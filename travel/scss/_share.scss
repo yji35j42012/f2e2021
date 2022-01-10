@@ -33,7 +33,6 @@ h2 {
 }
 h3 {
     width: 100%;
-    margin-bottom: 12px;
     font-size: 36px;
     font-weight: 300;
     color: #1e1e1e;
@@ -279,24 +278,28 @@ h3 {
 
 .activity {
     &_group {
-        @include d_f(flex);
+        @include d_f(flex, center, space-between);
         flex-wrap: wrap;
         width: 100%;
     }
     &_item {
         overflow: hidden;
         @include d_f(flex);
-        width: 50%;
+        width: calc(50% - 15px);
+        margin-top: 12px;
         font-size: 16px;
         border: 1px solid #e5e5e5;
-        border-radius: 6px;
+        border-radius: 12px;
         .pic {
             flex: none;
             width: 160px;
             height: 160px;
         }
         .txt {
+            @include d_f(flex, center);
+            flex-wrap: wrap;
             width: 100%;
+            padding: 16px 30px;
             // txt_date
             &_date {
                 color: #646464;
@@ -309,13 +312,31 @@ h3 {
             }
             // txt_address
             &_address {
-				width: 50%;
-				color: #646464;
+                @include d_f(flex, center);
+                width: 50%;
+                color: #646464;
+                fill: #646464;
+                .icon_add {
+                    display: block;
+                    width: 14px;
+                    height: 16px;
+                    margin-right: 4px;
+                }
             }
             // txt_detail
             &_detail {
+                @include d_f(flex, center, flex-end);
                 width: 50%;
-                text-align: right;
+                color: #7f977b;
+                fill: #7f977b;
+                .icon_arrow {
+                    display: block;
+                    width: 16px;
+                    height: 16px;
+                    margin-left: 6px;
+                        transform: rotate(-90deg);
+                        
+                }
             }
         }
     }

@@ -9,5 +9,7 @@
 
 	],
 	"liveServer.settings.port": 5503,
-	"liveSassCompile.settings.autoprefix": null
+	// "liveSassCompile.settings.generateMap": false,
+	"editor.formatOnSave": true, 
+	// "liveSassCompile.settings.autoprefix": null
 }
