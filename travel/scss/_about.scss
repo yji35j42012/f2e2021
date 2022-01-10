@@ -1,0 +1,31 @@
+.about {
+    @include d_f(flex, center, space-between);
+    padding: 80px 95px 55px 95px;
+    // about_txt
+    &_txt {
+        width: 55%;
+        align-content: flex-start;
+    }
+    // about_address
+    &_address {
+        @include d_f(flex, flex-end);
+        margin-top: 17px;
+        &::before {
+            content: '';
+            align-self: center;
+            display: block;
+            width: 15px;
+            height: 15px;
+            margin-right: 6px;
+            background: url('../images/icon/icon_adderss.svg') no-repeat
+                center/contain;
+        }
+        .tw {
+            margin-right: 8px;
+            font-weight: 20px;
+        }
+        .en {
+            font-weight: 18px;
+        }
+    }
+}

@@ -12,7 +12,49 @@
 <body>
     <div id="app" class="wrap">
         <htitle></htitle>
-        <banner></banner>
+        <div class="content">
+            <div class="container">
+                <div class="about">
+                    <div class="about_txt">
+                        <h2>
+                            探索<span class="under_line">台灣之美</span>
+                            <br>
+                            讓我們更親近這片土地
+                        </h2>
+                        <div class="about_address">
+                            <p class="tw">台灣旅遊景點導覽</p>
+                            <p class="en">Taiwan Travel Guide</p>
+                        </div>
+                    </div>
+                    <func></func>
+                </div>
+                <banner></banner>
+
+                <div class="activity infoBox">
+                    <h3>近期活動</h3>
+                    <ul class="activity_group">
+                        <li class="activity_item">
+                            <div class="pic">
+                                <img src="./images/EventPhoto1.jpg" alt="">
+                            </div>
+                            <div class="txt">
+                                <p class="txt_date">2021/10/30 - 2021/11/13</p>
+                                <p class="txt_title">2021 日月潭花火音樂嘉年華</p>
+                                <p class="txt_address">南投縣</p>
+                                <p class="txt_detail">詳細介紹</p>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+                <div class="popular infoBox">
+                    <h3>熱門打卡景點</h3>
+                </div>
+                <div class="revisit infoBox">
+                    <h3>一再回訪美食</h3>
+                </div>
+            </div>
+        </div>
+
     </div>
 
     <script src="./js/libs/vue_2_6_9.js"></script>
@@ -45,12 +87,13 @@
             el: "#app",
             data() {
                 return {
-
+                    icon_all: icon_all,
                 };
             },
             components: {
                 htitle: httpVueLoader('./components/Header.vue'),
                 banner: httpVueLoader('./components/Banner.vue'),
+                func: httpVueLoader('./components/Func.vue'),
             },
             router,
             watch: {
