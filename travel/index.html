@@ -19,6 +19,19 @@
 		<footer>
 			#The F2E 3rd Week01 #Breakfast
 		</footer>
+
+
+		<div class="alert" v-if="alertShow">
+			<div class="alert_box">
+				<div class="alert_title">訊息</div>
+				<div class="alert_info">
+					<div class="msg">網站進行中～</div>
+				</div>
+				<div class="alert_func">
+					<button class="normal_btn" @click="close">關閉</button>
+				</div>
+			</div>
+		</div>
 	</div>
 
 	<script src="./js/libs/vue_2_6_9.js"></script>
@@ -52,6 +65,7 @@
 			data() {
 				return {
 					icon_all: icon_all,
+					alertShow: true,
 				};
 			},
 			components: {
@@ -74,7 +88,9 @@
 				// },
 			},
 			methods: {
-
+				close() {
+					this.alertShow = false
+				}
 			},
 		});
 	</script>
