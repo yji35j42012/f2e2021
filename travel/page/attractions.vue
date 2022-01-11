@@ -25,11 +25,64 @@
         </div>
         <div class="map infoBox">
             <div class="map_txt">
-				<table>
-				
-				</table>
-			</div>
-            <div class="map_info"></div>
+                <table>
+                    <tr>
+                        <th>營業時間：</th>
+                        <td>上午11:00~14:30下午17:00~21:00</td>
+                    </tr>
+                    <tr>
+                        <th>聯絡電話：</th>
+                        <td>886-49-2995096</td>
+                    </tr>
+                    <tr>
+                        <th>餐廳地址：</th>
+                        <td class="green">南投縣埔里鎮信義路236號</td>
+                    </tr>
+                    <tr>
+                        <th>官方網站：</th>
+                        <td class="green">http://www.jindu1994.com/</td>
+                    </tr>
+                </table>
+            </div>
+            <div class="map_pic">
+                <img src="../images/GoogleMap.jpg" alt="" />
+            </div>
+            <ul class="map_surrounding">
+                <li>周邊資訊：</li>
+                <li>
+                    <i>
+                        <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            viewBox="0 0 30 26"
+                        >
+                            <path :d="icon_all.mount" />
+                        </svg>
+                    </i>
+                    附近景點
+                </li>
+                <li>
+                    <i>
+                        <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            viewBox="0 0 23 25"
+                        >
+                            <path :d="icon_all.active" />
+                        </svg>
+                    </i>
+                    附近活動
+                </li>
+                <li>
+                    <i>
+                        <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            viewBox="0 0 23 25"
+                        >
+                            <path :d="icon_all.eat" />
+                        </svg>
+                    </i>
+                    附近美食
+                </li>
+            </ul>
         </div>
     </div>
 </template>
@@ -39,13 +92,13 @@ module.exports = {
     data() {
         return {
             icon_all: icon_all,
-        }
+        };
     },
     components: {
-        banner: httpVueLoader('../components/Banner.vue'),
+        banner: httpVueLoader("../components/Banner.vue"),
     },
     mounted() {},
     computed: {},
     methods: {},
-}
+};
 </script>

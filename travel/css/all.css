@@ -1203,6 +1203,7 @@ footer {
 
 .introduce p {
   font-size: 20px;
+  font-weight: 700;
   color: #2f2f2f;
 }
 
@@ -1216,21 +1217,95 @@ footer {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  -webkit-box-align: stretch;
-      -ms-flex-align: stretch;
-          align-items: stretch;
-  -webkit-box-pack: start;
-      -ms-flex-pack: start;
-          justify-content: flex-start;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: end;
+      -ms-flex-pack: end;
+          justify-content: flex-end;
   width: 100%;
 }
 
 .map_txt {
-  width: 50%;
+  width: calc(50% - 15px);
+  height: 250px;
+  margin-right: 30px;
+  padding: 30px 0 0 30px;
+  background-color: #f9f9f9;
+  border-radius: 12px;
+}
+
+.map_txt th,
+.map_txt td {
+  height: 35px;
+}
+
+.map_txt th {
+  font-weight: 700;
+}
+
+.map_txt .green {
+  color: #6e7d60;
 }
 
 .map_info {
-  width: 50%;
+  width: calc(50% - 15px);
   margin-left: 30px;
+}
+
+.map_pic {
+  margin-bottom: 32px;
+}
+
+.map_surrounding {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  width: calc(50% - 15px);
+  text-align: left;
+}
+
+.map_surrounding li:first-child {
+  width: 100%;
+  margin-bottom: 20px;
+  font-size: 20px;
+  font-weight: 700;
+  color: #2f2f2f;
+}
+
+.map_surrounding li:not(:first-child) {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  width: calc(100% / 3 - 20px);
+  height: 110px;
+  color: #7f977b;
+  fill: #7f977b;
+  border: 1px solid #e5e5e5;
+  border-radius: 6px;
+}
+
+.map_surrounding i {
+  display: block;
+  width: 26px;
+  margin-bottom: 5px;
 }
 /*# sourceMappingURL=all.css.map */
