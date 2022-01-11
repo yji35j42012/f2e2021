@@ -9,12 +9,15 @@
             </router-link>
         </h1>
 
-        <button class="menu_btn">
+        <button
+            :class="['menu_btn',  menuShow ? 'open' : false]"
+            @click="btnHandler"
+        >
             <span></span>
         </button>
         <ul class="menu_group">
             <li>
-                <router-link to="/">探索景點</router-link>
+                <router-link to="/attractions">探索景點</router-link>
             </li>
             <li>
                 <router-link to="/">節慶活動</router-link>
@@ -31,8 +34,14 @@ module.exports = {
     data() {
         return {
             icon_all: icon_all,
+            menuShow: false,
         }
     },
     computes: {},
+    methods: {
+        btnHandler() {
+            this.menuShow = !this.menuShow
+        },
+    },
 }
 </script>

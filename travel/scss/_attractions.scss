@@ -1,0 +1,25 @@
+.introduce {
+    margin-top: 33px;
+    p {
+        font-size: 20px;
+        color: #2f2f2f;
+    }
+    span {
+        display: block;
+        margin-top: 10px;
+        font-size: 18px;
+    }
+}
+
+.map {
+    @include d_f(flex);
+    width: 100%;
+
+    &_txt {
+        width: 50%;
+    }
+    &_info {
+        width: 50%;
+        margin-left: 30px;
+    }
+}

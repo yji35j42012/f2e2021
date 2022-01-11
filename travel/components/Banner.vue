@@ -6,7 +6,9 @@
             <div
                 class="banner_item"
                 style="background-image: url('../images/banner1.jpg')"
-            ></div>
+            >
+                <span>新北市 | 不厭亭</span>
+            </div>
             <div
                 class="banner_item"
                 style="background-image: url('../images/banner2.jpg')"
@@ -39,10 +41,5 @@ module.exports = {
             icon_all: icon_all,
         }
     },
-    // computes: {
-    //     icon() {
-    //         return store.state.icon_all;
-    //     },
-    // },
 }
 </script>
