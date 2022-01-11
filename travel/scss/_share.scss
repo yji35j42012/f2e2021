@@ -30,12 +30,33 @@ h2 {
     font-size: 48px;
     font-weight: 300;
     color: #1e1e1e;
+
+    @include mw(S) {
+        font-size: 28px;
+    }
 }
 h3 {
+    @include d_f(flex, flex-end, space-between);
     width: 100%;
     font-size: 36px;
     font-weight: 300;
     color: #1e1e1e;
+    span {
+        @include d_f(flex, center, center);
+        color: #ff725e;
+        fill: #ff725e;
+        font-size: 16px;
+        .icon_arrow {
+            display: inline-block;
+            width: 16px;
+            height: 16px;
+            margin-left: 3px;
+            transform: rotate(-90deg);
+        }
+    }
+    @include mw(S) {
+        font-size: 24px;
+    }
 }
 .under_line {
     border-bottom: 2px solid #e0da48;
@@ -49,6 +70,10 @@ h3 {
 
     * + * {
         margin-top: 7px;
+    }
+    @include mw(S) {
+        flex-direction: column;
+        width: 100%;
     }
 }
 .normal_sel {
@@ -128,6 +153,9 @@ h3 {
     height: 100%;
     padding: 0 45px;
     margin: auto;
+    @include mw(S) {
+        padding: 0 15px;
+    }
 }
 .header {
     @include d_f(flex, center, space-between);
@@ -140,6 +168,7 @@ h3 {
 
     @include mw(S) {
         height: 65px;
+        padding: 0 15px;
     }
 }
 .logo {
@@ -205,18 +234,25 @@ h3 {
 
 .banner {
     position: relative;
+    // .banner_group
     &_group {
         overflow: hidden;
         @include d_f(flex);
         width: 100%;
         height: 400px;
+        @include mw(S) {
+            height: 185px;
+        }
     }
+    // banner_item
     &_item {
         flex: none;
         width: 100%;
         height: 100%;
         background-repeat: no-repeat;
         background-size: cover;
+        background-position: center;
+        border-radius: 16px;
     }
 
     &_next,
@@ -236,6 +272,10 @@ h3 {
 
         svg {
             width: 16px;
+        }
+
+        @include mw(S) {
+            display: none;
         }
     }
     &_next {
@@ -263,6 +303,14 @@ h3 {
                 height: 20px;
                 background-color: #ffffff;
             }
+            @include mw(S) {
+                width: 8px;
+                height: 8px;
+                &.on {
+                    width: 10px;
+                    height: 10px;
+                }
+            }
         }
         li + li {
             margin-left: 12px;
@@ -282,6 +330,7 @@ h3 {
         flex-wrap: wrap;
         width: 100%;
     }
+    // .activity_item
     &_item {
         overflow: hidden;
         @include d_f(flex);
@@ -290,25 +339,54 @@ h3 {
         font-size: 16px;
         border: 1px solid #e5e5e5;
         border-radius: 12px;
+        @include mw(S) {
+            width: 100%;
+            border: none;
+        }
         .pic {
             flex: none;
             width: 160px;
             height: 160px;
+            @include mw(S) {
+                overflow: hidden;
+                width: 90px;
+                height: 60px;
+                border-radius: 16px;
+            }
         }
         .txt {
+            overflow: hidden;
             @include d_f(flex, center);
             flex-wrap: wrap;
             width: 100%;
             padding: 16px 30px;
+
+            @include mw(S) {
+                padding: 0 15px 3px;
+            }
             // txt_date
             &_date {
+                width: 100%;
                 color: #646464;
+                @include mw(S) {
+                    font-size: 12px;
+                }
             }
             // txt_title
             &_title {
+                width: 100%;
                 height: 60px;
                 font-size: 22px;
                 font-weight: 700;
+
+                @include mw(S) {
+                    overflow: hidden;
+                    height: auto;
+                    margin-top: 3px;
+                    font-size: 15px;
+                    white-space: nowrap;
+                    text-overflow: ellipsis;
+                }
             }
             // txt_address
             &_address {
@@ -322,6 +400,14 @@ h3 {
                     height: 16px;
                     margin-right: 4px;
                 }
+                @include mw(S) {
+                    width: 100%;
+                    margin-top: 1px;
+                    font-size: 12px;
+                    .icon_add {
+                        display: none;
+                    }
+                }
             }
             // txt_detail
             &_detail {
@@ -334,9 +420,50 @@ h3 {
                     width: 16px;
                     height: 16px;
                     margin-left: 6px;
-                        transform: rotate(-90deg);
-                        
+                    transform: rotate(-90deg);
                 }
+                @include mw(S) {
+                    display: none;
+                }
+            }
+        }
+    }
+}
+
+.popular {
+    &_group {
+        @include d_f(flex, center, space-between);
+        width: 100%;
+        margin-top: 12px;
+    }
+    &_item {
+		overflow: hidden;
+        width: calc(100% / 4);
+        // max-width: 255px;
+    }
+    li + li {
+        margin-left: 30px;
+    }
+    .txt {
+        &_title {
+            margin-top: 10px;
+            color: #2f2f2f;
+            font-size: 22px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+        &_address {
+            @include d_f(flex, center);
+            margin-top: 16px;
+            color: #646464;
+            fill: #646464;
+            font-size: 16px;
+            .icon_add {
+                display: block;
+                width: 14px;
+                height: 16px;
+                margin-right: 4px;
             }
         }
     }

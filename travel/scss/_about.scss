@@ -1,10 +1,20 @@
 .about {
     @include d_f(flex, center, space-between);
     padding: 80px 95px 55px 95px;
+    @include mw(S) {
+        justify-content: center;
+        flex-wrap: wrap;
+        padding: 6px 0 38px;
+    }
     // about_txt
     &_txt {
         width: 55%;
         align-content: flex-start;
+        @include mw(S) {
+            width: 100%;
+            margin-bottom: 35px;
+            text-align: center;
+        }
     }
     // about_address
     &_address {
@@ -26,6 +36,16 @@
         }
         .en {
             font-weight: 18px;
+        }
+        @include mw(S) {
+            justify-content: center;
+            margin-top: 14px;
+            .tw {
+                font-size: 14px;
+            }
+            .en {
+                font-weight: 12px;
+            }
         }
     }
 }
