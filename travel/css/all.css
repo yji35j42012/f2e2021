@@ -106,12 +106,12 @@ select {
   }
 }
 
-.menu_btn span, .menu_btn span::before, .menu_btn span::after, .menu_group {
+.normal_sel_group, .menu_btn span, .menu_btn span::before, .menu_btn span::after, .menu_group {
   -webkit-transition-duration: 0.3s;
           transition-duration: 0.3s;
 }
 
-.menu_btn, .banner_next, .banner_prev, .banner_dot li, .alert_func .normal_btn {
+.normal_sel, .normal_btn, .menu_btn, .banner_next, .banner_prev, .banner_dot li, .alert_func .normal_btn {
   cursor: pointer;
 }
 
@@ -211,6 +211,30 @@ h3 span .icon_arrow {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
+  -webkit-box-align: stretch;
+      -ms-flex-align: stretch;
+          align-items: stretch;
+  -webkit-box-pack: start;
+      -ms-flex-pack: start;
+          justify-content: flex-start;
+}
+
+.func > * + * {
+  margin-left: 15px;
+}
+
+.func .normal_sel {
+  max-width: 240px;
+}
+
+.func .normal_btn {
+  max-width: 210px;
+}
+
+.about .func {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
@@ -222,12 +246,18 @@ h3 span .icon_arrow {
   width: 45%;
 }
 
-.func * + * {
+.about .func .normal_sel,
+.about .func .normal_btn,
+.about .func .normal_inp {
+  max-width: 350px;
+}
+
+.about .func * + * {
   margin-top: 7px;
 }
 
 @media screen and (max-width: 995px) {
-  .func {
+  .about .func {
     -webkit-box-orient: vertical;
     -webkit-box-direction: normal;
         -ms-flex-direction: column;
@@ -248,17 +278,39 @@ h3 span .icon_arrow {
       -ms-flex-pack: start;
           justify-content: flex-start;
   width: 100%;
-  max-width: 350px;
   height: 50px;
   padding: 11px 30px;
   color: #6e7d60;
   fill: #737373;
   border: 1px solid #e5e5e5;
-  border-radius: 5px;
+  border-radius: 6px;
 }
 
 .normal_sel_group {
-  display: none;
+  position: absolute;
+  top: calc(100% + 5px);
+  left: 0;
+  width: 100%;
+  background-color: #fff;
+  border: 1px solid #e5e5e5;
+  border-radius: 6px;
+  -webkit-transform-origin: top center;
+          transform-origin: top center;
+  -webkit-transform: scale(1, 0);
+          transform: scale(1, 0);
+}
+
+.normal_sel_group li {
+  padding: 10px 30px;
+}
+
+.normal_sel_group li + li {
+  border-top: 1px solid #e5e5e5;
+}
+
+.normal_sel_group.open {
+  -webkit-transform: scale(1, 1);
+          transform: scale(1, 1);
 }
 
 .normal_sel .icon_arrow {
@@ -275,10 +327,9 @@ h3 span .icon_arrow {
 .normal_inp {
   display: block;
   width: 100%;
-  max-width: 350px;
   height: 50px;
   padding: 11px 30px;
-  background-color: #fff;
+  background-color: #f9f9f9;
   border: 1px solid #e5e5e5;
   border-radius: 5px;
 }
@@ -302,7 +353,6 @@ h3 span .icon_arrow {
 .normal_btn {
   display: block;
   width: 100%;
-  max-width: 350px;
   height: 50px;
   background: #7f977b;
   color: #fff;
@@ -765,13 +815,7 @@ footer {
           justify-content: center;
 }
 
-@media screen and (max-width: 995px) {
-  .r1c4 {
-    padding-bottom: 70px;
-  }
-}
-
-.r1c4_group {
+.r1c4 {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -786,7 +830,7 @@ footer {
 }
 
 @media screen and (max-width: 995px) {
-  .r1c4_group {
+  .r1c4 {
     overflow-x: auto;
     overflow-y: hidden;
     margin-top: 8px;
@@ -817,7 +861,7 @@ footer {
   }
 }
 
-.r1c4 .txt_title {
+.r1c4_txt_title {
   margin-top: 10px;
   color: #2f2f2f;
   font-size: 22px;
@@ -827,13 +871,13 @@ footer {
 }
 
 @media screen and (max-width: 995px) {
-  .r1c4 .txt_title {
+  .r1c4_txt_title {
     font-size: 18px;
     margin-top: 6px;
   }
 }
 
-.r1c4 .txt_address {
+.r1c4_txt_address {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -849,7 +893,7 @@ footer {
   font-size: 16px;
 }
 
-.r1c4 .txt_address .icon_add {
+.r1c4_txt_address .icon_add {
   display: block;
   width: 14px;
   height: 16px;
@@ -857,10 +901,10 @@ footer {
 }
 
 @media screen and (max-width: 995px) {
-  .r1c4 .txt_address {
+  .r1c4_txt_address {
     margin-top: 4px;
   }
-  .r1c4 .txt_address .icon_add {
+  .r1c4_txt_address .icon_add {
     width: 13px;
   }
 }

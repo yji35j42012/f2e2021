@@ -10,7 +10,7 @@
         </h1>
 
         <button
-            :class="['menu_btn',  menuShow ? 'open' : false]"
+            :class="['menu_btn', menuShow ? 'open' : false]"
             @click="btnHandler"
         >
             <span></span>

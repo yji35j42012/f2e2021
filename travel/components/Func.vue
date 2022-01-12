@@ -2,15 +2,16 @@
 
 <template>
     <div class="func">
-        <label class="normal_sel">
-            <span>探索景點</span>
+        <label class="normal_sel open" @click="selectHandler">
+            <span>全部縣市</span>
             <i class="icon_arrow">
                 <svg viewBox="0 0 16 16">
                     <path :d="icon_all.arrow" />
                 </svg>
             </i>
-            <ul class="normal_sel_group">
+            <ul :class="['normal_sel_group' ,selectShow ? 'open' : '']">
                 <li>台北市</li>
+                <li>宜蘭線</li>
             </ul>
         </label>
         <label class="normal_inp">
@@ -32,8 +33,14 @@ module.exports = {
     data() {
         return {
             icon_all: icon_all,
+            selectShow: false,
         }
     },
     computes: {},
+    methods: {
+        selectHandler() {
+            this.selectShow = !this.selectShow
+        },
+    },
 }
 </script>

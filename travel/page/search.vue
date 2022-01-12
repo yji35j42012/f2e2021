@@ -7,6 +7,9 @@
             <li>探索景點</li>
         </ul>
         <Func></Func>
+        <div class="infoBox">
+            <h3>熱門主題</h3>
+        </div>
     </div>
 </template>
 

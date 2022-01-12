@@ -62,7 +62,7 @@
                 </li>
             </ul>
         </div>
-        <div class="r1c4 infoBox">
+        <div class="infoBox">
             <h3>
                 還有這些不能錯過的景點
                 <span>
@@ -74,14 +74,14 @@
                     </i>
                 </span>
             </h3>
-            <ul class="r1c4_group">
+            <ul class="r1c4">
                 <li class="r1c4_item">
                     <div class="pic">
                         <img src="./images/RestaurantPicture1.jpg" alt="" />
                     </div>
-                    <div class="txt">
-                        <p class="txt_title">龜山島牛奶海</p>
-                        <p class="txt_address">
+                    <div class="r1c4_txt">
+                        <p class="r1c4_txt_title">龜山島牛奶海</p>
+                        <p class="r1c4_txt_address">
                             <i class="icon_add">
                                 <svg viewBox="0 0 14 16">
                                     <path :d="icon_all.add" />
@@ -95,9 +95,9 @@
                     <div class="pic">
                         <img src="./images/RestaurantPicture2.jpg" alt="" />
                     </div>
-                    <div class="txt">
-                        <p class="txt_title">高美濕地(高美野生動物保護區)</p>
-                        <p class="txt_address">
+                    <div class="r1c4_txt">
+                        <p class="r1c4_txt_title">高美濕地(高美野生動物保護區)</p>
+                        <p class="r1c4_txt_address">
                             <i class="icon_add">
                                 <svg viewBox="0 0 14 16">
                                     <path :d="icon_all.add" />
@@ -111,9 +111,9 @@
                     <div class="pic">
                         <img src="./images/RestaurantPicture3.jpg" alt="" />
                     </div>
-                    <div class="txt">
-                        <p class="txt_title">溪頭自然教育園區</p>
-                        <p class="txt_address">
+                    <div class="r1c4_txt">
+                        <p class="r1c4_txt_title">溪頭自然教育園區</p>
+                        <p class="r1c4_txt_address">
                             <i class="icon_add">
                                 <svg viewBox="0 0 14 16">
                                     <path :d="icon_all.add" />
@@ -127,9 +127,9 @@
                     <div class="pic">
                         <img src="./images/RestaurantPicture4.jpg" alt="" />
                     </div>
-                    <div class="txt">
-                        <p class="txt_title">九份老街</p>
-                        <p class="txt_address">
+                    <div class="r1c4_txt">
+                        <p class="r1c4_txt_title">九份老街</p>
+                        <p class="r1c4_txt_address">
                             <i class="icon_add">
                                 <svg viewBox="0 0 14 16">
                                     <path :d="icon_all.add" />
