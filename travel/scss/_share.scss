@@ -154,11 +154,10 @@ h3 {
 .container {
     width: 100%;
     max-width: 1200px;
-    height: 100%;
-    padding: 0 45px;
+    padding: 0 45px 120px;
     margin: auto;
     @include mw(M) {
-        padding: 0 15px;
+        padding: 0 15px 60px;
     }
 }
 .header {
@@ -243,15 +242,19 @@ h3 {
             }
         }
     }
-
+    // .menu_group
     &_group {
         @include d_f(flex, center);
         color: #646464;
         @extend %transition;
 
+        li + li {
+            margin-left: 20px;
+        }
         @include mw(M) {
             position: absolute;
             top: 65px;
+            left: 0;
             flex-wrap: wrap;
             width: 100%;
             background-color: #fff;
@@ -264,9 +267,9 @@ h3 {
                 border-bottom: 1px solid #ccc;
                 text-align: center;
             }
-        }
-        li + li {
-            margin-left: 20px;
+            li + li {
+                margin-left: 0;
+            }
         }
     }
     .open + &_group {
@@ -422,8 +425,8 @@ footer {
     &_box {
         width: 100%;
         max-width: 500px;
-		min-height: 100px;
-		padding-bottom: 15px;
+        min-height: 100px;
+        padding-bottom: 15px;
         background-color: #fff;
     }
     &_title {
@@ -436,9 +439,74 @@ footer {
         padding: 15px;
     }
     &_func {
-		@include d_f(flex, center, center);
-		.normal_btn{
-			@extend %hand;
-		}
+        @include d_f(flex, center, center);
+        .normal_btn {
+            @extend %hand;
+        }
+    }
+}
+// 行1列４
+.r1c4 {
+    @include mw(M) {
+        padding-bottom: 70px;
+    }
+    &_group {
+        @include d_f(flex, center, space-between);
+        width: 100%;
+        margin-top: 12px;
+
+        @include mw(M) {
+            overflow-x: auto;
+            overflow-y: hidden;
+            margin-top: 8px;
+        }
+    }
+    &_item {
+        overflow: hidden;
+        width: calc(100% / 4);
+
+        @include mw(M) {
+            flex: none;
+            width: 220px;
+        }
+    }
+    li + li {
+        margin-left: 30px;
+        @include mw(M) {
+            margin-left: 16px;
+        }
+    }
+    .txt {
+        &_title {
+            margin-top: 10px;
+            color: #2f2f2f;
+            font-size: 22px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            @include mw(M) {
+                font-size: 18px;
+                margin-top: 6px;
+            }
+        }
+        &_address {
+            @include d_f(flex, center);
+            margin-top: 16px;
+            color: #646464;
+            fill: #646464;
+            font-size: 16px;
+            .icon_add {
+                display: block;
+                width: 14px;
+                height: 16px;
+                margin-right: 4px;
+            }
+            @include mw(M) {
+                margin-top: 4px;
+                .icon_add {
+                    width: 13px;
+                }
+            }
+        }
     }
 }

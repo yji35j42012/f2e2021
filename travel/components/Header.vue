@@ -17,13 +17,16 @@
         </button>
         <ul class="menu_group">
             <li>
-                <router-link to="/attractions">探索景點</router-link>
+                <router-link to="/search">探索景點</router-link>
             </li>
             <li>
-                <router-link to="/">節慶活動</router-link>
+                <router-link to="/attractions">景點內頁</router-link>
             </li>
             <li>
-                <router-link to="/">品嚐美食</router-link>
+                <router-link to="/activity">節慶活動</router-link>
+            </li>
+            <li>
+                <router-link to="/restaurant">品嚐美食</router-link>
             </li>
         </ul>
     </div>

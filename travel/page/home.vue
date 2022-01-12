@@ -134,7 +134,7 @@
                 </li>
             </ul>
         </div>
-        <div class="popular infoBox">
+        <div class="r1c4 infoBox">
             <h3>
                 熱門打卡景點
                 <span>
@@ -146,8 +146,8 @@
                     </i>
                 </span>
             </h3>
-            <ul class="popular_group">
-                <li class="popular_item">
+            <ul class="r1c4_group">
+                <li class="r1c4_item">
                     <div class="pic">
                         <img src="./images/RestaurantPicture1.jpg" alt="" />
                     </div>
@@ -163,7 +163,7 @@
                         </p>
                     </div>
                 </li>
-                <li class="popular_item">
+                <li class="r1c4_item">
                     <div class="pic">
                         <img src="./images/RestaurantPicture2.jpg" alt="" />
                     </div>
@@ -179,7 +179,7 @@
                         </p>
                     </div>
                 </li>
-                <li class="popular_item">
+                <li class="r1c4_item">
                     <div class="pic">
                         <img src="./images/RestaurantPicture3.jpg" alt="" />
                     </div>
@@ -195,7 +195,7 @@
                         </p>
                     </div>
                 </li>
-                <li class="popular_item">
+                <li class="r1c4_item">
                     <div class="pic">
                         <img src="./images/RestaurantPicture4.jpg" alt="" />
                     </div>
@@ -213,7 +213,7 @@
                 </li>
             </ul>
         </div>
-        <div class="revisit infoBox">
+        <div class="r1c4 infoBox">
             <h3>
                 一再回訪美食
                 <span>
@@ -225,8 +225,8 @@
                     </i>
                 </span>
             </h3>
-            <ul class="revisit_group">
-                <li class="revisit_item">
+            <ul class="r1c4_group">
+                <li class="r1c4_item">
                     <div class="pic">
                         <img src="./images/RestaurantPicture5.jpg" alt="" />
                     </div>
@@ -242,7 +242,7 @@
                         </p>
                     </div>
                 </li>
-                <li class="revisit_item">
+                <li class="r1c4_item">
                     <div class="pic">
                         <img src="./images/RestaurantPicture6.jpg" alt="" />
                     </div>
@@ -258,7 +258,7 @@
                         </p>
                     </div>
                 </li>
-                <li class="revisit_item">
+                <li class="r1c4_item">
                     <div class="pic">
                         <img src="./images/RestaurantPicture7.jpg" alt="" />
                     </div>
@@ -274,7 +274,7 @@
                         </p>
                     </div>
                 </li>
-                <li class="revisit_item">
+                <li class="r1c4_item">
                     <div class="pic">
                         <img src="./images/RestaurantPicture8.jpg" alt="" />
                     </div>

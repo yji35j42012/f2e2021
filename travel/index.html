@@ -49,11 +49,31 @@
 				},
 			},
 			{
+				path: "/search",
+				components: {
+					default: httpVueLoader("./page/search.vue"),
+				},
+			},
+			{
 				path: "/attractions",
 				components: {
 					default: httpVueLoader("./page/attractions.vue"),
 				},
 			},
+			{
+				path: "/activity",
+				components: {
+					default: httpVueLoader("./page/activity.vue"),
+				},
+			},
+			{
+				path: "/restaurant",
+				components: {
+					default: httpVueLoader("./page/restaurant.vue"),
+				},
+			},
+
+
 		];
 		const router = new VueRouter({
 			// mode: 'history',
@@ -64,6 +84,7 @@
 			el: "#app",
 			data() {
 				return {
+					nowPath: "",
 					icon_all: icon_all,
 					alertShow: false,
 				};
@@ -77,15 +98,18 @@
 			},
 			router,
 			watch: {
-				// $route(to, from) {
-				//     var now = this.$route.path;
-				//     if (this.$route.path == "/") {
-				//         this.nowPath = 'index';
-				//     } else {
-				//         this.nowPath = now.split('/')[1]
-				//     }
-				//     this.showMenu = false;
-				// },
+				$route(to, from) {
+					console.log('to', to);
+					console.log('from', from);
+
+					var now = this.$route.path;
+					if (this.$route.path == "/") {
+						this.nowPath = 'home';
+					} else {
+						this.nowPath = now.split('/')[1]
+					}
+					// this.showMenu = false;
+				},
 			},
 			methods: {
 				close() {
