@@ -106,7 +106,7 @@ select {
   }
 }
 
-.normal_sel_group, .menu_btn span, .menu_btn span::before, .menu_btn span::after, .menu_group {
+.normal_sel_group, .menu_btn span, .menu_btn span::before, .menu_btn span::after, .menu_group, .r2c4_item {
   -webkit-transition-duration: 0.3s;
           transition-duration: 0.3s;
 }
@@ -910,12 +910,56 @@ footer {
 }
 
 .r2c4 {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: stretch;
+      -ms-flex-align: stretch;
+          align-items: stretch;
+  -webkit-box-pack: start;
+      -ms-flex-pack: start;
+          justify-content: flex-start;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
   width: 100%;
+  font-size: 0;
 }
 
 .r2c4_item {
-  width: calc(100% / 4 - 22.5);
+  position: relative;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  width: calc(100% / 4 - 22.5px);
   height: 125px;
+  margin-top: 12px;
+  background-repeat: no-repeat;
+  background-size: 101%;
+  background-position: center;
+  border-radius: 24px;
+  color: #ffffff;
+  font-size: 24px;
+  font-weight: bold;
+}
+
+@media (pointer: fine) and (-webkit-max-device-pixel-ratio: 2), (pointer: fine) and (max-resolution: 2dppx), screen and (pointer: fine) and (-webkit-max-device-pixel-ratio: 2), (-moz-touch-enabled: 0) {
+  .r2c4_item:hover {
+    background-size: 120%;
+  }
+}
+
+.r2c4_item:active {
+  background-size: 120%;
+}
+
+.r2c4_item + .r2c4_item:not(:nth-child(4n + 1)) {
+  margin-left: 30px;
 }
 
 .about {
