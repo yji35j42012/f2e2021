@@ -909,6 +909,15 @@ footer {
   }
 }
 
+.r2c4 {
+  width: 100%;
+}
+
+.r2c4_item {
+  width: calc(100% / 4 - 22.5);
+  height: 125px;
+}
+
 .about {
   display: -webkit-box;
   display: -ms-flexbox;

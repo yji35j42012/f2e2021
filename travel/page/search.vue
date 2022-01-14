@@ -9,6 +9,9 @@
         <Func></Func>
         <div class="infoBox">
             <h3>熱門主題</h3>
+            <ul class="r2c4">
+                <li class="r2c4_item" data-txt="自然風景類"></li>
+            </ul>
         </div>
     </div>
 </template>

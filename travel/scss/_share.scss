@@ -543,3 +543,12 @@ footer {
         }
     }
 }
+
+// 行2列４
+.r2c4 {
+    width: 100%;
+    &_item {
+        width: calc(100% / 4 - 22.5);
+        height: 125px;
+    }
+}
