@@ -1,123 +1,168 @@
 <!DOCTYPE html>
 <html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta
+            name="viewport"
+            content="width=device-width, initial-scale=1, shrink-to-fit=no"
+        />
+        <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+        <title>旅遊網</title>
+        <link rel="stylesheet" href="./css/all.css" />
+    </head>
 
-<head>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-	<meta http-equiv="X-UA-Compatible" content="ie=edge">
-	<title>旅遊網</title>
-	<link rel="stylesheet" href="./css/all.css">
-</head>
+    <body>
+        <div id="app" class="wrap">
+            <htitle></htitle>
+            <div :class="['content' , nowPath]">
+                <router-view></router-view>
+            </div>
 
-<body>
-	<div id="app" class="wrap">
-		<htitle></htitle>
-		<div class="content">
-			<router-view></router-view>
-		</div>
+            <footer>#The F2E 3rd Week01 #Breakfast</footer>
 
-		<footer>
-			#The F2E 3rd Week01 #Breakfast
-		</footer>
+            <div class="alert" v-if="alertShow">
+                <div class="alert_box">
+                    <div class="alert_title">訊息</div>
+                    <div class="alert_info">
+                        <div class="msg">網站進行中～</div>
+                    </div>
+                    <div class="alert_func">
+                        <button class="normal_btn" @click="close">關閉</button>
+                    </div>
+                </div>
+            </div>
+        </div>
 
+        <script src="./js/libs/axios.js"></script>
+        <script src="./js/libs/vue_2_6_9.js"></script>
+        <script src="./js/libs/vue-router.js"></script>
+        <script src="./js/libs/http-vue-loader.js"></script>
+        <script src="./js/libs/vuex_3_0_1.js"></script>
+        <script src="./js/icon_all.js"></script>
+        <script src="./store/store.js"></script>
 
-		<div class="alert" v-if="alertShow">
-			<div class="alert_box">
-				<div class="alert_title">訊息</div>
-				<div class="alert_info">
-					<div class="msg">網站進行中～</div>
-				</div>
-				<div class="alert_func">
-					<button class="normal_btn" @click="close">關閉</button>
-				</div>
-			</div>
-		</div>
-	</div>
+        <script src="./aaa.json"></script>
+        <script>
+            const routes = [
+                {
+                    path: "",
+                    components: {
+                        default: httpVueLoader("./page/home.vue"),
+                    },
+                },
+                {
+                    path: "/search",
+                    components: {
+                        default: httpVueLoader("./page/search.vue"),
+                    },
+                },
+                {
+                    path: "/attractions",
+                    components: {
+                        default: httpVueLoader("./page/attractions.vue"),
+                    },
+                },
+                {
+                    path: "/activity",
+                    components: {
+                        default: httpVueLoader("./page/activity.vue"),
+                    },
+                },
+                {
+                    path: "/restaurant",
+                    components: {
+                        default: httpVueLoader("./page/restaurant.vue"),
+                    },
+                },
+            ];
+            const router = new VueRouter({
+                // mode: 'history',
+                routes: routes, // (缩写) 相当于 routes: routes
+            });
 
-	<script src="./js/libs/vue_2_6_9.js"></script>
-	<script src="./js/libs/vue-router.js"></script>
-	<script src="./js/libs/http-vue-loader.js"></script>
-	<script src="./js/libs/vuex_3_0_1.js"></script>
-	<script src="./js/icon_all.js"></script>
+            var vue = new Vue({
+                el: "#app",
+                data() {
+                    return {
+                        nowPath: "",
+                        icon_all: icon_all,
+                        alertShow: false,
+                        city: [],
+                    };
+                },
+                components: {
+                    htitle: httpVueLoader("./components/Header.vue"),
+                    banner: httpVueLoader("./components/Banner.vue"),
+                    func: httpVueLoader("./components/Func.vue"),
+                },
+                mounted() {
+                    store.dispatch("READ_CITY");
+                },
+                router,
+                watch: {
+                    $route(to, from) {
+                        var now = this.$route.path;
+                        if (this.$route.path == "/") {
+                            this.nowPath = "home";
+                            store.dispatch("PAGE", "home");
+                        } else {
+                            this.nowPath = now.split("/")[1];
+                            store.dispatch("PAGE", now.split("/")[1]);
+                            switch (now.split("/")[1]) {
+                                case "restaurant":
+                                    store.dispatch("CLEAR_BREADCRUMBS");
+                                    store.dispatch(
+                                        "ADD_BREADCRUMBS",
+                                        "品嚐美食"
+                                    );
+                                    break;
+                                case "activity":
+                                    store.dispatch("CLEAR_BREADCRUMBS");
+                                    store.dispatch(
+                                        "ADD_BREADCRUMBS",
+                                        "節慶活動"
+                                    );
+                                    break;
+                                case "attractions":
+                                    store.dispatch("CLEAR_BREADCRUMBS");
+                                    store.dispatch(
+                                        "ADD_BREADCRUMBS",
+                                        "探索景點"
+                                    );
+                                    break;
+                                default:
+                                    break;
+                            }
+                        }
+                    },
+                },
+                methods: {
+                    close() {
+                        this.alertShow = false;
+                    },
+                    getAuthorizationHeader() {
+                        let AppID = "";
+                        let AppKey = "";
 
-	<script>
-		const routes = [
-			{
-				path: "",
-				components: {
-					default: httpVueLoader("./page/home.vue"),
-				},
-			},
-			{
-				path: "/search",
-				components: {
-					default: httpVueLoader("./page/search.vue"),
-				},
-			},
-			{
-				path: "/attractions",
-				components: {
-					default: httpVueLoader("./page/attractions.vue"),
-				},
-			},
-			{
-				path: "/activity",
-				components: {
-					default: httpVueLoader("./page/activity.vue"),
-				},
-			},
-			{
-				path: "/restaurant",
-				components: {
-					default: httpVueLoader("./page/restaurant.vue"),
-				},
-			},
+                        let GMTstring = new Date().toGMTString;
+                        let ShaObj = new jsSHA("SHA-1", "TEXT");
 
-
-		];
-		const router = new VueRouter({
-			// mode: 'history',
-			routes: routes, // (缩写) 相当于 routes: routes
-		});
-
-		var vue = new Vue({
-			el: "#app",
-			data() {
-				return {
-					nowPath: "",
-					icon_all: icon_all,
-					alertShow: false,
-				};
-			},
-			components: {
-				htitle: httpVueLoader('./components/Header.vue'),
-				banner: httpVueLoader('./components/Banner.vue'),
-				func: httpVueLoader('./components/Func.vue'),
-
-
-			},
-			router,
-			watch: {
-				$route(to, from) {
-					console.log('to', to);
-					console.log('from', from);
-
-					var now = this.$route.path;
-					if (this.$route.path == "/") {
-						this.nowPath = 'home';
-					} else {
-						this.nowPath = now.split('/')[1]
-					}
-					// this.showMenu = false;
-				},
-			},
-			methods: {
-				close() {
-					this.alertShow = false
-				}
-			},
-		});
-	</script>
-</body>
-
+                        ShaObj.setHMACKey(AppKey, "TEXT");
+                        ShaObj.update("x-date:" + GMTstring);
+                        let HMAC = ShaObj.getHAMC("B64");
+                        let Authorization =
+                            'hmac username="' +
+                            AppID +
+                            '",algorithm="hmac-sha1",headers="x-date", signature="' +
+                            HMAC +
+                            '"';
+                        return {
+                            Authoriztion: Authorization,
+                            "X-Date": GMTstring,
+                        };
+                    },
+                },
+            });
+        </script>
+    </body>
 </html>

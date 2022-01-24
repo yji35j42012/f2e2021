@@ -2,145 +2,38 @@
 
 <template>
     <div class="container">
-        <ul class="breadcrumbs">
-            <li>首頁</li>
-            <li>在地美食</li>
-            <li>南投縣</li>
-            <li>金都餐廳</li>
-        </ul>
-        <banner></banner>
+        <breadcrumbs @clearsearch="clearSearchHandler"></breadcrumbs>
+        <Func @search="resultHandler"></Func>
+        <div class="infoBox" v-if="!resultShow">
+            <h3>熱門主題</h3>
+            <ul class="r2c4">
+                <li
+                    class="r2c4_item"
+                    v-for="(item, index) in restaurant_sort.class_sort"
+                    :key="index"
+                    :data-txt="item"
+                    :style="{
+                        backgroundImage:
+                            'url(' +
+                            restaurant_sort.class_map[item].picUrl[0] +
+                            ')',
+                    }"
+                    @click="typeSearch(item)"
+                ></li>
+            </ul>
+        </div>
 
-        <div class="infoBox">
-            <h3>金都餐廳</h3>
-            <ul class="hash">
-                <li># 中式美食</li>
-            </ul>
-            <div class="introduce">
-                <p>餐廳介紹：</p>
-                <span>
-                    埔里金都餐廳於1994年創立於美麗的台灣中心埔里，1995年起創意取材埔里名酒研發推出紹興宴，揚名台北中華美食展，此後，不斷結合地方鄉土農特產，持續研發新健康美食與主題饗宴(日月潭邵族宴、水果宴、梅宴、茭白筍大餐、珍菇水筍宴、養生御膳、百花宴、香草宴、香米喜宴、原鄉風味餐、2003時尚蕃茄宴…等)，更榮耀承辦聖文森總理及五國元首國宴，成功的在台灣捲起金都美食風！精采展現台灣美食新風情，成為台灣中部旅遊線首選最佳的美食餐廳，並連續四年榮獲優經濟部選拔為質餐廳之殊榮。
-                </span>
-            </div>
-        </div>
-        <div class="map infoBox">
-            <div class="map_txt">
-                <table>
-                    <tr>
-                        <th>營業時間：</th>
-                        <td>上午11:00~14:30下午17:00~21:00</td>
-                    </tr>
-                    <tr>
-                        <th>聯絡電話：</th>
-                        <td>886-49-2995096</td>
-                    </tr>
-                    <tr>
-                        <th>餐廳地址：</th>
-                        <td class="green">南投縣埔里鎮信義路236號</td>
-                    </tr>
-                    <tr>
-                        <th>官方網站：</th>
-                        <td class="green">http://www.jindu1994.com/</td>
-                    </tr>
-                </table>
-            </div>
-            <div class="map_pic">
-                <img src="../images/GoogleMap.jpg" alt="" />
-            </div>
-            <ul class="map_surrounding">
-                <li>周邊資訊：</li>
-                <li>
-                    <i class="icon_mount"></i>
-                    附近景點
-                </li>
-                <li>
-                    <i class="icon_nearby"></i>
-                    附近活動
-                </li>
-                <li>
-                    <i class="icon_eat"></i>
-                    附近美食
-                </li>
-            </ul>
-        </div>
-        <div class="infoBox">
-            <h3>
-                還有這些不能錯過的景點
-                <span>
-                    更多宜蘭縣景點
-                    <i class="icon_arrow">
-                        <svg viewBox="0 0 16 16">
-                            <path :d="icon_all.arrow" />
-                        </svg>
-                    </i>
-                </span>
-            </h3>
-            <ul class="r1c4">
-                <li class="r1c4_item">
-                    <div class="pic">
-                        <img src="./images/RestaurantPicture1.jpg" alt="" />
-                    </div>
-                    <div class="r1c4_txt">
-                        <p class="r1c4_txt_title">龜山島牛奶海</p>
-                        <p class="r1c4_txt_address">
-                            <i class="icon_add">
-                                <svg viewBox="0 0 14 16">
-                                    <path :d="icon_all.add" />
-                                </svg>
-                            </i>
-                            宜蘭縣
-                        </p>
-                    </div>
-                </li>
-                <li class="r1c4_item">
-                    <div class="pic">
-                        <img src="./images/RestaurantPicture2.jpg" alt="" />
-                    </div>
-                    <div class="r1c4_txt">
-                        <p class="r1c4_txt_title">高美濕地(高美野生動物保護區)</p>
-                        <p class="r1c4_txt_address">
-                            <i class="icon_add">
-                                <svg viewBox="0 0 14 16">
-                                    <path :d="icon_all.add" />
-                                </svg>
-                            </i>
-                            臺中市
-                        </p>
-                    </div>
-                </li>
-                <li class="r1c4_item">
-                    <div class="pic">
-                        <img src="./images/RestaurantPicture3.jpg" alt="" />
-                    </div>
-                    <div class="r1c4_txt">
-                        <p class="r1c4_txt_title">溪頭自然教育園區</p>
-                        <p class="r1c4_txt_address">
-                            <i class="icon_add">
-                                <svg viewBox="0 0 14 16">
-                                    <path :d="icon_all.add" />
-                                </svg>
-                            </i>
-                            南投縣
-                        </p>
-                    </div>
-                </li>
-                <li class="r1c4_item">
-                    <div class="pic">
-                        <img src="./images/RestaurantPicture4.jpg" alt="" />
-                    </div>
-                    <div class="r1c4_txt">
-                        <p class="r1c4_txt_title">九份老街</p>
-                        <p class="r1c4_txt_address">
-                            <i class="icon_add">
-                                <svg viewBox="0 0 14 16">
-                                    <path :d="icon_all.add" />
-                                </svg>
-                            </i>
-                            新北市
-                        </p>
-                    </div>
-                </li>
-            </ul>
-        </div>
+        <searchgroup
+            v-if="resultShow"
+            :itemcount="result.count"
+            :itemobj="restaurant_info"
+        ></searchgroup>
+        <page
+            v-if="resultShow"
+            :maxpage="result.infoMaxPage"
+            :nowpage="result.infoNowPage"
+            @changepage="changePageHanlder"
+        ></page>
     </div>
 </template>
 
@@ -149,13 +42,123 @@ module.exports = {
     data() {
         return {
             icon_all: icon_all,
-        }
+            resultShow: false,
+            filterCity: "",
+            filterCityName: "",
+            filterInfo: "",
+            result: {
+                count: 0,
+                info: [],
+                infoMaxShow: 20,
+                infoNowPage: 1,
+                infoMaxPage: 0,
+            },
+        };
     },
     components: {
-        banner: httpVueLoader('../components/Banner.vue'),
+        func: httpVueLoader("../components/Func.vue"),
+        breadcrumbs: httpVueLoader("../components/Breadcrumbs.vue"),
+        searchgroup: httpVueLoader("../components/SearchGroup.vue"),
+        page: httpVueLoader("../components/Page.vue"),
+        // searchgroup: httpVueLoader("../components/SearchGroup.vue"),
     },
-    mounted() {},
-    computed: {},
-    methods: {},
-}
+    mounted() {
+        store.dispatch("READ_RESTAURANT_INFO");
+    },
+    computed: {
+        restaurant_sort() {
+            return store.state.restaurant.class;
+        },
+        restaurant_info() {
+            let showList = [];
+            let info = this.result;
+            let mathPage = Math.ceil(info.info.length / 20); //頁數
+            info.infoMaxPage = mathPage;
+            startItem =
+                (parseInt(info.infoNowPage) - 1) * parseInt(info.infoMaxShow);
+            endItem = parseInt(info.infoNowPage) * parseInt(info.infoMaxShow);
+
+            if (mathPage == 1) {
+                showList = info.info;
+            } else if (endItem > info.count) {
+                for (let i = startItem; i < info.count; i++) {
+                    showList.push(info.info[i]);
+                }
+            } else {
+                for (let i = startItem; i < endItem; i++) {
+                    showList.push(info.info[i]);
+                }
+            }
+
+            return showList;
+        },
+    },
+    methods: {
+        changePageHanlder(num) {
+            console.log(num);
+            if (
+                num == "++" &&
+                this.result.infoNowPage !== this.result.infoMaxPage
+            ) {
+                this.result.infoNowPage = this.result.infoNowPage + 1;
+            } else if (num == "--" && this.result.infoNowPage !== 1) {
+                this.result.infoNowPage = this.result.infoNowPage - 1;
+            } else if (num !== "++" && num !== "--") {
+                this.result.infoNowPage = num;
+            }
+        },
+        clearSearchHandler() {
+            this.resultShow = false;
+        },
+        typeSearch(str) {
+            this.resultShow = true;
+            let info = store.state.restaurant.info;
+            this.result.info = [];
+            this.result.count = 0;
+
+            info.forEach((item) => {
+                if (item.type) {
+                    item.type.indexOf(str) !== -1
+                        ? this.result.info.push(item)
+                        : "";
+                }
+            });
+            this.result.count = this.result.info.length;
+            store.dispatch("ADD_BREADCRUMBS", str);
+        },
+        resultHandler(val) {
+            this.resultShow = true;
+            let info = store.state.restaurant.info;
+            this.result.info = [];
+            this.result.count = 0;
+
+            if (val.city == "all" && val.info == "") {
+                this.result.info = info;
+            } else if (val.city !== "all" && val.info == "") {
+                info.forEach((item) => {
+                    item.cityName.indexOf(val.cityName) !== -1
+                        ? this.result.info.push(item)
+                        : "";
+                });
+            } else if (val.city == "all" && val.info !== "") {
+                info.forEach((item) => {
+                    item.detail.indexOf(val.info) !== -1 ||
+                    item.restaurantName.indexOf(val.info) !== -1
+                        ? this.result.info.push(item)
+                        : "";
+                });
+            } else if (val.city !== "all" && val.info !== "") {
+                info.forEach((item) => {
+                    if (item.cityName.indexOf(val.cityName) !== -1) {
+                        item.detail.indexOf(val.info) !== -1 ||
+                        item.restaurantName.indexOf(val.info) !== -1
+                            ? this.result.info.push(item)
+                            : "";
+                    }
+                });
+            }
+            this.result.count = this.result.info.length;
+        },
+    },
+};
 </script>

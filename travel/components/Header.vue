@@ -17,10 +17,7 @@
         </button>
         <ul class="menu_group">
             <li>
-                <router-link to="/search">探索景點</router-link>
-            </li>
-            <li>
-                <router-link to="/attractions">景點內頁</router-link>
+                <router-link to="/attractions">探索景點</router-link>
             </li>
             <li>
                 <router-link to="/activity">節慶活動</router-link>
