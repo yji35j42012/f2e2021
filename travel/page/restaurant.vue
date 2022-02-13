@@ -2,38 +2,9 @@
 
 <template>
     <div class="container">
-        <breadcrumbs @clearsearch="clearSearchHandler"></breadcrumbs>
-        <Func @search="resultHandler"></Func>
-        <div class="infoBox" v-if="!resultShow">
-            <h3>熱門主題</h3>
-            <ul class="r2c4">
-                <li
-                    class="r2c4_item"
-                    v-for="(item, index) in restaurant_sort.class_sort"
-                    :key="index"
-                    :data-txt="item"
-                    :style="{
-                        backgroundImage:
-                            'url(' +
-                            restaurant_sort.class_map[item].picUrl[0] +
-                            ')',
-                    }"
-                    @click="typeSearch(item)"
-                ></li>
-            </ul>
-        </div>
-
-        <searchgroup
-            v-if="resultShow"
-            :itemcount="result.count"
-            :itemobj="restaurant_info"
-        ></searchgroup>
-        <page
-            v-if="resultShow"
-            :maxpage="result.infoMaxPage"
-            :nowpage="result.infoNowPage"
-            @changepage="changePageHanlder"
-        ></page>
+        <breadcrumbs></breadcrumbs>
+        <Func v-if="showFunc"></Func>
+        <router-view></router-view>
     </div>
 </template>
 
@@ -63,7 +34,10 @@ module.exports = {
         // searchgroup: httpVueLoader("../components/SearchGroup.vue"),
     },
     mounted() {
+        console.log("restaurant_outside");
         store.dispatch("READ_RESTAURANT_INFO");
+        store.dispatch("CLEAR_BREADCRUMBS");
+        store.dispatch("ADD_BREADCRUMBS", "品嚐美食");
     },
     computed: {
         restaurant_sort() {
@@ -89,13 +63,19 @@ module.exports = {
                     showList.push(info.info[i]);
                 }
             }
-
             return showList;
+        },
+        showFunc() {
+            let breadcrumbCount = store.state.breadcrumbs.length;
+            if (breadcrumbCount == 3) {
+                return false;
+            } else {
+                return true;
+            }
         },
     },
     methods: {
         changePageHanlder(num) {
-            console.log(num);
             if (
                 num == "++" &&
                 this.result.infoNowPage !== this.result.infoMaxPage
@@ -110,54 +90,12 @@ module.exports = {
         clearSearchHandler() {
             this.resultShow = false;
         },
-        typeSearch(str) {
-            this.resultShow = true;
-            let info = store.state.restaurant.info;
-            this.result.info = [];
-            this.result.count = 0;
-
-            info.forEach((item) => {
-                if (item.type) {
-                    item.type.indexOf(str) !== -1
-                        ? this.result.info.push(item)
-                        : "";
-                }
-            });
-            this.result.count = this.result.info.length;
-            store.dispatch("ADD_BREADCRUMBS", str);
-        },
-        resultHandler(val) {
-            this.resultShow = true;
-            let info = store.state.restaurant.info;
-            this.result.info = [];
-            this.result.count = 0;
-
-            if (val.city == "all" && val.info == "") {
-                this.result.info = info;
-            } else if (val.city !== "all" && val.info == "") {
-                info.forEach((item) => {
-                    item.cityName.indexOf(val.cityName) !== -1
-                        ? this.result.info.push(item)
-                        : "";
-                });
-            } else if (val.city == "all" && val.info !== "") {
-                info.forEach((item) => {
-                    item.detail.indexOf(val.info) !== -1 ||
-                    item.restaurantName.indexOf(val.info) !== -1
-                        ? this.result.info.push(item)
-                        : "";
-                });
-            } else if (val.city !== "all" && val.info !== "") {
-                info.forEach((item) => {
-                    if (item.cityName.indexOf(val.cityName) !== -1) {
-                        item.detail.indexOf(val.info) !== -1 ||
-                        item.restaurantName.indexOf(val.info) !== -1
-                            ? this.result.info.push(item)
-                            : "";
-                    }
-                });
+        returnIdHandler(id) {
+            this.resultShow = false;
+            let nowPage = store.state.nowPage;
+            if (nowPage == "restaurant") {
+                this.$router.push("/restaurant/" + id);
             }
-            this.result.count = this.result.info.length;
         },
     },
 };

@@ -32,7 +32,11 @@ module.exports = {
             if (str == "品嚐美食" || str == "節慶活動" || str == "節慶活動") {
                 store.dispatch("CLEAR_BREADCRUMBS");
                 store.dispatch("ADD_BREADCRUMBS", str);
+                this.$router.push("/" + store.state.nowPage);
                 this.$emit("clearsearch");
+            } else if (store.state.breadcrumbs.length == 3) {
+                store.dispatch("DEL_BREADCRUMBS");
+                this.$router.go(-1);
             }
         },
     },

@@ -3,48 +3,8 @@
 <template>
     <div class="container">
         <breadcrumbs></breadcrumbs>
-        <Func></Func>
-        <div class="infoBox">
-            <h3>熱門主題</h3>
-            <ul class="r2c4">
-                <li
-                    class="r2c4_item"
-                    style="background-image: url('../images/search1.jpg')"
-                >
-                    自然風景類
-                </li>
-                <li
-                    class="r2c4_item"
-                    style="background-image: url('../images/search1.jpg')"
-                >
-                    觀光工廠類
-                </li>
-                <li
-                    class="r2c4_item"
-                    style="background-image: url('../images/search1.jpg')"
-                >
-                    觀光工廠類
-                </li>
-                <li
-                    class="r2c4_item"
-                    style="background-image: url('../images/search1.jpg')"
-                >
-                    觀光工廠類
-                </li>
-                <li
-                    class="r2c4_item"
-                    style="background-image: url('../images/search1.jpg')"
-                >
-                    觀光工廠類
-                </li>
-                <li
-                    class="r2c4_item"
-                    style="background-image: url('../images/search1.jpg')"
-                >
-                    觀光工廠類
-                </li>
-            </ul>
-        </div>
+        <Func v-if="showFunc"></Func>
+        <router-view></router-view>
     </div>
 </template>
 
@@ -59,8 +19,22 @@ module.exports = {
         func: httpVueLoader("../components/Func.vue"),
         breadcrumbs: httpVueLoader("../components/Breadcrumbs.vue"),
     },
-    mounted() {},
-    computed: {},
+    mounted() {
+        console.log("activity_outside");
+        store.dispatch("READ_ACTIVITY_INFO");
+        store.dispatch("CLEAR_BREADCRUMBS");
+        store.dispatch("ADD_BREADCRUMBS", "節慶活動");
+    },
+    computed: {
+        showFunc() {
+            let breadcrumbCount = store.state.breadcrumbs.length;
+            if (breadcrumbCount == 3) {
+                return false;
+            } else {
+                return true;
+            }
+        },
+    },
     methods: {},
 };
 </script>

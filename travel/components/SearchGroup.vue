@@ -4,13 +4,14 @@
     <div class="infoBox result">
         <h3>
             搜尋結果
-            <span class="result_count"> 共有 {{ itemcount }} 筆 </span>
+            <span class="result_count"> 共有 {{ itemCount }} 筆 </span>
         </h3>
         <ul class="result_group">
             <li
                 class="result_item"
-                v-for="(item, index) in itemobj"
+                v-for="(item, index) in itemContent"
                 :key="index"
+                @click="itemHandler(item.restaurantID, item.restaurantName)"
             >
                 <div
                     class="result_pic"
@@ -33,6 +34,13 @@
                 </div>
             </li>
         </ul>
+
+        <page
+            v-if="result.infoMaxPage > 1"
+            :maxpage="result.infoMaxPage"
+            :nowpage="result.infoNowPage"
+            @changepage="changePageHanlder"
+        ></page>
     </div>
 </template>
 
@@ -40,15 +48,84 @@
 module.exports = {
     data() {
         return {
+            result: {
+                infoMaxShow: 20,
+                infoNowPage: 1,
+                infoMaxPage: 0,
+            },
             icon_all: icon_all,
         };
     },
-    props: ["itemcount", "itemobj"],
+    components: {
+        page: httpVueLoader("../components/Page.vue"),
+    },
+    mounted() {},
     computed: {
-        page() {
-            return store.state.nowPage;
+        itemCount() {
+            let showSearch = store.state.showSearch;
+            return showSearch.length;
+        },
+        itemContent() {
+            let resultData = this.result;
+            let showSearch = store.state.showSearch;
+            let showList = [];
+            let mathPage = Math.ceil(showSearch.length / 20); //頁數
+            resultData.infoMaxPage = mathPage;
+            let startItem =
+                (parseInt(resultData.infoNowPage) - 1) *
+                parseInt(resultData.infoMaxShow);
+            let endItem =
+                parseInt(resultData.infoNowPage) *
+                parseInt(resultData.infoMaxShow);
+            console.log("頁數", mathPage);
+            console.log("此頁第一筆", startItem);
+            console.log("此頁最後一筆", endItem);
+            if (mathPage == 1) {
+                showList = showSearch;
+            } else if (endItem > showSearch.length) {
+                for (let i = startItem; i < showSearch.length; i++) {
+                    showList.push(showSearch[i]);
+                }
+            } else {
+                for (let i = startItem; i < endItem; i++) {
+                    showList.push(showSearch[i]);
+                }
+            }
+            return showList;
+            //     let nowPage = store.state.nowPage;
+            //     if (
+            //         searchItem.funcSearch_city == "all" &&
+            //         searchItem.funcSearch_info == ""
+            //     ) {
+            //         if (nowPage == "restaurant") {
+            //             // return store.state.restaurant.info;
+            //             return store.state.restaurant.info;
+            //         }
+            //         // // this.result.info = info;
+            //         // return "我在all";
+            //     }
         },
     },
-    methods: {},
+    methods: {
+        itemHandler(id, str) {
+            let nowPage = store.state.nowPage;
+            store.dispatch("ADD_BREADCRUMBS", str ? str : "noname");
+            this.$router.push(
+                "/" + nowPage + "/" + this.$route.params.search + "/" + id
+            );
+        },
+        changePageHanlder(num) {
+            if (
+                num == "++" &&
+                this.result.infoNowPage !== this.result.infoMaxPage
+            ) {
+                this.result.infoNowPage = this.result.infoNowPage + 1;
+            } else if (num == "--" && this.result.infoNowPage !== 1) {
+                this.result.infoNowPage = this.result.infoNowPage - 1;
+            } else if (num !== "++" && num !== "--") {
+                this.result.infoNowPage = num;
+            }
+        },
+    },
 };
 </script>

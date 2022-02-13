@@ -107,11 +107,55 @@ module.exports = {
             this.selectShow = !this.selectShow;
         },
         searchHandler() {
-            this.$emit("search", {
-                city: this.searchCity,
-                cityName: this.choseCity,
-                info: this.searchInfo,
+            store.dispatch("SET_SEARCHITEM", {
+                type: "func",
+                funcSearch_city: this.searchCity,
+                funcSearch_cityName: this.choseCity,
+                funcSearch_info: this.searchInfo,
             });
+            if (store.state.breadcrumbs.length > 1) {
+                store.dispatch("DEL_BREADCRUMBS");
+                store.dispatch("ADD_BREADCRUMBS", this.choseCity);
+            } else {
+                store.dispatch("ADD_BREADCRUMBS", this.choseCity);
+            }
+            this.$router.push("/" + store.state.nowPage + "/" + this.choseCity);
+
+            let info = store.state.restaurant.info;
+            let list = [];
+            if (this.searchCity == "all" && this.searchInfo == "") {
+                list = info;
+            } else if (this.searchCity !== "all" && this.searchInfo == "") {
+                info.forEach((item) => {
+                    item.cityName.indexOf(this.choseCity) !== -1
+                        ? list.push(item)
+                        : "";
+                });
+            } else if (this.searchCity == "all" && this.searchInfo !== "") {
+                info.forEach((item) => {
+                    item.detail.indexOf(this.searchInfo) !== -1 ||
+                    item.restaurantName.indexOf(this.searchInfo) !== -1
+                        ? list.push(item)
+                        : "";
+                });
+            } else if (this.searchCity !== "all" && this.searchInfo !== "") {
+                info.forEach((item) => {
+                    if (item.cityName.indexOf(this.choseCity) !== -1) {
+                        item.detail.indexOf(this.searchInfo) !== -1 ||
+                        item.restaurantName.indexOf(this.searchInfo) !== -1
+                            ? list.push(item)
+                            : "";
+                    }
+                });
+            }
+
+            store.dispatch("SET_SHOWSEARCH", list);
+
+            // this.$emit("search", {
+            //     city: this.searchCity,
+            //     cityName: this.choseCity,
+            //     info: this.searchInfo,
+            // });
         },
         searchChangeHandler(str) {
             this.nowSearch = str;

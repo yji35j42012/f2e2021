@@ -41,7 +41,9 @@
         <script src="./js/icon_all.js"></script>
         <script src="./store/store.js"></script>
 
-        <script src="./aaa.json"></script>
+        <script src="./testData/restaurant.json"></script>
+        <script src="./testData/attractions.json"></script>
+        <script src="./testData/activity.json"></script>
         <script>
             const routes = [
                 {
@@ -50,29 +52,85 @@
                         default: httpVueLoader("./page/home.vue"),
                     },
                 },
-                {
-                    path: "/search",
-                    components: {
-                        default: httpVueLoader("./page/search.vue"),
-                    },
-                },
+                // {
+                //     path: "/search",
+                //     component: httpVueLoader("./page/search.vue"),
+                // },
                 {
                     path: "/attractions",
-                    components: {
-                        default: httpVueLoader("./page/attractions.vue"),
-                    },
+                    component: httpVueLoader("./page/attractions.vue"),
+                    children: [
+                        {
+                            path: "",
+                            component: httpVueLoader(
+                                "./components/ClassType.vue"
+                            ),
+                        },
+                        {
+                            path: ":search",
+                            component: httpVueLoader(
+                                "./components/SearchGroup.vue"
+                            ),
+                        },
+                        {
+                            path: ":search/:id",
+                            component: httpVueLoader(
+                                "./components/ShowDetail.vue"
+                            ),
+                        },
+                    ],
                 },
                 {
                     path: "/activity",
-                    components: {
-                        default: httpVueLoader("./page/activity.vue"),
-                    },
+                    component: httpVueLoader("./page/activity.vue"),
+                    children: [
+                        {
+                            path: "",
+                            component: httpVueLoader(
+                                "./components/ClassType.vue"
+                            ),
+                        },
+                        {
+                            path: ":search",
+                            component: httpVueLoader(
+                                "./components/SearchGroup.vue"
+                            ),
+                        },
+                        {
+                            path: ":search/:id",
+                            component: httpVueLoader(
+                                "./components/ShowDetail.vue"
+                            ),
+                        },
+                    ],
                 },
                 {
                     path: "/restaurant",
-                    components: {
-                        default: httpVueLoader("./page/restaurant.vue"),
-                    },
+                    component: httpVueLoader("./page/restaurant.vue"),
+                    children: [
+                        {
+                            path: "",
+                            component: httpVueLoader(
+                                "./components/ClassType.vue"
+                            ),
+                        },
+                        {
+                            path: ":search",
+                            component: httpVueLoader(
+                                "./components/SearchGroup.vue"
+                            ),
+                        },
+                        {
+                            path: ":search/:id",
+                            component: httpVueLoader(
+                                "./components/ShowDetail.vue"
+                            ),
+                        },
+                        // {
+                        //     path: ":id",
+                        //     component: httpVueLoader("./page/restaurant1.vue"),
+                        // },
+                    ],
                 },
             ];
             const router = new VueRouter({
@@ -101,6 +159,7 @@
                 router,
                 watch: {
                     $route(to, from) {
+                        // console.log("fullpagh" + this.$route.fullPath);
                         var now = this.$route.path;
                         if (this.$route.path == "/") {
                             this.nowPath = "home";
@@ -108,31 +167,6 @@
                         } else {
                             this.nowPath = now.split("/")[1];
                             store.dispatch("PAGE", now.split("/")[1]);
-                            switch (now.split("/")[1]) {
-                                case "restaurant":
-                                    store.dispatch("CLEAR_BREADCRUMBS");
-                                    store.dispatch(
-                                        "ADD_BREADCRUMBS",
-                                        "品嚐美食"
-                                    );
-                                    break;
-                                case "activity":
-                                    store.dispatch("CLEAR_BREADCRUMBS");
-                                    store.dispatch(
-                                        "ADD_BREADCRUMBS",
-                                        "節慶活動"
-                                    );
-                                    break;
-                                case "attractions":
-                                    store.dispatch("CLEAR_BREADCRUMBS");
-                                    store.dispatch(
-                                        "ADD_BREADCRUMBS",
-                                        "探索景點"
-                                    );
-                                    break;
-                                default:
-                                    break;
-                            }
                         }
                     },
                 },
