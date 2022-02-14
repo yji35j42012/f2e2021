@@ -66,15 +66,18 @@ h3 {
     word-break: break-all;
 }
 
+.hand {
+    @extend %hand;
+}
 .func {
     @include d_f(flex);
     > * + * {
         margin-left: 15px;
-        @at-root .home &{
+        @at-root .home & {
             margin-left: 0;
         }
     }
-    
+
     .normal_sel,
     .normal_date {
         max-width: 240px;

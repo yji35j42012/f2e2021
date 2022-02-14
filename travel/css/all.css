@@ -111,7 +111,7 @@ select {
           transition-duration: 0.3s;
 }
 
-.normal_sel, .normal_btn, .menu_btn, .banner_next, .banner_prev, .banner_dot li, .breadcrumbs li:not(:last-child), .alert_func .normal_btn, .r2c4_item, .page_li, .page_prev, .page_next {
+.hand, .normal_sel, .normal_btn, .menu_btn, .banner_next, .banner_prev, .banner_dot li, .breadcrumbs li:not(:last-child), .alert_func .normal_btn, .r2c4_item, .page_li, .page_prev, .page_next {
   cursor: pointer;
 }
 

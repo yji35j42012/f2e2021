@@ -8,7 +8,7 @@
                 {{ detail.name }}
             </h3>
             <ul class="hash">
-                <li v-if="detail.class !== ''"># {{ detail.class }}</li>
+                <li v-if="detail.class"># {{ detail.class }}</li>
                 <!-- <li># 林場類</li> -->
             </ul>
             <div class="introduce">
@@ -183,18 +183,25 @@ module.exports = {
         axios.get(axiosUrl).then((res) => {
             console.log("data", res.data[0])
             let item = res.data[0]
+            let page = store.state.nowPage
             console.log("item", item)
 
             this.detail = {
                 address: item.Address,
-                name: item.RestaurantName,
+                // name: item.RestaurantName,
                 description: item.Description,
                 class: item.Class,
                 opentime: item.OpenTime,
                 phone: item.Phone,
                 webAddress: item.WebsiteUrl,
             }
-            
+            if (page == "restaurant") {
+                this.detail.name = item.RestaurantName
+            } else if (page == "attractions") {
+                this.detail.name = item.ScenicSpotName
+            } else if (page == "activity") {
+                this.detail.name = item.ActivityName
+            }
             console.log("s", this.detail.class)
         })
     },

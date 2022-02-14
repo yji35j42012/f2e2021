@@ -91,65 +91,75 @@ module.exports = {
             choseCity: "全部縣市",
             searchCity: "all",
             searchInfo: "",
-        };
+        }
     },
 
     computed: {
         page() {
-            return store.state.nowPage;
+            return store.state.nowPage
         },
         city() {
-            return store.state.city;
+            return store.state.city
         },
     },
     methods: {
         selectHandler() {
-            this.selectShow = !this.selectShow;
+            this.selectShow = !this.selectShow
         },
         searchHandler() {
+            console.log("searchHandler")
+
             store.dispatch("SET_SEARCHITEM", {
                 type: "func",
                 funcSearch_city: this.searchCity,
                 funcSearch_cityName: this.choseCity,
                 funcSearch_info: this.searchInfo,
-            });
+            })
             if (store.state.breadcrumbs.length > 1) {
-                store.dispatch("DEL_BREADCRUMBS");
-                store.dispatch("ADD_BREADCRUMBS", this.choseCity);
+                store.dispatch("DEL_BREADCRUMBS")
+                store.dispatch("ADD_BREADCRUMBS", this.choseCity)
             } else {
-                store.dispatch("ADD_BREADCRUMBS", this.choseCity);
+                store.dispatch("ADD_BREADCRUMBS", this.choseCity)
             }
-            this.$router.push("/" + store.state.nowPage + "/" + this.choseCity);
+            
+            this.$router.push("/" + store.state.nowPage + "/" + this.choseCity)
+            let info = ""
+            if (store.state.nowPage == "restaurant") {
+                info = store.state.restaurant.info
+            } else if (store.state.nowPage == "activity") {
+                info = store.state.activity.info
+            } else if (store.state.nowPage == "attractions") {
+                info = store.state.attractions.info
+            }
 
-            let info = store.state.restaurant.info;
-            let list = [];
+            let list = []
             if (this.searchCity == "all" && this.searchInfo == "") {
-                list = info;
+                list = info
             } else if (this.searchCity !== "all" && this.searchInfo == "") {
                 info.forEach((item) => {
                     item.cityName.indexOf(this.choseCity) !== -1
                         ? list.push(item)
-                        : "";
-                });
+                        : ""
+                })
             } else if (this.searchCity == "all" && this.searchInfo !== "") {
                 info.forEach((item) => {
                     item.detail.indexOf(this.searchInfo) !== -1 ||
-                    item.restaurantName.indexOf(this.searchInfo) !== -1
+                    item.infoName.indexOf(this.searchInfo) !== -1
                         ? list.push(item)
-                        : "";
-                });
+                        : ""
+                })
             } else if (this.searchCity !== "all" && this.searchInfo !== "") {
                 info.forEach((item) => {
                     if (item.cityName.indexOf(this.choseCity) !== -1) {
                         item.detail.indexOf(this.searchInfo) !== -1 ||
-                        item.restaurantName.indexOf(this.searchInfo) !== -1
+                        item.infoName.indexOf(this.searchInfo) !== -1
                             ? list.push(item)
-                            : "";
+                            : ""
                     }
-                });
+                })
             }
 
-            store.dispatch("SET_SHOWSEARCH", list);
+            store.dispatch("SET_SHOWSEARCH", list)
 
             // this.$emit("search", {
             //     city: this.searchCity,
@@ -158,12 +168,12 @@ module.exports = {
             // });
         },
         searchChangeHandler(str) {
-            this.nowSearch = str;
+            this.nowSearch = str
         },
         changeCity(str, str1) {
-            this.choseCity = str;
-            this.searchCity = str1;
+            this.choseCity = str
+            this.searchCity = str1
         },
     },
-};
+}
 </script>
