@@ -11,7 +11,7 @@
                 class="result_item"
                 v-for="(item, index) in itemContent"
                 :key="index"
-                @click="itemHandler(item.restaurantID, item.restaurantName)"
+                @click="itemHandler(item.infoId, item.infoName)"
             >
                 <div
                     class="result_pic"
@@ -21,7 +21,7 @@
                 ></div>
                 <div class="result_txt">
                     <p class="result_txt_title">
-                        {{ item.restaurantName }}
+                        {{ item.infoName }}
                     </p>
                     <p class="result_txt_address">
                         <i class="icon_add">
@@ -54,7 +54,7 @@ module.exports = {
                 infoMaxPage: 0,
             },
             icon_all: icon_all,
-        };
+        }
     },
     components: {
         page: httpVueLoader("../components/Page.vue"),
@@ -62,36 +62,38 @@ module.exports = {
     mounted() {},
     computed: {
         itemCount() {
-            let showSearch = store.state.showSearch;
-            return showSearch.length;
+            let showSearch = store.state.showSearch
+            return showSearch.length
         },
         itemContent() {
-            let resultData = this.result;
-            let showSearch = store.state.showSearch;
-            let showList = [];
-            let mathPage = Math.ceil(showSearch.length / 20); //頁數
-            resultData.infoMaxPage = mathPage;
+            let resultData = this.result
+            let showSearch = store.state.showSearch
+            console.log("showSearch", showSearch)
+
+            let showList = []
+            let mathPage = Math.ceil(showSearch.length / 20) //頁數
+            resultData.infoMaxPage = mathPage
             let startItem =
                 (parseInt(resultData.infoNowPage) - 1) *
-                parseInt(resultData.infoMaxShow);
+                parseInt(resultData.infoMaxShow)
             let endItem =
                 parseInt(resultData.infoNowPage) *
-                parseInt(resultData.infoMaxShow);
-            console.log("頁數", mathPage);
-            console.log("此頁第一筆", startItem);
-            console.log("此頁最後一筆", endItem);
+                parseInt(resultData.infoMaxShow)
+            // console.log("頁數", mathPage)
+            // console.log("此頁第一筆", startItem)
+            // console.log("此頁最後一筆", endItem)
             if (mathPage == 1) {
-                showList = showSearch;
+                showList = showSearch
             } else if (endItem > showSearch.length) {
                 for (let i = startItem; i < showSearch.length; i++) {
-                    showList.push(showSearch[i]);
+                    showList.push(showSearch[i])
                 }
             } else {
                 for (let i = startItem; i < endItem; i++) {
-                    showList.push(showSearch[i]);
+                    showList.push(showSearch[i])
                 }
             }
-            return showList;
+            return showList
             //     let nowPage = store.state.nowPage;
             //     if (
             //         searchItem.funcSearch_city == "all" &&
@@ -108,6 +110,8 @@ module.exports = {
     },
     methods: {
         itemHandler(id, str) {
+            // console.log("id", id)
+
             let nowPage = store.state.nowPage;
             store.dispatch("ADD_BREADCRUMBS", str ? str : "noname");
             this.$router.push(
@@ -119,13 +123,13 @@ module.exports = {
                 num == "++" &&
                 this.result.infoNowPage !== this.result.infoMaxPage
             ) {
-                this.result.infoNowPage = this.result.infoNowPage + 1;
+                this.result.infoNowPage = this.result.infoNowPage + 1
             } else if (num == "--" && this.result.infoNowPage !== 1) {
-                this.result.infoNowPage = this.result.infoNowPage - 1;
+                this.result.infoNowPage = this.result.infoNowPage - 1
             } else if (num !== "++" && num !== "--") {
-                this.result.infoNowPage = num;
+                this.result.infoNowPage = num
             }
         },
     },
-};
+}
 </script>

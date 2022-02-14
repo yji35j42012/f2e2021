@@ -111,7 +111,7 @@ select {
           transition-duration: 0.3s;
 }
 
-.normal_sel, .normal_btn, .menu_btn, .banner_next, .banner_prev, .banner_dot li, .alert_func .normal_btn, .r2c4_item, .page_li, .page_prev, .page_next {
+.normal_sel, .normal_btn, .menu_btn, .banner_next, .banner_prev, .banner_dot li, .breadcrumbs li:not(:last-child), .alert_func .normal_btn, .r2c4_item, .page_li, .page_prev, .page_next {
   cursor: pointer;
 }
 
@@ -207,6 +207,10 @@ h3 span .icon_arrow {
   font-weight: 300;
 }
 
+.word_break_all {
+  word-break: break-all;
+}
+
 .func {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -221,6 +225,10 @@ h3 span .icon_arrow {
 
 .func > * + * {
   margin-left: 15px;
+}
+
+.home .func > * + * {
+  margin-left: 0;
 }
 
 .func .normal_sel,
@@ -357,6 +365,8 @@ h3 span .icon_arrow {
 }
 
 .normal_inp input {
+  width: 100%;
+  background-color: transparent;
   font-size: 18px;
 }
 
@@ -1585,6 +1595,7 @@ footer {
 }
 
 .map_pic {
+  width: calc(50% - 15px);
   margin-bottom: 32px;
 }
 

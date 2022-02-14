@@ -47,6 +47,7 @@
     }
     // .map_pic
     &_pic {
+        width: calc(50% - 15px);
         margin-bottom: 32px;
     }
 
@@ -85,13 +86,13 @@
             background-size: cover;
         }
         .icon_mount {
-            background-image: url('../images/icon/icon_mount.svg');
+            background-image: url("../images/icon/icon_mount.svg");
         }
         .icon_nearby {
-            background-image: url('../images/icon/icon_nearby.svg');
+            background-image: url("../images/icon/icon_nearby.svg");
         }
         .icon_eat {
-            background-image: url('../images/icon/icon_eat.svg');
+            background-image: url("../images/icon/icon_eat.svg");
         }
     }
     @include mw(M) {
