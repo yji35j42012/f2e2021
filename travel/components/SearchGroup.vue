@@ -111,7 +111,6 @@ module.exports = {
     methods: {
         itemHandler(id, str) {
             // console.log("id", id)
-
             let nowPage = store.state.nowPage;
             store.dispatch("ADD_BREADCRUMBS", str ? str : "noname");
             this.$router.push(
