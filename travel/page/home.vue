@@ -308,7 +308,9 @@ module.exports = {
         banner: httpVueLoader("../components/Banner.vue"),
         func: httpVueLoader("../components/Func.vue"),
     },
-    mounted() {},
+    mounted() {
+        store.dispatch("CLEAR_BREADCRUMBS")
+    },
     computed: {},
     methods: {
         pageHandler(str) {

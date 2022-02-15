@@ -21,9 +21,10 @@ module.exports = {
     },
     mounted() {
         console.log("attractions_outside");
+        if (store.state.breadcrumbs.length !== 2) {
         store.dispatch("READ_ATTRACTIONS_INFO");
         store.dispatch("CLEAR_BREADCRUMBS");
-        store.dispatch("ADD_BREADCRUMBS", "探索景點");
+        store.dispatch("ADD_BREADCRUMBS", "探索景點");}
     },
     computed: {
         showFunc() {

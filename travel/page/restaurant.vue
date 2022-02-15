@@ -34,9 +34,11 @@ module.exports = {
     },
     mounted() {
         console.log("restaurant_outside")
-        store.dispatch("READ_RESTAURANT_INFO")
-        store.dispatch("CLEAR_BREADCRUMBS")
-        store.dispatch("ADD_BREADCRUMBS", "品嚐美食")
+        if (store.state.breadcrumbs.length !== 2) {
+            store.dispatch("READ_RESTAURANT_INFO")
+            store.dispatch("CLEAR_BREADCRUMBS")
+            store.dispatch("ADD_BREADCRUMBS", "品嚐美食")
+        }
     },
     computed: {
         restaurant_sort() {
