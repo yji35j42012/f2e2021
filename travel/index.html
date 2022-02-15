@@ -17,9 +17,7 @@
             <div :class="['content' , nowPath]">
                 <router-view></router-view>
             </div>
-
             <footer>#The F2E 3rd Week01 #Breakfast</footer>
-
             <div class="alert" v-if="alertShow">
                 <div class="alert_box">
                     <div class="alert_title">訊息</div>
@@ -151,7 +149,6 @@
                 router,
                 watch: {
                     $route(to, from) {
-                        // console.log("fullpagh" + this.$route.fullPath);
                         var now = this.$route.path;
                         if (this.$route.path == "/") {
                             this.nowPath = "home";
@@ -169,7 +166,6 @@
                     getAuthorizationHeader() {
                         let AppID = "";
                         let AppKey = "";
-
                         let GMTstring = new Date().toGMTString;
                         let ShaObj = new jsSHA("SHA-1", "TEXT");
 
