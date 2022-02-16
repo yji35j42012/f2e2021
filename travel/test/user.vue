@@ -11,7 +11,6 @@
 <script>
 module.exports = {
     mounted() {
-        console.log("user");
     },
 };
 </script>

@@ -72,7 +72,6 @@ module.exports = {
                     item.type.indexOf(str) !== -1 ? list.push(item) : "";
                 }
             });
-            console.log(list);
             store.dispatch("ADD_BREADCRUMBS", str);
             store.dispatch("SET_SEARCHITEM", {
                 type: "class",

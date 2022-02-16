@@ -9,7 +9,6 @@
             </h3>
             <ul class="hash">
                 <li v-if="detail.class"># {{ detail.class }}</li>
-                <!-- <li># 林場類</li> -->
             </ul>
             <div class="introduce">
                 <p>景點介紹：</p>
@@ -23,7 +22,6 @@
                 <table>
                     <tr>
                         <th>營業時間：</th>
-                        <!-- <td>上午11:00~14:30下午17:00~21:00</td> -->
                         <td>{{ detail.opentime }}</td>
                     </tr>
                     <tr>
@@ -180,15 +178,13 @@ module.exports = {
                 searchId +
                 "')&%24top=1&%24format=JSON"
         }
+
         axios.get(axiosUrl).then((res) => {
-            console.log("data", res.data[0])
+            console.log("res", res.data)
             let item = res.data[0]
             let page = store.state.nowPage
-            console.log("item", item)
-
             this.detail = {
                 address: item.Address,
-                // name: item.RestaurantName,
                 description: item.Description,
                 class: item.Class,
                 opentime: item.OpenTime,
@@ -202,7 +198,6 @@ module.exports = {
             } else if (page == "activity") {
                 this.detail.name = item.ActivityName
             }
-            console.log("s", this.detail.class)
         })
     },
     computed: {

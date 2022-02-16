@@ -107,7 +107,6 @@ module.exports = {
             this.selectShow = !this.selectShow
         },
         searchHandler() {
-            console.log("searchHandler")
             let nowPage = store.state.nowPage
             let info = ""
             let list = []
@@ -159,8 +158,6 @@ module.exports = {
                         store.dispatch("ADD_BREADCRUMBS", this.nowSearch)
                         this.$router.push("/restaurant/")
                     } else {
-                        console.log("asdf")
-
                         info.forEach((item) => {
                             item.detail.indexOf(this.searchInfo) !== -1 ||
                             item.infoName.indexOf(this.searchInfo) !== -1
@@ -218,12 +215,6 @@ module.exports = {
                 }
             }
             store.dispatch("SET_SHOWSEARCH", list)
-
-            // this.$emit("search", {
-            //     city: this.searchCity,
-            //     cityName: this.choseCity,
-            //     info: this.searchInfo,
-            // });
         },
         searchChangeHandler(str) {
             this.nowSearch = str

@@ -6,8 +6,7 @@
 
 <script>
 module.exports = {
-     mounted() {
-        console.log("UserContent");
+    mounted() {
     },
 };
 </script>

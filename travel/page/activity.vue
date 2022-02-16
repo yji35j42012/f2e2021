@@ -20,7 +20,6 @@ module.exports = {
         breadcrumbs: httpVueLoader("../components/Breadcrumbs.vue"),
     },
     mounted() {
-        console.log("activity_outside")
         if (store.state.breadcrumbs.length !== 2) {
             store.dispatch("READ_ACTIVITY_INFO")
             store.dispatch("CLEAR_BREADCRUMBS")

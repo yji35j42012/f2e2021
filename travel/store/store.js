@@ -53,13 +53,6 @@ const store = new Vuex.Store({
             state.breadcrumbs = []
         },
         SET_SEARCHITEM(state, searchObj) {
-            // console.log("SET_SEARCHITEM_INSIDE", searchObj);
-            // state.searchItem = {
-            //     typeSearch: "",
-            //     funcSearch_city: "",
-            //     funcSearch_cityName: "",
-            //     funcSearch_info: "",
-            // };
             state.searchItem = []
             state.searchItem = searchObj
         },

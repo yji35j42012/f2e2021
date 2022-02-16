@@ -68,8 +68,6 @@ module.exports = {
         itemContent() {
             let resultData = this.result
             let showSearch = store.state.showSearch
-            console.log("showSearch", showSearch)
-
             let showList = []
             let mathPage = Math.ceil(showSearch.length / 20) //頁數
             resultData.infoMaxPage = mathPage
@@ -79,9 +77,6 @@ module.exports = {
             let endItem =
                 parseInt(resultData.infoNowPage) *
                 parseInt(resultData.infoMaxShow)
-            // console.log("頁數", mathPage)
-            // console.log("此頁第一筆", startItem)
-            // console.log("此頁最後一筆", endItem)
             if (mathPage == 1) {
                 showList = showSearch
             } else if (endItem > showSearch.length) {
@@ -94,23 +89,10 @@ module.exports = {
                 }
             }
             return showList
-            //     let nowPage = store.state.nowPage;
-            //     if (
-            //         searchItem.funcSearch_city == "all" &&
-            //         searchItem.funcSearch_info == ""
-            //     ) {
-            //         if (nowPage == "restaurant") {
-            //             // return store.state.restaurant.info;
-            //             return store.state.restaurant.info;
-            //         }
-            //         // // this.result.info = info;
-            //         // return "我在all";
-            //     }
         },
     },
     methods: {
         itemHandler(id, str) {
-            // console.log("id", id)
             let nowPage = store.state.nowPage;
             store.dispatch("ADD_BREADCRUMBS", str ? str : "noname");
             this.$router.push(

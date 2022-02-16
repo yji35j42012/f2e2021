@@ -6,8 +6,7 @@
 
 <script>
 module.exports = {
-     mounted() {
-        console.log("user Profile");
+    mounted() {
     },
 };
 </script>
