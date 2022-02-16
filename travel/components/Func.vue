@@ -135,8 +135,8 @@ module.exports = {
                                 : ""
                         })
                         store.dispatch("ADD_BREADCRUMBS", this.nowSearch)
-						store.dispatch("ADD_BREADCRUMBS", "全部縣市")
-						this.$router.push("/attractions/全部縣市")
+                        store.dispatch("ADD_BREADCRUMBS", "全部縣市")
+                        this.$router.push("/attractions/全部縣市")
                     }
                 } else if (this.nowSearch == "節慶活動") {
                     if (this.searchInfo == "") {
@@ -150,8 +150,8 @@ module.exports = {
                                 : ""
                         })
                         store.dispatch("ADD_BREADCRUMBS", this.nowSearch)
-						store.dispatch("ADD_BREADCRUMBS", "全部縣市")
-						this.$router.push("/activity/全部縣市")
+                        store.dispatch("ADD_BREADCRUMBS", "全部縣市")
+                        this.$router.push("/activity/全部縣市")
                     }
                 } else if (this.nowSearch == "品嘗美食") {
                     if (this.searchInfo == "") {
