@@ -1,180 +1,189 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8" />
-        <meta
-            name="viewport"
-            content="width=device-width, initial-scale=1, shrink-to-fit=no"
-        />
-        <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-        <title>旅遊網</title>
-        <link rel="stylesheet" href="./css/all.css" />
-    </head>
 
-    <body>
-        <div id="app" class="wrap">
-            <htitle></htitle>
-            <div :class="['content' , nowPath]">
-                <router-view></router-view>
-            </div>
-            <footer>#The F2E 3rd Week01 #Breakfast</footer>
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>旅遊網</title>
+    <link rel="stylesheet" href="./css/all.css" />
+</head>
+
+<body>
+    <div id="app" class="wrap">
+        <htitle></htitle>
+        <div :class="['content' , nowPath]">
+            <router-view></router-view>
         </div>
-
-        <script src="./js/libs/axios.js"></script>
-        <script src="./js/libs/vue_2_6_9.js"></script>
-        <script src="./js/libs/vue-router.js"></script>
-        <script src="./js/libs/http-vue-loader.js"></script>
-        <script src="./js/libs/vuex_3_0_1.js"></script>
-        <script src="./js/icon_all.js"></script>
-        <script src="./store/store.js"></script>
-
-        <script src="./testData/restaurant.json"></script>
-        <script src="./testData/attractions.json"></script>
-        <script src="./testData/activity.json"></script>
         
-        <script>
-            const routes = [
-                {
-                    path: "",
-                    components: {
-                        default: httpVueLoader("./page/home.vue"),
-                    },
-                },
-                {
-                    path: "/attractions",
-                    component: httpVueLoader("./page/attractions.vue"),
-                    children: [
-                        {
-                            path: "",
-                            component: httpVueLoader(
-                                "./components/ClassType.vue"
-                            ),
-                        },
-                        {
-                            path: ":search",
-                            component: httpVueLoader(
-                                "./components/SearchGroup.vue"
-                            ),
-                        },
-                        {
-                            path: ":search/:id",
-                            component: httpVueLoader(
-                                "./components/ShowDetail.vue"
-                            ),
-                        },
-                    ],
-                },
-                {
-                    path: "/activity",
-                    component: httpVueLoader("./page/activity.vue"),
-                    children: [
-                        {
-                            path: "",
-                            component: httpVueLoader(
-                                "./components/ClassType.vue"
-                            ),
-                        },
-                        {
-                            path: ":search",
-                            component: httpVueLoader(
-                                "./components/SearchGroup.vue"
-                            ),
-                        },
-                        {
-                            path: ":search/:id",
-                            component: httpVueLoader(
-                                "./components/ShowDetail.vue"
-                            ),
-                        },
-                    ],
-                },
-                {
-                    path: "/restaurant",
-                    component: httpVueLoader("./page/restaurant.vue"),
-                    children: [
-                        {
-                            path: "",
-                            component: httpVueLoader(
-                                "./components/ClassType.vue"
-                            ),
-                        },
-                        {
-                            path: ":search",
-                            component: httpVueLoader(
-                                "./components/SearchGroup.vue"
-                            ),
-                        },
-                        {
-                            path: ":search/:id",
-                            component: httpVueLoader(
-                                "./components/ShowDetail.vue"
-                            ),
-                        },
-                    ],
-                },
-            ];
-            const router = new VueRouter({
-                // mode: 'history',
-                routes: routes, // (缩写) 相当于 routes: routes
-            });
+        <hfooter></hfooter>
+        <loading v-if="loadingShow"></loading>
+    </div>
 
-            var vue = new Vue({
-                el: "#app",
-                data() {
+    <script src="./js/libs/axios.js"></script>
+    <script src="./js/libs/vue_2_6_9.js"></script>
+    <script src="./js/libs/vue-router.js"></script>
+    <script src="./js/libs/http-vue-loader.js"></script>
+    <script src="./js/libs/vuex_3_0_1.js"></script>
+    <script src="./js/icon_all.js"></script>
+    <script src="./store/store.js"></script>
+
+    <script src="./testData/restaurant.json"></script>
+    <script src="./testData/attractions.json"></script>
+    <script src="./testData/activity.json"></script>
+
+    <script>
+        const routes = [
+            {
+                path: "",
+                components: {
+                    default: httpVueLoader("./page/home.vue"),
+                },
+            },
+            {
+                path: "/attractions",
+                component: httpVueLoader("./page/attractions.vue"),
+                children: [
+                    {
+                        path: "",
+                        component: httpVueLoader(
+                            "./components/ClassType.vue"
+                        ),
+                    },
+                    {
+                        path: ":search",
+                        component: httpVueLoader(
+                            "./components/SearchGroup.vue"
+                        ),
+                    },
+                    {
+                        path: ":search/:id",
+                        component: httpVueLoader(
+                            "./components/ShowDetail.vue"
+                        ),
+                    },
+                ],
+            },
+            {
+                path: "/activity",
+                component: httpVueLoader("./page/activity.vue"),
+                children: [
+                    {
+                        path: "",
+                        component: httpVueLoader(
+                            "./components/ClassType.vue"
+                        ),
+                    },
+                    {
+                        path: ":search",
+                        component: httpVueLoader(
+                            "./components/SearchGroup.vue"
+                        ),
+                    },
+                    {
+                        path: ":search/:id",
+                        component: httpVueLoader(
+                            "./components/ShowDetail.vue"
+                        ),
+                    },
+                ],
+            },
+            {
+                path: "/restaurant",
+                component: httpVueLoader("./page/restaurant.vue"),
+                children: [
+                    {
+                        path: "",
+                        component: httpVueLoader(
+                            "./components/ClassType.vue"
+                        ),
+                    },
+                    {
+                        path: ":search",
+                        component: httpVueLoader(
+                            "./components/SearchGroup.vue"
+                        ),
+                    },
+                    {
+                        path: ":search/:id",
+                        component: httpVueLoader(
+                            "./components/ShowDetail.vue"
+                        ),
+                    },
+                ],
+            },
+        ];
+        const router = new VueRouter({
+            // mode: 'history',
+            routes: routes, // (缩写) 相当于 routes: routes
+        });
+
+        var vue = new Vue({
+            el: "#app",
+            data() {
+                return {
+                    nowPath: "",
+                    icon_all: icon_all,
+                    alertShow: false,
+                    city: [],
+                };
+            },
+            components: {
+                htitle: httpVueLoader("./components/Header.vue"),
+                banner: httpVueLoader("./components/Banner.vue"),
+                func: httpVueLoader("./components/Func.vue"),
+                loading: httpVueLoader("./components/Loading.vue"),
+                hfooter: httpVueLoader("./components/Footer.vue"),
+            },
+            router,
+            mounted() {
+                store.dispatch("READ_CITY");
+                store.dispatch("SET_LOADING", false);
+            },
+            computed: {
+                loadingShow() {
+                    return store.state.loadingShow
+                }
+            },
+            watch: {
+                $route(to, from) {
+                    var now = this.$route.path;
+                    if (this.$route.path == "/") {
+                        this.nowPath = "home";
+                        store.dispatch("PAGE", "home");
+                    } else {
+                        this.nowPath = now.split("/")[1];
+                        store.dispatch("PAGE", now.split("/")[1]);
+                    }
+                },
+            },
+            methods: {
+                close() {
+                    this.alertShow = false;
+                },
+                getAuthorizationHeader() {
+                    let AppID = "";
+                    let AppKey = "";
+                    let GMTstring = new Date().toGMTString;
+                    let ShaObj = new jsSHA("SHA-1", "TEXT");
+
+                    ShaObj.setHMACKey(AppKey, "TEXT");
+                    ShaObj.update("x-date:" + GMTstring);
+                    let HMAC = ShaObj.getHAMC("B64");
+                    let Authorization =
+                        'hmac username="' +
+                        AppID +
+                        '",algorithm="hmac-sha1",headers="x-date", signature="' +
+                        HMAC +
+                        '"';
                     return {
-                        nowPath: "",
-                        icon_all: icon_all,
-                        alertShow: false,
-                        city: [],
+                        Authoriztion: Authorization,
+                        "X-Date": GMTstring,
                     };
                 },
-                components: {
-                    htitle: httpVueLoader("./components/Header.vue"),
-                    banner: httpVueLoader("./components/Banner.vue"),
-                    func: httpVueLoader("./components/Func.vue"),
-                },
-                mounted() {
-                    store.dispatch("READ_CITY");
-                },
-                router,
-                watch: {
-                    $route(to, from) {
-                        var now = this.$route.path;
-                        if (this.$route.path == "/") {
-                            this.nowPath = "home";
-                            store.dispatch("PAGE", "home");
-                        } else {
-                            this.nowPath = now.split("/")[1];
-                            store.dispatch("PAGE", now.split("/")[1]);
-                        }
-                    },
-                },
-                methods: {
-                    close() {
-                        this.alertShow = false;
-                    },
-                    getAuthorizationHeader() {
-                        let AppID = "";
-                        let AppKey = "";
-                        let GMTstring = new Date().toGMTString;
-                        let ShaObj = new jsSHA("SHA-1", "TEXT");
+            },
+        });
+    </script>
+</body>
 
-                        ShaObj.setHMACKey(AppKey, "TEXT");
-                        ShaObj.update("x-date:" + GMTstring);
-                        let HMAC = ShaObj.getHAMC("B64");
-                        let Authorization =
-                            'hmac username="' +
-                            AppID +
-                            '",algorithm="hmac-sha1",headers="x-date", signature="' +
-                            HMAC +
-                            '"';
-                        return {
-                            Authoriztion: Authorization,
-                            "X-Date": GMTstring,
-                        };
-                    },
-                },
-            });
-        </script>
-    </body>
 </html>
