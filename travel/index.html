@@ -11,13 +11,12 @@
 
 <body>
 	<div id="app" class="wrap">
+		<!-- <loading v-if="loadingShow"></loading> -->
 		<htitle></htitle>
 		<div :class="['content' , nowPath]">
 			<router-view></router-view>
 		</div>
-		
 		<hfooter></hfooter>
-		<loading v-if="loadingShow"></loading>
 	</div>
 
 	<script src="./js/libs/axios.js"></script>
@@ -51,13 +50,13 @@
 						),
 					},
 					{
-						path: ":search",
+						path: ":city/:search",
 						component: httpVueLoader(
 							"./components/SearchGroup.vue"
 						),
 					},
 					{
-						path: ":search/:id",
+						path: ":city/:search/:id",
 						component: httpVueLoader(
 							"./components/ShowDetail.vue"
 						),
@@ -75,13 +74,13 @@
 						),
 					},
 					{
-						path: ":search",
+						path: ":city/:date/:search",
 						component: httpVueLoader(
 							"./components/SearchGroup.vue"
 						),
 					},
 					{
-						path: ":search/:id",
+						path: ":city/:date/:search/:id",
 						component: httpVueLoader(
 							"./components/ShowDetail.vue"
 						),
@@ -99,13 +98,13 @@
 						),
 					},
 					{
-						path: ":search",
+						path: ":city/:search",
 						component: httpVueLoader(
 							"./components/SearchGroup.vue"
 						),
 					},
 					{
-						path: ":search/:id",
+						path: ":city/:search/:id",
 						component: httpVueLoader(
 							"./components/ShowDetail.vue"
 						),
@@ -129,10 +128,10 @@
 				};
 			},
 			components: {
+				loading: httpVueLoader("./components/Loading.vue"),
 				htitle: httpVueLoader("./components/Header.vue"),
 				banner: httpVueLoader("./components/Banner.vue"),
 				func: httpVueLoader("./components/Func.vue"),
-				loading: httpVueLoader("./components/Loading.vue"),
 				hfooter: httpVueLoader("./components/Footer.vue"),
 			},
 			router,

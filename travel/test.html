@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        .box {
+            display: flex;
+            width: 700px;
+            height: 100px;
+            border: 1px solid #000;
+        }
+
+        button {
+            width: 100%;
+        }
+
+
+        .btn+.btn,
+        .btn:not([style="display: none;"])+.btn {
+            margin-left: 16px;
+        }
+
+        .btn:not(:nth-child(2))[style="display: none;"]+.btn,
+        .btn[style="display: none;"]+.btn[style="display: none;"]+.btn {
+            margin-left: 0;
+        }
+
+
+        /* .btn{
+            display: flex;
+        } */
+
+        /* .btn:not(:first-child){
+            margin-left: 16px;
+        }
+        .btn:not(:nth-child(2))[style="display: none;"]+.btn {
+            margin-left: 0;
+        } */
+
+        /* .btn:not([style="display: none;"])+.btn {
+            margin-left: 16px;
+        }
+        .btn:nth-child(2)[style="display: none;"] + .btn {
+            margin-left: 16px;
+        } */
+
+
+        /* .btn[style="display: none;"]+.btn {
+            margin-left: 0;
+        } */
+        main :only-child:not([style="display: none;"]) {
+            color: red;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="box">
+        <button id="btn1" class="btn">AAA</button>
+        <button id="btn2" class="btn">BBB</button>
+        <button id="btn3" class="btn">CCC</button>
+    </div>
+
+    <button id="toggleBtn1" class="btn">toggleBtn1</button>
+    <button id="toggleBtn2" class="btn">toggleBtn2</button>
+    <button id="toggleBtn3" class="btn">toggleBtn3</button>
+
+
+    <main>
+        <div>
+            <i>I am a lonely only child.</i>
+            <i style="display: none">I am a lonely only child.</i>
+        </div>
+
+        <div>
+            <i>I have siblings.</i><br>
+            <b>So do I!</b><br>
+            <span>I also have siblings, <span>but this is an only child.</span></span>
+        </div>
+    </main>
+    <script>
+        let btn1 = document.getElementById('btn1')
+        let btn2 = document.getElementById('btn2')
+        let btn3 = document.getElementById('btn3')
+        let toggleBtn1 = document.getElementById('toggleBtn1')
+        let toggleBtn2 = document.getElementById('toggleBtn2')
+        let toggleBtn3 = document.getElementById('toggleBtn3')
+
+        toggleBtn1.addEventListener('click', (e) => {
+            if (btn1.style.display == 'none') {
+                btn1.style.display = 'block'
+            } else {
+                btn1.style.display = 'none'
+            }
+        })
+        toggleBtn2.addEventListener('click', (e) => {
+            if (btn2.style.display == 'none') {
+                btn2.style.display = 'block'
+            } else {
+                btn2.style.display = 'none'
+            }
+        })
+        toggleBtn3.addEventListener('click', (e) => {
+            if (btn3.style.display == 'none') {
+                btn3.style.display = 'block'
+            } else {
+                btn3.style.display = 'none'
+            }
+        })
+    </script>
+</body>
+
+</html>

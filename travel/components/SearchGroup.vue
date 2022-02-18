@@ -53,13 +53,37 @@ module.exports = {
                 infoNowPage: 1,
                 infoMaxPage: 0,
             },
+            showContent: "",
             icon_all: icon_all,
         }
     },
     components: {
         page: httpVueLoader("../components/Page.vue"),
     },
-    mounted() {},
+    mounted() {
+        let nowPage = store.state.nowPage
+        let city = this.$route.params.city
+        let info = this.$route.params.search
+        let date = this.$route.params.date
+        let list = []
+        // if (city == "all" && info == "") {
+        //     list = info
+        // }
+        if (nowPage == "attractions") {
+            let content = store.state.attractions.info
+            if (city == "all" && info == "") {
+                list = info
+            }
+        } else if (nowPage == "activity") {
+            let content = store.state.activity.info
+        } else if (nowPage == "restaurant") {
+            let content = store.state.restaurant.info
+            if (city == "all" && info == "") {
+                list = info
+            }
+        }
+        this.showContent = list
+    },
     computed: {
         itemCount() {
             let showSearch = store.state.showSearch
@@ -92,12 +116,13 @@ module.exports = {
         },
     },
     methods: {
+        searchHandler() {},
         itemHandler(id, str) {
-            let nowPage = store.state.nowPage;
-            store.dispatch("ADD_BREADCRUMBS", str ? str : "noname");
+            let nowPage = store.state.nowPage
+            store.dispatch("ADD_BREADCRUMBS", str ? str : "noname")
             this.$router.push(
                 "/" + nowPage + "/" + this.$route.params.search + "/" + id
-            );
+            )
         },
         changePageHanlder(num) {
             if (
