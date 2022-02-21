@@ -91,6 +91,7 @@ module.exports = {
             choseCity: "全部縣市",
             searchCity: "all",
             searchInfo: "",
+            searchDate: "all",
         }
     },
 
@@ -108,20 +109,20 @@ module.exports = {
         },
         searchHandler() {
             let nowPage = store.state.nowPage
-            let city = this.searchCity
+            let city = this.searchCity == "all" ? "全部縣市" : his.searchCity
             let info = this.searchInfo == "" ? "all" : this.searchInfo
+            let date = this.searchDate
             let nowSearch = this.nowSearch
 
             if (nowPage == "attractions" || nowSearch == "探索景點") {
-                console.log("attractions", "/attractions/" + city + "/" + info)
-                this.$router.push("/attractions/"+city+"/"+info)
+                store.dispatch("READ_ATTRACTIONS_INFO")
+                this.$router.push("/attractions/" + city + "/" + info)
             } else if (nowPage == "activity" || nowSearch == "節慶活動") {
-                console.log(
-                    "activity",
-                    "/activity/" + city + "/" + "date" + "/" + info
-                )
+                store.dispatch("READ_ACTIVITY_INFO")
+                this.$router.push("/activity/" + city + "/" + date + "/" + info)
             } else if (nowPage == "restaurant" || nowSearch == "品嘗美食") {
-                console.log("restaurant", "/restaurant/" + city + "/" + info)
+                store.dispatch("READ_RESTAURANT_INFO")
+                this.$router.push("/restaurant/" + city + "/" + info)
             }
 
             // else if (nowPage == "home") {

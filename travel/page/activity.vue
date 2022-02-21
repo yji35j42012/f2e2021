@@ -20,11 +20,12 @@ module.exports = {
         breadcrumbs: httpVueLoader("../components/Breadcrumbs.vue"),
     },
     mounted() {
-        if (store.state.breadcrumbs.length !== 2) {
-            store.dispatch("READ_ACTIVITY_INFO")
-            store.dispatch("CLEAR_BREADCRUMBS")
-            store.dispatch("ADD_BREADCRUMBS", "節慶活動")
-        }
+        store.dispatch("READ_ACTIVITY_INFO")
+        // if (store.state.breadcrumbs.length !== 2) {
+        //     store.dispatch("READ_ACTIVITY_INFO")
+        //     store.dispatch("CLEAR_BREADCRUMBS")
+        //     store.dispatch("ADD_BREADCRUMBS", "節慶活動")
+        // }
     },
     computed: {
         showFunc() {

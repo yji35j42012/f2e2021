@@ -62,27 +62,34 @@ module.exports = {
     },
     mounted() {
         let nowPage = store.state.nowPage
-        let city = this.$route.params.city
+        let city =
+            this.$route.params.city == "全部縣市"
+                ? "all"
+                : this.$route.params.city
         let info = this.$route.params.search
         let date = this.$route.params.date
         let list = []
-        // if (city == "all" && info == "") {
-        //     list = info
+
+        // if (nowPage == "attractions") {
+        //     var content = store.state.attractions.info
+        //     console.log("content", content)
+        //     if (city == "all" && info == "all") {
+        //         list = content
+        //     }
+        // } else if (nowPage == "activity") {
+        //     let content = store.state.activity.info
+        //     console.log("content", content)
+        //     if (city == "all" && info == "all") {
+        //         list = content
+        //     }
+        // } else if (nowPage == "restaurant") {
+        //     let content = store.state.restaurant.info
+        //     console.log("content", content)
+        //     if (city == "all" && info == "all") {
+        //         list = content
+        //     }
         // }
-        if (nowPage == "attractions") {
-            let content = store.state.attractions.info
-            if (city == "all" && info == "") {
-                list = info
-            }
-        } else if (nowPage == "activity") {
-            let content = store.state.activity.info
-        } else if (nowPage == "restaurant") {
-            let content = store.state.restaurant.info
-            if (city == "all" && info == "") {
-                list = info
-            }
-        }
-        this.showContent = list
+        // this.showContent = list
     },
     computed: {
         itemCount() {
@@ -116,6 +123,7 @@ module.exports = {
         },
     },
     methods: {
+
         searchHandler() {},
         itemHandler(id, str) {
             let nowPage = store.state.nowPage

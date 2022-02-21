@@ -117,7 +117,7 @@ const store = new Vuex.Store({
 				})
 		},
 
-		READ_ATTRACTIONS_INFO({ commit }) {
+		READ_ATTRACTIONS_INFO ({ commit }) {
 			axios
 				.get(
 					// "https://ptx.transportdata.tw/MOTC/v2/Tourism/ScenicSpot?%24select=Class1%2CPicture%2CScenicSpotName%2CScenicSpotID%2CDescription%2CAddress&%24format=JSON"
