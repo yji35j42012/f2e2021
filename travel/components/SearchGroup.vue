@@ -48,10 +48,17 @@
 module.exports = {
     data() {
         return {
+            nowPage: "",
             result: {
                 infoMaxShow: 20,
                 infoNowPage: 1,
                 infoMaxPage: 0,
+            },
+            searchInfo: {
+                classType: "",
+                city: "",
+                info: "",
+                date: "",
             },
             info: [],
             showContent: [],
@@ -62,68 +69,16 @@ module.exports = {
         page: httpVueLoader("../components/Page.vue"),
     },
     mounted() {
-        let nowPage = store.state.nowPage
-        let classType = this.$route.params.class
-        let city =
+        this.nowPage = store.state.nowPage
+        this.searchInfo.classType = this.$route.params.class
+        this.searchInfo.city =
             this.$route.params.city == "全部縣市"
                 ? "all"
                 : this.$route.params.city
-        let info = this.$route.params.search
-        let date = this.$route.params.date
+        this.searchInfo.info = this.$route.params.search
+        this.searchInfo.date = this.$route.params.date
 
-        if (nowPage == "attractions") {
-            if (store.state.attractions.info.length == 0) {
-                store.dispatch("READ_ATTRACTIONS_INFO")
-                this.info = store.state.attractions.info
-            } else {
-                this.info = store.state.attractions.info
-            }
-        } else if (nowPage == "activity") {
-            if (store.state.activity.info.length == 0) {
-                store.dispatch("READ_ACTIVITY_INFO")
-                this.info = store.state.attractions.info
-            } else {
-                this.info = store.state.attractions.info
-            }
-        } else if (nowPage == "restaurant") {
-            if (store.state.restaurant.info.length == 0) {
-                store.dispatch("READ_RESTAURANT_INFO")
-                this.info = store.state.attractions.info
-            } else {
-                this.info = store.state.attractions.info
-            }
-        }
-
-        console.log("classType", classType)
-        console.log("city", city)
-        console.log("info", info)
-        console.log("date", date)
-
-        if (classType) {
-            this.classFiliter(classType)
-        }
-
-        // let class = this.$route.params.class;
-
-        // if (nowPage == "attractions") {
-        //     var content = store.state.attractions.info
-        //     console.log("content", content.length)
-        //     if (city == "all" && info == "all") {
-        //         list = content
-        //     }
-        // } else if (nowPage == "activity") {
-        //     let content = store.state.activity.info
-        //     console.log("content", content)
-        //     if (city == "all" && info == "all") {
-        //         list = content
-        //     }
-        // } else if (nowPage == "restaurant") {
-        //     let content = store.state.restaurant.info
-        //     console.log("content", content)
-        //     if (city == "all" && info == "all") {
-        //         list = content
-        //     }
-        // }
+        this.serials([this.getInfo], this.searchFilter)
     },
     computed: {
         itemCount() {
@@ -157,6 +112,84 @@ module.exports = {
         },
     },
     methods: {
+        serials(tasks, callback) {
+            var step = tasks.length
+            var result = []
+            // // 檢查的邏輯寫在這裡
+            function check(r) {
+                result.push(r)
+                if (result.length === step) {
+                    callback()
+                }
+            }
+            tasks.forEach(function(f) {
+                f(check)
+            })
+        },
+        getInfo(check) {
+            console.log("getInfo")
+            this.info = []
+            if (this.nowPage == "attractions") {
+                store.dispatch("READ_ATTRACTIONS_INFO")
+                if (store.state.attractions.info.length == 0) {
+                    let time = setTimeout(() => {
+                        if (store.state.attractions.info.length == 0) {
+                            tiem
+                        } else {
+                            this.info = store.state.attractions.info
+                            check("ok")
+                        }
+                    }, 1000)
+                } else {
+                    this.info = store.state.attractions.info
+                    check("ok")
+                }
+            } else if (this.nowPage == "activity") {
+                store.dispatch("READ_ACTIVITY_INFO")
+                if (store.state.activity.info.length == 0) {
+                    let time = setTimeout(() => {
+                        if (store.state.activity.info.length == 0) {
+                            tiem
+                        } else {
+                            this.info = store.state.activity.info
+                            check("ok")
+                        }
+                    }, 1000)
+                } else {
+                    this.info = store.state.activity.info
+                    check("ok")
+                }
+            } else if (this.nowPage == "restaurant") {
+                store.dispatch("READ_RESTAURANT_INFO")
+                if (store.state.restaurant.info.length == 0) {
+                    let time = setTimeout(() => {
+                        if (store.state.restaurant.info.length == 0) {
+                            tiem
+                        } else {
+                            this.info = store.state.restaurant.info
+                            check("ok")
+                        }
+                    }, 1000)
+                } else {
+                    this.info = store.state.restaurant.info
+                    check("ok")
+                }
+            }
+        },
+        searchFilter() {
+            console.log("searchFilter", store.state.attractions.info)
+            searchInfo = this.searchInfo
+            if (searchInfo.classType) {
+                this.info.forEach((item) => {
+                    if (item.type) {
+                        item.type.indexOf(searchInfo.classType) !== -1
+                            ? this.showContent.push(item)
+                            : ""
+                    }
+                })
+            }
+        },
+
         classFiliter(str) {
             console.log(str)
         },
