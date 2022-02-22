@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <button id="btn">取得隨機數</button>
+    <!-- <script>
+        let btn = document.getElementById('btn');
+        btn.addEventListener('click', function () {
+            // console.log('a');
+            serials([funA, funB, funC], funD);
+        })
+
+        function serials(tasks, callback) {
+            var step = tasks.length;
+            var result = [];
+
+            // 檢查的邏輯寫在這裡
+            function check(r) {
+                result.push(r);
+                if (result.length === step) {
+                    callback();
+                }
+            }
+
+            tasks.forEach(function (f) {
+                f(check);
+            });
+        }
+
+
+        function funA(check) {
+            let randomNum = (Math.random() + 1) * 1000;
+            setTimeout(() => {
+                check('A');
+                console.log('A完成');
+            }, randomNum);
+        }
+        function funB(check) {
+            let randomNum = (Math.random() + 1) * 1000;
+            setTimeout(() => {
+                check('B');
+                console.log('B完成');
+            }, randomNum);
+        }
+        function funC(check) {
+            let randomNum = (Math.random() + 1) * 1000;
+            setTimeout(() => {
+                check('C');
+                console.log('C完成');
+            }, randomNum);
+        }
+        function funD() {
+            console.log('完成');
+        }
+    </script> -->
+
+    <script>
+        function funcA() {
+            return new Promise(function (resolve, reject) {
+                window.setTimeout(function () {
+                    console.log('A');
+                    resolve('A');
+                }, (Math.random() + 1) * 1000);
+            });
+        }
+
+        function funcB() {
+            return new Promise(function (resolve, reject) {
+                window.setTimeout(function () {
+                    console.log('B');
+                    resolve('B');
+                }, (Math.random() + 1) * 1000);
+            });
+        }
+
+        function funcC() {
+            return new Promise(function (resolve, reject) {
+                window.setTimeout(function () {
+                    console.log('C');
+                    resolve('C');
+                }, (Math.random() + 1) * 1000);
+            });
+        }
+        funcA().then(funcB).then(funcC);
+    </script>
+</body>
+
+</html>

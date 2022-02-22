@@ -58,26 +58,26 @@ module.exports = {
     },
     methods: {
         typeSearch(str) {
-            let info;
-            if (store.state.nowPage == "restaurant") {
-                info = store.state.restaurant.info;
-            } else if (store.state.nowPage == "attractions") {
-                info = store.state.attractions.info;
-            } else if (store.state.nowPage == "activity") {
-                info = store.state.activity.info;
-            }
-            let list = [];
-            info.forEach((item) => {
-                if (item.type) {
-                    item.type.indexOf(str) !== -1 ? list.push(item) : "";
-                }
-            });
-            store.dispatch("ADD_BREADCRUMBS", str);
-            store.dispatch("SET_SEARCHITEM", {
-                type: "class",
-                typeSearch: str,
-            });
-            store.dispatch("SET_SHOWSEARCH", list);
+            // let info;
+            // if (store.state.nowPage == "restaurant") {
+            //     info = store.state.restaurant.info;
+            // } else if (store.state.nowPage == "attractions") {
+            //     info = store.state.attractions.info;
+            // } else if (store.state.nowPage == "activity") {
+            //     info = store.state.activity.info;
+            // }
+            // let list = [];
+            // info.forEach((item) => {
+            //     if (item.type) {
+            //         item.type.indexOf(str) !== -1 ? list.push(item) : "";
+            //     }
+            // });
+            // store.dispatch("ADD_BREADCRUMBS", str);
+            // store.dispatch("SET_SEARCHITEM", {
+            //     type: "class",
+            //     typeSearch: str,
+            // });
+            // store.dispatch("SET_SHOWSEARCH", list);
             this.$router.push(this.$route.fullPath + "/" + str);
         },
     },

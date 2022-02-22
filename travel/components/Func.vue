@@ -115,13 +115,10 @@ module.exports = {
             let nowSearch = this.nowSearch
 
             if (nowPage == "attractions" || nowSearch == "探索景點") {
-                store.dispatch("READ_ATTRACTIONS_INFO")
                 this.$router.push("/attractions/" + city + "/" + info)
             } else if (nowPage == "activity" || nowSearch == "節慶活動") {
-                store.dispatch("READ_ACTIVITY_INFO")
                 this.$router.push("/activity/" + city + "/" + date + "/" + info)
             } else if (nowPage == "restaurant" || nowSearch == "品嘗美食") {
-                store.dispatch("READ_RESTAURANT_INFO")
                 this.$router.push("/restaurant/" + city + "/" + info)
             }
 
@@ -237,6 +234,14 @@ module.exports = {
             //     }
             // }
             // store.dispatch("SET_SHOWSEARCH", list)
+        },
+        getInfo() {
+            store.dispatch("READ_ATTRACTIONS_INFO")
+        },
+        goPage() {
+            let city = this.searchCity == "all" ? "全部縣市" : his.searchCity
+            let info = this.searchInfo == "" ? "all" : this.searchInfo
+            this.$router.push("/attractions/" + city + "/" + info)
         },
         searchChangeHandler(str) {
             this.nowSearch = str

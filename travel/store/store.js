@@ -75,48 +75,6 @@ const store = new Vuex.Store({
 					commit("SET_CITY", res.data)
 				})
 		},
-		READ_RESTAURANT_INFO({ commit }) {
-			axios
-				.get(
-					// "https://ptx.transportdata.tw/MOTC/v2/Tourism/Restaurant?%24select=Class%2CPicture%2CRestaurantName%2CRestaurantID%2CDescription%2CAddress&%24format=JSON"
-					"../testData/restaurant.json"
-				)
-				.then((res) => {
-					let class_obj = {
-						class_sort: [],
-						class_map: {},
-					}
-					let info_obj = []
-					res.data.forEach((item) => {
-						if (!class_obj.class_map[item.Class] && item.Class) {
-							class_obj.class_sort.push(item.Class)
-							class_obj.class_map[item.Class] = {
-								picUrl: [],
-							}
-						}
-						if (item.Class) {
-							class_obj.class_map[item.Class].picUrl.push(
-								item.Picture.PictureUrl1
-							)
-						}
-						info_obj.push({
-							infoId: item.RestaurantID,
-							cityName: item.Address
-								? item.Address.substr(0, 3)
-								: "",
-							detail: item.Description,
-							picture: item.Picture,
-							pictureUrl: item.Picture.PictureUrl1
-								? item.Picture.PictureUrl1
-								: "../images/error.png",
-							infoName: item.RestaurantName,
-							type: item.Class,
-						})
-					})
-					commit("SET_RESTAURANT", { class_obj, info_obj })
-				})
-		},
-
 		READ_ATTRACTIONS_INFO ({ commit }) {
 			axios
 				.get(
@@ -160,6 +118,48 @@ const store = new Vuex.Store({
 					commit("SET_ATTRACTIONS", { class_obj, info_obj })
 				})
 		},
+		READ_RESTAURANT_INFO({ commit }) {
+			axios
+				.get(
+					// "https://ptx.transportdata.tw/MOTC/v2/Tourism/Restaurant?%24select=Class%2CPicture%2CRestaurantName%2CRestaurantID%2CDescription%2CAddress&%24format=JSON"
+					"../testData/restaurant.json"
+				)
+				.then((res) => {
+					let class_obj = {
+						class_sort: [],
+						class_map: {},
+					}
+					let info_obj = []
+					res.data.forEach((item) => {
+						if (!class_obj.class_map[item.Class] && item.Class) {
+							class_obj.class_sort.push(item.Class)
+							class_obj.class_map[item.Class] = {
+								picUrl: [],
+							}
+						}
+						if (item.Class) {
+							class_obj.class_map[item.Class].picUrl.push(
+								item.Picture.PictureUrl1
+							)
+						}
+						info_obj.push({
+							infoId: item.RestaurantID,
+							cityName: item.Address
+								? item.Address.substr(0, 3)
+								: "",
+							detail: item.Description,
+							picture: item.Picture,
+							pictureUrl: item.Picture.PictureUrl1
+								? item.Picture.PictureUrl1
+								: "../images/error.png",
+							infoName: item.RestaurantName,
+							type: item.Class,
+						})
+					})
+					commit("SET_RESTAURANT", { class_obj, info_obj })
+				})
+		},
+
 		READ_ACTIVITY_INFO({ commit }) {
 			axios
 				.get(

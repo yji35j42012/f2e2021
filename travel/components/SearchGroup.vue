@@ -53,7 +53,8 @@ module.exports = {
                 infoNowPage: 1,
                 infoMaxPage: 0,
             },
-            showContent: "",
+            info: [],
+            showContent: [],
             icon_all: icon_all,
         }
     },
@@ -62,17 +63,51 @@ module.exports = {
     },
     mounted() {
         let nowPage = store.state.nowPage
+        let classType = this.$route.params.class
         let city =
             this.$route.params.city == "全部縣市"
                 ? "all"
                 : this.$route.params.city
         let info = this.$route.params.search
         let date = this.$route.params.date
-        let list = []
+
+        if (nowPage == "attractions") {
+            if (store.state.attractions.info.length == 0) {
+                store.dispatch("READ_ATTRACTIONS_INFO")
+                this.info = store.state.attractions.info
+            } else {
+                this.info = store.state.attractions.info
+            }
+        } else if (nowPage == "activity") {
+            if (store.state.activity.info.length == 0) {
+                store.dispatch("READ_ACTIVITY_INFO")
+                this.info = store.state.attractions.info
+            } else {
+                this.info = store.state.attractions.info
+            }
+        } else if (nowPage == "restaurant") {
+            if (store.state.restaurant.info.length == 0) {
+                store.dispatch("READ_RESTAURANT_INFO")
+                this.info = store.state.attractions.info
+            } else {
+                this.info = store.state.attractions.info
+            }
+        }
+
+        console.log("classType", classType)
+        console.log("city", city)
+        console.log("info", info)
+        console.log("date", date)
+
+        if (classType) {
+            this.classFiliter(classType)
+        }
+
+        // let class = this.$route.params.class;
 
         // if (nowPage == "attractions") {
         //     var content = store.state.attractions.info
-        //     console.log("content", content)
+        //     console.log("content", content.length)
         //     if (city == "all" && info == "all") {
         //         list = content
         //     }
@@ -89,7 +124,6 @@ module.exports = {
         //         list = content
         //     }
         // }
-        // this.showContent = list
     },
     computed: {
         itemCount() {
@@ -98,7 +132,7 @@ module.exports = {
         },
         itemContent() {
             let resultData = this.result
-            let showSearch = store.state.showSearch
+            let showSearch = this.showContent
             let showList = []
             let mathPage = Math.ceil(showSearch.length / 20) //頁數
             resultData.infoMaxPage = mathPage
@@ -123,6 +157,26 @@ module.exports = {
         },
     },
     methods: {
+        classFiliter(str) {
+            console.log(str)
+        },
+        // getInfo(check) {
+        //     store.dispatch("READ_ATTRACTIONS_INFO")
+        //     console.log("getInfo", store.state.attractions.info.length)
+        //     let time = setTimeout(() => {
+        //         if (store.state.attractions.info.length == 0) {
+        //             time
+        //         } else {
+        //             console.log("d")
+
+        //             check("B")
+        //         }
+        //     }, 1000)
+        // },
+        // filter() {
+        //     console.log("filter", store.state.attractions.info)
+        //     this.showContent = store.state.attractions.info
+        // },
 
         searchHandler() {},
         itemHandler(id, str) {

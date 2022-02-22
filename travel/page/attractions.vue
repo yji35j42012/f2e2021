@@ -19,9 +19,8 @@ module.exports = {
         func: httpVueLoader("../components/Func.vue"),
         breadcrumbs: httpVueLoader("../components/Breadcrumbs.vue"),
     },
-    mounted() {
-        store.dispatch("READ_ATTRACTIONS_INFO")
-                
+    mounted() {    
+        store.dispatch("READ_ATTRACTIONS_INFO")     
         // if (store.state.breadcrumbs.length !== 2) {
         //     store.dispatch("READ_ATTRACTIONS_INFO")
         //     store.dispatch("CLEAR_BREADCRUMBS")
