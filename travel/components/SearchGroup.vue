@@ -34,11 +34,11 @@
                 </div>
             </li>
         </ul>
-
         <page
-            v-if="result.infoMaxPage > 1"
-            :maxpage="result.infoMaxPage"
-            :nowpage="result.infoNowPage"
+            v-if="pageInfo.maxPage > 1"
+            :maxpage="pageInfo.maxPage"
+            :nowpage="pageInfo.infoNowPage"
+            :showpage="pageInfo.show"
             @changepage="changePageHanlder"
         ></page>
     </div>
@@ -63,6 +63,11 @@ module.exports = {
             info: [],
             showContent: [],
             icon_all: icon_all,
+            pageInfo: {
+                show: [],
+                maxPage: 0,
+                nowPageNum: 1,
+            },
         }
     },
     components: {
@@ -72,145 +77,189 @@ module.exports = {
         this.nowPage = store.state.nowPage
         this.searchInfo.classType = this.$route.params.class
         this.searchInfo.city =
-            this.$route.params.city == "全部縣市"
-                ? "all"
-                : this.$route.params.city
-        this.searchInfo.info = this.$route.params.search
+            this.$route.params.city == "全部縣市" ? "" : this.$route.params.city
+        this.searchInfo.info =
+            this.$route.params.search == "all" ? "" : this.$route.params.search
         this.searchInfo.date = this.$route.params.date
-
-        this.serials([this.getInfo], this.searchFilter)
+        this.getInfo()
     },
     computed: {
         itemCount() {
-            let showSearch = store.state.showSearch
+            let showSearch = this.showContent
             return showSearch.length
         },
         itemContent() {
-            let resultData = this.result
+            this.itemPage()
             let showSearch = this.showContent
             let showList = []
-            let mathPage = Math.ceil(showSearch.length / 20) //頁數
-            resultData.infoMaxPage = mathPage
-            let startItem =
-                (parseInt(resultData.infoNowPage) - 1) *
-                parseInt(resultData.infoMaxShow)
-            let endItem =
-                parseInt(resultData.infoNowPage) *
-                parseInt(resultData.infoMaxShow)
-            if (mathPage == 1) {
+
+            nowPage = this.pageInfo.nowPageNum
+            maxPage = this.pageInfo.maxPage
+            console.log("nowPage", nowPage)
+            console.log("maxPage", maxPage)
+            startItem = nowPage * 20
+            endItem = nowPage * 20
+            if (maxPage == 1) {
                 showList = showSearch
-            } else if (endItem > showSearch.length) {
-                for (let i = startItem; i < showSearch.length; i++) {
-                    showList.push(showSearch[i])
-                }
             } else {
                 for (let i = startItem; i < endItem; i++) {
                     showList.push(showSearch[i])
                 }
             }
+
+            // let startItem = (parseInt(nowPage)) * parseInt(maxPage)
+            // let endItem = parseInt(nowPage) * parseInt(maxPage)
+            // if (maxPage == 1) {
+            //     showList = showSearch
+            // } else if (endItem > showSearch.length) {
+            //     for (let i = startItem; i < showSearch.length; i++) {
+            //         showList.push(showSearch[i])
+            //     }
+            // } else {
+            //     for (let i = startItem; i < endItem; i++) {
+            //         showList.push(showSearch[i])
+            //     }
+            // }
             return showList
         },
     },
     methods: {
-        serials(tasks, callback) {
-            var step = tasks.length
-            var result = []
-            // // 檢查的邏輯寫在這裡
-            function check(r) {
-                result.push(r)
-                if (result.length === step) {
-                    callback()
+        itemPage() {
+            let show = []
+            let pageCount = Math.ceil(this.showContent.length / 20) //頁數
+
+            this.pageInfo.maxPage = pageCount
+            let nowPageNum = this.pageInfo.nowPageNum
+            let eveupPage = Math.ceil(this.showContent.length / 2)
+
+            if (pageCount > 6) {
+                if (nowPageNum == 1) {
+                    // 第一頁顯示前三號碼＋...跟後二號碼，.on在第一個
+                    show.push(nowPageNum)
+                    show.push(nowPageNum + 1)
+                    show.push(nowPageNum + 2)
+                    show.push("more")
+                    show.push(pageCount - 1)
+                    show.push(pageCount)
+                } else if (nowPageNum == page) {
+                    // 最後一頁顯示前二號碼＋...跟後三號碼，.on在最後一個
+                    show.push(1)
+                    show.push(2)
+                    show.push("more")
+                    show.push(pageCount - 2)
+                    show.push(pageCount - 1)
+                    show.push(pageCount)
+                } else if (halfPage == nowPageNum && nowPageNum + 4 == page) {
+                    // 總頁數的一半等於現在的頁數而且現在的頁數加４等於總頁數
+                    // 此判斷發生於總頁數＝８現在頁數＝４
+                    // 如果沒有此判斷再第４頁的時候會變成 1,2,...,3,4,5
+                    show.push(nowPageNum - 1)
+                    show.push(nowPageNum)
+                    show.push(nowPageNum + 1)
+                    show.push(nowPageNum + 2)
+                    show.push(nowPageNum + 3)
+                    show.push(nowPageNum + 4)
+                } else if (nowPageNum > 1 && nowPageNum < eveupPage) {
+                    // 總頁數的一半大於現在的頁數，前面顯示三個頁碼，後面顯示兩個頁碼，
+                    // .on在前面三個的中間
+                    show.push(nowPageNum - 1)
+                    show.push(nowPageNum)
+                    show.push(nowPageNum + 1)
+                    show.push("more")
+                    show.push(pageCount - 1)
+                    show.push(pageCount)
+                } else if (
+                    nowPageNum * 2 > pageCount &&
+                    eveupPage == nowPageNum &&
+                    nowPageNum + 3 == pageCount
+                ) {
+                    // 2被的現在頁數大於總頁數而且總頁數的一半等於現在的頁數而且現在頁數加三等於限在頁數
+                    show.push(nowPageNum - 2)
+                    show.push(nowPageNum - 1)
+                    show.push(nowPageNum)
+                    show.push(nowPageNum + 1)
+                    show.push(nowPageNum + 2)
+                    show.push(nowPageNum + 3)
+                } else {
+                    // 總頁數的一半大於現在的頁數，前面顯示兩個頁碼，後面顯示三個頁碼，
+                    // .on在後面三個的中間
+                    show.push(1)
+                    show.push(2)
+                    show.push("more")
+                    show.push(nowPageNum - 1)
+                    show.push(nowPageNum)
+                    show.push(nowPageNum + 1)
+                }
+            } else {
+                for (let i = 0; i < pageCount; i++) {
+                    show.push(i + 1)
                 }
             }
-            tasks.forEach(function(f) {
-                f(check)
-            })
+            this.pageInfo.show = show
         },
-        getInfo(check) {
-            console.log("getInfo")
+        getInfo() {
+            searchInfo = this.searchInfo
             this.info = []
+            let url
             if (this.nowPage == "attractions") {
-                store.dispatch("READ_ATTRACTIONS_INFO")
-                if (store.state.attractions.info.length == 0) {
-                    let time = setTimeout(() => {
-                        if (store.state.attractions.info.length == 0) {
-                            tiem
-                        } else {
-                            this.info = store.state.attractions.info
-                            check("ok")
-                        }
-                    }, 1000)
+                if (searchInfo.classType) {
+                    url =
+                        "https://ptx.transportdata.tw/MOTC/v2/Tourism/ScenicSpot?%24filter=contains(Class1%2C'" +
+                        searchInfo.classType +
+                        "')%20&%24format=JSON"
                 } else {
-                    this.info = store.state.attractions.info
-                    check("ok")
+                    url =
+                        "https://ptx.transportdata.tw/MOTC/v2/Tourism/ScenicSpot?%24filter=contains(Address%2C'" +
+                        searchInfo.city +
+                        "')%20and%20contains(ScenicSpotName%2C'" +
+                        searchInfo.info +
+                        "')&%24format=JSON"
                 }
             } else if (this.nowPage == "activity") {
-                store.dispatch("READ_ACTIVITY_INFO")
-                if (store.state.activity.info.length == 0) {
-                    let time = setTimeout(() => {
-                        if (store.state.activity.info.length == 0) {
-                            tiem
-                        } else {
-                            this.info = store.state.activity.info
-                            check("ok")
-                        }
-                    }, 1000)
+                if (searchInfo.classType) {
+                    url =
+                        "https://ptx.transportdata.tw/MOTC/v2/Tourism/Activity?%24filter=contains(Class1%2C'" +
+                        searchInfo.classType +
+                        "')&%24format=JSON"
                 } else {
-                    this.info = store.state.activity.info
-                    check("ok")
+                    url =
+                        "https://ptx.transportdata.tw/MOTC/v2/Tourism/Activity?%24filter=contains(Address%2C'" +
+                        searchInfo.city +
+                        "')%20and%20contains(ActivityName%2C'" +
+                        searchInfo.info +
+                        "')%20&%24format=JSON"
                 }
             } else if (this.nowPage == "restaurant") {
-                store.dispatch("READ_RESTAURANT_INFO")
-                if (store.state.restaurant.info.length == 0) {
-                    let time = setTimeout(() => {
-                        if (store.state.restaurant.info.length == 0) {
-                            tiem
-                        } else {
-                            this.info = store.state.restaurant.info
-                            check("ok")
-                        }
-                    }, 1000)
+                if (searchInfo.classType) {
+                    url =
+                        "https://ptx.transportdata.tw/MOTC/v2/Tourism/Restaurant?%24filter=contains(Class%2C'" +
+                        searchInfo.classType +
+                        "')&%24format=JSON"
                 } else {
-                    this.info = store.state.restaurant.info
-                    check("ok")
+                    url =
+                        "https://ptx.transportdata.tw/MOTC/v2/Tourism/Restaurant?%24filter=contains(Address%2C'" +
+                        searchInfo.city +
+                        "')%20and%20contains(RestaurantName%2C'" +
+                        searchInfo.info +
+                        "')&%24format=JSON"
                 }
             }
-        },
-        searchFilter() {
-            console.log("searchFilter", store.state.attractions.info)
-            searchInfo = this.searchInfo
-            if (searchInfo.classType) {
-                this.info.forEach((item) => {
-                    if (item.type) {
-                        item.type.indexOf(searchInfo.classType) !== -1
-                            ? this.showContent.push(item)
-                            : ""
-                    }
+            axios.get(url).then((res) => {
+                res.data.forEach((item) => {
+                    this.showContent.push({
+                        infoId: item.ScenicSpotID,
+                        cityName: item.Address ? item.Address.substr(0, 3) : "",
+                        detail: item.Description,
+                        picture: item.Picture,
+                        pictureUrl: item.Picture.PictureUrl1
+                            ? item.Picture.PictureUrl1
+                            : "../images/error.png",
+                        infoName: item.ScenicSpotName,
+                        type: item.Class1,
+                    })
                 })
-            }
+            })
         },
-
-        classFiliter(str) {
-            console.log(str)
-        },
-        // getInfo(check) {
-        //     store.dispatch("READ_ATTRACTIONS_INFO")
-        //     console.log("getInfo", store.state.attractions.info.length)
-        //     let time = setTimeout(() => {
-        //         if (store.state.attractions.info.length == 0) {
-        //             time
-        //         } else {
-        //             console.log("d")
-
-        //             check("B")
-        //         }
-        //     }, 1000)
-        // },
-        // filter() {
-        //     console.log("filter", store.state.attractions.info)
-        //     this.showContent = store.state.attractions.info
-        // },
-
         searchHandler() {},
         itemHandler(id, str) {
             let nowPage = store.state.nowPage
@@ -222,13 +271,13 @@ module.exports = {
         changePageHanlder(num) {
             if (
                 num == "++" &&
-                this.result.infoNowPage !== this.result.infoMaxPage
+                this.pageInfo.nowPageNum !== this.result.infoMaxPage
             ) {
-                this.result.infoNowPage = this.result.infoNowPage + 1
-            } else if (num == "--" && this.result.infoNowPage !== 1) {
-                this.result.infoNowPage = this.result.infoNowPage - 1
+                this.pageInfo.nowPageNum = this.pageInfo.nowPageNum + 1
+            } else if (num == "--" && this.pageInfo.nowPageNum !== 1) {
+                this.pageInfo.nowPageNum = this.pageInfo.nowPageNum - 1
             } else if (num !== "++" && num !== "--") {
-                this.result.infoNowPage = num
+                this.pageInfo.nowPageNum = num
             }
         },
     },
