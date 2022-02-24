@@ -727,7 +727,7 @@ h3 {
     @include d_f(flex, center, center);
     width: 100%;
 
-    &_li,
+    &_li:not(&_more),
     &_prev,
     &_next {
         @include d_f(flex, center, center);

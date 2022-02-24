@@ -13,12 +13,16 @@
             </i>
         </li>
         <li
-            :class="['page_li', nowpage == item ? 'on' : '']"
+            :class="[
+                'page_li',
+                nowpage == item ? 'on' : '',
+                item == 'more' ? 'page_more' : '',
+            ]"
             v-for="(item, index) in showpage"
             :key="index"
             @click="changePage(item)"
         >
-            {{ item }}
+            {{ item == "more" ? "..." : item }}
         </li>
         <li
             :class="['page_next', nowpage == maxpage ? '_disabled' : '']"
@@ -44,8 +48,8 @@ module.exports = {
 
     methods: {
         changePage(str) {
-            console.log(str);
-            
+            console.log(str)
+            if (str == "more") return
             this.$emit("changepage", str)
         },
     },

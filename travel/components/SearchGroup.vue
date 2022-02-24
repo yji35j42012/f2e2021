@@ -68,6 +68,21 @@ module.exports = {
     components: {
         page: httpVueLoader("../components/Page.vue"),
     },
+    watch: {
+        $route(to, from) {
+            this.searchInfo.classType = this.$route.params.class
+            this.searchInfo.city =
+                this.$route.params.city == "全部縣市"
+                    ? ""
+                    : this.$route.params.city
+            this.searchInfo.info =
+                this.$route.params.search == "all"
+                    ? ""
+                    : this.$route.params.search
+            this.searchInfo.date = this.$route.params.date
+            this.getInfo()
+        },
+    },
     mounted() {
         this.nowPage = store.state.nowPage
         this.searchInfo.classType = this.$route.params.class
@@ -77,6 +92,18 @@ module.exports = {
             this.$route.params.search == "all" ? "" : this.$route.params.search
         this.searchInfo.date = this.$route.params.date
         this.getInfo()
+
+        let breadcrumbs_str
+        if (this.nowPage == "attractions") {
+            breadcrumbs_str = "探索景點"
+        } else if (this.nowPage == "activity") {
+            breadcrumbs_str = "節慶活動"
+        } else if (this.nowPage == "restaurant") {
+            breadcrumbs_str = "品嘗美食"
+        }
+        console.log(this.searchInfo.city)
+
+        store.dispatch("ADD_BREADCRUMBS", breadcrumbs_str)
     },
     computed: {
         itemCount() {
@@ -87,11 +114,8 @@ module.exports = {
             this.itemPage()
             let showSearch = this.showContent
             let showList = []
-
             nowPageNum = this.pageInfo.nowPageNum
             maxPage = this.pageInfo.maxPage
-            console.log("nowPage", nowPageNum)
-            console.log("maxPage", maxPage)
             startItem = nowPageNum * 20 - 19
             endItem = nowPageNum * 20 + 1
             showList = []
@@ -191,6 +215,7 @@ module.exports = {
         getInfo() {
             searchInfo = this.searchInfo
             this.info = []
+            this.showContent = []
             let url
             if (this.nowPage == "attractions") {
                 if (searchInfo.classType) {
@@ -234,7 +259,9 @@ module.exports = {
                         searchInfo.info +
                         "')&%24format=JSON"
                 }
-            }
+			}
+			console.log(url);
+			
             axios.get(url).then((res) => {
                 res.data.forEach((item) => {
                     this.showContent.push({

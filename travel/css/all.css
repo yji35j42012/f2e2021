@@ -106,12 +106,12 @@ select {
   }
 }
 
-.normal_sel_group, .menu_btn span, .menu_btn span::before, .menu_btn span::after, .menu_group, .r2c4_item, .page_li, .page_prev, .page_next {
+.normal_sel_group, .menu_btn span, .menu_btn span::before, .menu_btn span::after, .menu_group, .r2c4_item, .page_li:not(.page_more), .page_prev, .page_next {
   -webkit-transition-duration: 0.3s;
           transition-duration: 0.3s;
 }
 
-.hand, .normal_sel, .normal_btn, .menu_btn, .banner_next, .banner_prev, .banner_dot li, .breadcrumbs li:not(:last-child), .alert_func .normal_btn, .r2c4_item, .page_li, .page_prev, .page_next {
+.hand, .normal_sel, .normal_btn, .menu_btn, .banner_next, .banner_prev, .banner_dot li, .breadcrumbs li:not(:last-child), .alert_func .normal_btn, .r2c4_item, .page_li:not(.page_more), .page_prev, .page_next {
   cursor: pointer;
 }
 
@@ -1171,7 +1171,7 @@ h3 span .icon_arrow {
   width: 100%;
 }
 
-.page_li, .page_prev, .page_next {
+.page_li:not(.page_more), .page_prev, .page_next {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -1189,14 +1189,14 @@ h3 span .icon_arrow {
 }
 
 @media (pointer: fine) and (-webkit-max-device-pixel-ratio: 2), (pointer: fine) and (max-resolution: 2dppx), screen and (pointer: fine) and (-webkit-max-device-pixel-ratio: 2), (-moz-touch-enabled: 0) {
-  .page_li:hover, .page_prev:hover, .page_next:hover {
+  .page_li:not(.page_more):hover, .page_prev:hover, .page_next:hover {
     background-color: #7f977b;
     fill: #ffffff;
     color: #ffffff;
   }
 }
 
-.page_li:active, .page_prev:active, .page_next:active {
+.page_li:not(.page_more):active, .page_prev:active, .page_next:active {
   background-color: #7f977b;
   fill: #ffffff;
   color: #ffffff;
