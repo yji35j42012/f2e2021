@@ -13,7 +13,7 @@
             </i>
         </li>
         <li
-            :class="['page_li', nowpage == index + 1 ? 'on' : '']"
+            :class="['page_li', nowpage == item ? 'on' : '']"
             v-for="(item, index) in showpage"
             :key="index"
             @click="changePage(item)"
@@ -41,11 +41,11 @@ module.exports = {
         }
     },
     props: ["maxpage", "nowpage", "showpage"],
-    mounted() {
-        console.log("pageprops", this.$props.showpage)
-    },
+
     methods: {
         changePage(str) {
+            console.log(str);
+            
             this.$emit("changepage", str)
         },
     },

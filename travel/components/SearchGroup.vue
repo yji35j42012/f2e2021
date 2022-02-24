@@ -37,7 +37,7 @@
         <page
             v-if="pageInfo.maxPage > 1"
             :maxpage="pageInfo.maxPage"
-            :nowpage="pageInfo.infoNowPage"
+            :nowpage="pageInfo.nowPageNum"
             :showpage="pageInfo.show"
             @changepage="changePageHanlder"
         ></page>
@@ -49,11 +49,6 @@ module.exports = {
     data() {
         return {
             nowPage: "",
-            result: {
-                infoMaxShow: 20,
-                infoNowPage: 1,
-                infoMaxPage: 0,
-            },
             searchInfo: {
                 classType: "",
                 city: "",
@@ -93,33 +88,25 @@ module.exports = {
             let showSearch = this.showContent
             let showList = []
 
-            nowPage = this.pageInfo.nowPageNum
+            nowPageNum = this.pageInfo.nowPageNum
             maxPage = this.pageInfo.maxPage
-            console.log("nowPage", nowPage)
+            console.log("nowPage", nowPageNum)
             console.log("maxPage", maxPage)
-            startItem = nowPage * 20
-            endItem = nowPage * 20
+            startItem = nowPageNum * 20 - 19
+            endItem = nowPageNum * 20 + 1
+            showList = []
+
             if (maxPage == 1) {
                 showList = showSearch
-            } else {
+            } else if (endItem > showSearch.length) {
+                for (let i = startItem; i < showSearch.length; i++) {
+                    showList.push(showSearch[i])
+                }
+            } else if (maxPage > 1) {
                 for (let i = startItem; i < endItem; i++) {
                     showList.push(showSearch[i])
                 }
             }
-
-            // let startItem = (parseInt(nowPage)) * parseInt(maxPage)
-            // let endItem = parseInt(nowPage) * parseInt(maxPage)
-            // if (maxPage == 1) {
-            //     showList = showSearch
-            // } else if (endItem > showSearch.length) {
-            //     for (let i = startItem; i < showSearch.length; i++) {
-            //         showList.push(showSearch[i])
-            //     }
-            // } else {
-            //     for (let i = startItem; i < endItem; i++) {
-            //         showList.push(showSearch[i])
-            //     }
-            // }
             return showList
         },
     },
@@ -127,10 +114,11 @@ module.exports = {
         itemPage() {
             let show = []
             let pageCount = Math.ceil(this.showContent.length / 20) //頁數
+            this.pageInfo.maxPage = pageCount //最大頁數
+            let halfPage = pageCount / 2
 
-            this.pageInfo.maxPage = pageCount
             let nowPageNum = this.pageInfo.nowPageNum
-            let eveupPage = Math.ceil(this.showContent.length / 2)
+            let eveupPage = Math.ceil(halfPage)
 
             if (pageCount > 6) {
                 if (nowPageNum == 1) {
@@ -141,7 +129,7 @@ module.exports = {
                     show.push("more")
                     show.push(pageCount - 1)
                     show.push(pageCount)
-                } else if (nowPageNum == page) {
+                } else if (nowPageNum == pageCount) {
                     // 最後一頁顯示前二號碼＋...跟後三號碼，.on在最後一個
                     show.push(1)
                     show.push(2)
@@ -149,7 +137,10 @@ module.exports = {
                     show.push(pageCount - 2)
                     show.push(pageCount - 1)
                     show.push(pageCount)
-                } else if (halfPage == nowPageNum && nowPageNum + 4 == page) {
+                } else if (
+                    halfPage == nowPageNum &&
+                    nowPageNum + 4 == pageCount
+                ) {
                     // 總頁數的一半等於現在的頁數而且現在的頁數加４等於總頁數
                     // 此判斷發生於總頁數＝８現在頁數＝４
                     // 如果沒有此判斷再第４頁的時候會變成 1,2,...,3,4,5
@@ -269,9 +260,11 @@ module.exports = {
             )
         },
         changePageHanlder(num) {
+            console.log(num)
+
             if (
                 num == "++" &&
-                this.pageInfo.nowPageNum !== this.result.infoMaxPage
+                this.pageInfo.nowPageNum !== this.pageInfo.maxPage
             ) {
                 this.pageInfo.nowPageNum = this.pageInfo.nowPageNum + 1
             } else if (num == "--" && this.pageInfo.nowPageNum !== 1) {
