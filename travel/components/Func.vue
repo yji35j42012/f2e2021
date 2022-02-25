@@ -109,20 +109,19 @@ module.exports = {
         },
         searchHandler() {
             let nowPage = store.state.nowPage
-            let city = this.searchCity == "all" ? "全部縣市" : this.searchCity
+            let city = this.searchCity == "all" ? "全部縣市" : this.choseCity
             let info = this.searchInfo == "" ? "all" : this.searchInfo
             let date = this.searchDate
             let nowSearch = this.nowSearch
 
-            console.log(nowPage)
-
+            this.changeBreadcrumbs(nowSearch, city)
             if (nowPage == "attractions" || nowSearch == "探索景點") {
                 this.$router.push("/attractions/" + city + "/" + info)
             } else if (nowPage == "activity" || nowSearch == "節慶活動") {
                 this.$router.push("/activity/" + city + "/" + date + "/" + info)
             } else if (nowPage == "restaurant" || nowSearch == "品嘗美食") {
                 this.$router.push("/restaurant/" + city + "/" + info)
-            } 
+            }
         },
         getInfo() {
             store.dispatch("READ_ATTRACTIONS_INFO")
@@ -138,6 +137,14 @@ module.exports = {
         changeCity(str, str1) {
             this.choseCity = str
             this.searchCity = str1
+        },
+        changeBreadcrumbs(add, city) {
+            console.log("func", store.state.breadcrumbs.length)
+            console.log("func", add)
+            console.log("func", city)
+            if (store.state.breadcrumbs.length == 2) {
+                store.dispatch("CLEAR_BREADCRUMBS")
+            }
         },
     },
 }

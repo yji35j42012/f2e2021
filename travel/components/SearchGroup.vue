@@ -93,17 +93,16 @@ module.exports = {
         this.searchInfo.date = this.$route.params.date
         this.getInfo()
 
-        let breadcrumbs_str
-        if (this.nowPage == "attractions") {
-            breadcrumbs_str = "探索景點"
-        } else if (this.nowPage == "activity") {
-            breadcrumbs_str = "節慶活動"
-        } else if (this.nowPage == "restaurant") {
-            breadcrumbs_str = "品嘗美食"
+        if (store.state.breadcrumbs.length == 0) {
+            let page
+            if (this.nowPage == "attractions") {
+                page = "探索景點"
+            } else if (this.nowPage == "activity") {
+                page = "節慶活動"
+            } else if (this.nowPage == "restaurant") {
+                page = "品嘗美食"
+            }
         }
-        console.log(this.searchInfo.city)
-
-        store.dispatch("ADD_BREADCRUMBS", breadcrumbs_str)
     },
     computed: {
         itemCount() {
@@ -259,9 +258,7 @@ module.exports = {
                         searchInfo.info +
                         "')&%24format=JSON"
                 }
-			}
-			console.log(url);
-			
+            }
             axios.get(url).then((res) => {
                 res.data.forEach((item) => {
                     this.showContent.push({
@@ -281,14 +278,9 @@ module.exports = {
         searchHandler() {},
         itemHandler(id, str) {
             let nowPage = store.state.nowPage
-            store.dispatch("ADD_BREADCRUMBS", str ? str : "noname")
-            this.$router.push(
-                "/" + nowPage + "/" + this.$route.params.search + "/" + id
-            )
+            this.$router.push( this.$route.fullPath + "/" + id)
         },
         changePageHanlder(num) {
-            console.log(num)
-
             if (
                 num == "++" &&
                 this.pageInfo.nowPageNum !== this.pageInfo.maxPage

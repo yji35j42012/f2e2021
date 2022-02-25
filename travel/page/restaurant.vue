@@ -34,13 +34,6 @@ module.exports = {
     },
     mounted() {
         store.dispatch("READ_RESTAURANT_INFO")
-
-       
-        // if (store.state.breadcrumbs.length !== 2) {
-        // 	store.dispatch("READ_RESTAURANT_INFO")
-        // 	store.dispatch("CLEAR_BREADCRUMBS")
-        // 	store.dispatch("ADD_BREADCRUMBS", "品嚐美食")
-        // }
     },
     computed: {
         restaurant_sort() {
@@ -98,6 +91,15 @@ module.exports = {
             let nowPage = store.state.nowPage
             if (nowPage == "restaurant") {
                 this.$router.push("/restaurant/" + id)
+            }
+        },
+        getPageName() {
+            if (store.state.nowPage == "attractions") {
+                return "探索景點"
+            } else if (store.state.nowPage == "activity") {
+                return "節慶活動"
+            } else if (store.state.nowPage == "restaurant") {
+                return "品嘗美食"
             }
         },
     },

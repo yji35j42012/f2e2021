@@ -180,7 +180,6 @@ module.exports = {
         }
 
         axios.get(axiosUrl).then((res) => {
-            console.log("res", res.data)
             let item = res.data[0]
             let page = store.state.nowPage
             this.detail = {
