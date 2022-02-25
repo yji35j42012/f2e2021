@@ -84,6 +84,7 @@ module.exports = {
         },
     },
     mounted() {
+        console.log("SearchGroup")
         this.nowPage = store.state.nowPage
         this.searchInfo.classType = this.$route.params.class
         this.searchInfo.city =
@@ -92,7 +93,6 @@ module.exports = {
             this.$route.params.search == "all" ? "" : this.$route.params.search
         this.searchInfo.date = this.$route.params.date
         this.getInfo()
-
         if (store.state.breadcrumbs.length == 0) {
             let page
             if (this.nowPage == "attractions") {
@@ -278,7 +278,7 @@ module.exports = {
         searchHandler() {},
         itemHandler(id, str) {
             let nowPage = store.state.nowPage
-            this.$router.push( this.$route.fullPath + "/" + id)
+            this.$router.push(this.$route.fullPath + "/" + id)
         },
         changePageHanlder(num) {
             if (

@@ -157,6 +157,7 @@ module.exports = {
         banner: httpVueLoader("../components/Banner.vue"),
     },
     mounted() {
+        console.log("ShowDetail")        
         if (store.state.breadcrumbs.length !== 3) {
             this.$router.push("/")
         }

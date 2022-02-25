@@ -22,30 +22,33 @@
 <script>
 module.exports = {
     data() {
-        return {};
+        return {}
+    },
+    mounted() {
+        console.log("ClassType")
     },
     computed: {
         title() {
-            let title = "熱門主題";
+            let title = "熱門主題"
             if (store.state.nowPage == "restaurant") {
-                title = "熱門分類";
+                title = "熱門分類"
             }
-            return title;
+            return title
         },
         typeItem() {
             if (store.state.nowPage == "restaurant") {
-                return store.state.restaurant.class;
+                return store.state.restaurant.class
             } else if (store.state.nowPage == "attractions") {
-                return store.state.attractions.class;
+                return store.state.attractions.class
             } else if (store.state.nowPage == "activity") {
-                return store.state.activity.class;
+                return store.state.activity.class
             }
         },
     },
     methods: {
         typeSearch(str) {
-            this.$router.push(this.$route.fullPath + "/" + str);
+            this.$router.push(this.$route.fullPath + "/" + str)
         },
     },
-};
+}
 </script>

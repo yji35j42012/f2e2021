@@ -20,6 +20,7 @@ module.exports = {
         breadcrumbs: httpVueLoader("../components/Breadcrumbs.vue"),
     },
     mounted() {
+        console.log('adf');
         store.dispatch("READ_ATTRACTIONS_INFO")
     },
     computed: {
@@ -32,7 +33,7 @@ module.exports = {
             }
         },
     },
-    methods: {
+    methods: {        
         getPageName() {
             if (store.state.nowPage == "attractions") {
                 return "探索景點"

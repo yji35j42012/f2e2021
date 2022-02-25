@@ -50,6 +50,12 @@
 						),
 					},
 					{
+						path: ":class",
+						component: httpVueLoader(
+							"./components/SearchGroup.vue"
+						),
+					},
+					{
 						path: ":city/:search",
 						component: httpVueLoader(
 							"./components/SearchGroup.vue"
@@ -159,7 +165,7 @@
 			watch: {
 				$route(to, from) {
 					var now = this.$route.path;
-					console.log('now', this.$route);
+					// console.log('now', this.$route);
 
 					if (this.$route.path == "/") {
 						this.nowPath = "home";
