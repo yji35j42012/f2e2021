@@ -94,15 +94,27 @@ module.exports = {
         this.searchInfo.date = this.$route.params.date
         this.getInfo()
         if (store.state.breadcrumbs.length == 0) {
-            let page
-            if (this.nowPage == "attractions") {
-                page = "探索景點"
-            } else if (this.nowPage == "activity") {
-                page = "節慶活動"
-            } else if (this.nowPage == "restaurant") {
-                page = "品嘗美食"
+            store.dispatch("CLEAR_BREADCRUMBS")
+            store.dispatch("ADD_BREADCRUMBS", this.getPageName())
+            if (this.searchInfo.classType !== "all") {
+                store.dispatch("ADD_BREADCRUMBS", this.searchInfo.classType)
+            } else {
+                store.dispatch(
+                    "ADD_BREADCRUMBS",
+                    this.searchInfo.city == ""
+                        ? "全部縣市"
+                        : this.searchInfo.city
+                )
             }
+        }else{
+            store.dispatch("ADD_BREADCRUMBS", this.getPageName())
         }
+
+        console.log("breadcrumbs count", store.state.breadcrumbs.length)
+
+        // if (this.searchInfo.classType) {
+        //     store.dispatch("ADD_BREADCRUMBS", this.searchInfo.classType)
+        // }
     },
     computed: {
         itemCount() {
@@ -217,7 +229,7 @@ module.exports = {
             this.showContent = []
             let url
             if (this.nowPage == "attractions") {
-                if (searchInfo.classType) {
+                if (searchInfo.classType !== "all") {
                     url =
                         "https://ptx.transportdata.tw/MOTC/v2/Tourism/ScenicSpot?%24filter=contains(Class1%2C'" +
                         searchInfo.classType +
@@ -230,8 +242,25 @@ module.exports = {
                         searchInfo.info +
                         "')&%24format=JSON"
                 }
+                axios.get(url).then((res) => {
+                    res.data.forEach((item) => {
+                        this.showContent.push({
+                            infoId: item.ScenicSpotID,
+                            cityName: item.Address
+                                ? item.Address.substr(0, 3)
+                                : "",
+                            detail: item.Description,
+                            picture: item.Picture,
+                            pictureUrl: item.Picture.PictureUrl1
+                                ? item.Picture.PictureUrl1
+                                : "../images/error.png",
+                            infoName: item.ScenicSpotName,
+                            type: item.Class1,
+                        })
+                    })
+                })
             } else if (this.nowPage == "activity") {
-                if (searchInfo.classType) {
+                if (searchInfo.classType !== "all") {
                     url =
                         "https://ptx.transportdata.tw/MOTC/v2/Tourism/Activity?%24filter=contains(Class1%2C'" +
                         searchInfo.classType +
@@ -244,8 +273,25 @@ module.exports = {
                         searchInfo.info +
                         "')%20&%24format=JSON"
                 }
+                axios.get(url).then((res) => {
+                    res.data.forEach((item) => {
+                        this.showContent.push({
+                            infoId: item.ActivityID,
+                            cityName: item.Address
+                                ? item.Address.substr(0, 3)
+                                : "",
+                            detail: item.Description,
+                            picture: item.Picture,
+                            pictureUrl: item.Picture.PictureUrl1
+                                ? item.Picture.PictureUrl1
+                                : "../images/error.png",
+                            infoName: item.ActivityName,
+                            type: item.Class1,
+                        })
+                    })
+                })
             } else if (this.nowPage == "restaurant") {
-                if (searchInfo.classType) {
+                if (searchInfo.classType !== "all") {
                     url =
                         "https://ptx.transportdata.tw/MOTC/v2/Tourism/Restaurant?%24filter=contains(Class%2C'" +
                         searchInfo.classType +
@@ -258,22 +304,24 @@ module.exports = {
                         searchInfo.info +
                         "')&%24format=JSON"
                 }
-            }
-            axios.get(url).then((res) => {
-                res.data.forEach((item) => {
-                    this.showContent.push({
-                        infoId: item.ScenicSpotID,
-                        cityName: item.Address ? item.Address.substr(0, 3) : "",
-                        detail: item.Description,
-                        picture: item.Picture,
-                        pictureUrl: item.Picture.PictureUrl1
-                            ? item.Picture.PictureUrl1
-                            : "../images/error.png",
-                        infoName: item.ScenicSpotName,
-                        type: item.Class1,
+                axios.get(url).then((res) => {
+                    res.data.forEach((item) => {
+                        this.showContent.push({
+                            infoId: item.RestaurantID,
+                            cityName: item.Address
+                                ? item.Address.substr(0, 3)
+                                : "",
+                            detail: item.Description,
+                            picture: item.Picture,
+                            pictureUrl: item.Picture.PictureUrl1
+                                ? item.Picture.PictureUrl1
+                                : "../images/error.png",
+                            infoName: item.RestaurantName,
+                            type: item.Class1,
+                        })
                     })
                 })
-            })
+            }
         },
         searchHandler() {},
         itemHandler(id, str) {
@@ -290,6 +338,15 @@ module.exports = {
                 this.pageInfo.nowPageNum = this.pageInfo.nowPageNum - 1
             } else if (num !== "++" && num !== "--") {
                 this.pageInfo.nowPageNum = num
+            }
+        },
+        getPageName() {
+            if (store.state.nowPage == "attractions") {
+                return "探索景點"
+            } else if (store.state.nowPage == "activity") {
+                return "節慶活動"
+            } else if (store.state.nowPage == "restaurant") {
+                return "品嘗美食"
             }
         },
     },

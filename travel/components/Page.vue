@@ -48,7 +48,6 @@ module.exports = {
 
     methods: {
         changePage(str) {
-            console.log(str)
             if (str == "more") return
             this.$emit("changepage", str)
         },

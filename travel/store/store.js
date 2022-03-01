@@ -23,6 +23,7 @@ const store = new Vuex.Store({
         },
         showSearch: [],
         loadingShow: true,
+        showDetail: null,
     },
     getters: {},
     mutations: {
@@ -62,6 +63,9 @@ const store = new Vuex.Store({
         },
         SET_LOADING(state, boo) {
             state.loadingShow = boo
+        },
+        SET_DETAIL(state, str) {
+            state.showDetail = str
         },
     },
     actions: {
@@ -159,7 +163,6 @@ const store = new Vuex.Store({
                     commit("SET_RESTAURANT", { class_obj, info_obj })
                 })
         },
-
         READ_ACTIVITY_INFO({ commit }) {
             axios
                 .get(
@@ -204,11 +207,9 @@ const store = new Vuex.Store({
                 })
         },
         ADD_BREADCRUMBS({ commit }, str) {
-            console.log('strBREADCRUMBS',str[1])
-
-            commit("SET_BREADCRUMBS", str[0])
+            commit("SET_BREADCRUMBS", str)
         },
-        DEL_BREADCRUMBS({ commit }) {
+        DEL_BREADCRUMBS ({ commit }) {
             commit("DEL_BREADCRUMBS")
         },
         CLEAR_BREADCRUMBS({ commit }) {
@@ -224,6 +225,9 @@ const store = new Vuex.Store({
             setTimeout(() => {
                 commit("SET_LOADING", boo)
             }, 1000)
+        },
+        SET_DETAIL({ commit }, str) {
+            commit("SET_DETAIL", str)
         },
     },
 })

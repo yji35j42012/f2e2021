@@ -86,7 +86,7 @@ module.exports = {
         return {
             icon_all: icon_all,
             selectShow: false,
-            nowSearch: "探索景點",
+            nowSearch: "",
             searchList: ["探索景點", "節慶活動", "品嘗美食"],
             choseCity: "全部縣市",
             searchCity: "all",
@@ -94,7 +94,13 @@ module.exports = {
             searchDate: "all",
         }
     },
-
+    mounted() {
+        if (store.state.nowPage == "home") {
+            this.nowSearch = "探索景點"
+        } else {
+            this.nowSearch = ""
+        }
+    },
     computed: {
         page() {
             return store.state.nowPage
@@ -115,22 +121,31 @@ module.exports = {
             let nowSearch = this.nowSearch
 
             this.changeBreadcrumbs(nowSearch, city)
+            console.log("nowPage", nowPage)
+            console.log("nowSearch", nowSearch)
+
             if (nowPage == "attractions" || nowSearch == "探索景點") {
-                this.$router.push("/attractions/" + city + "/" + info)
+                this.$router.push(
+                    "/attractions/" + city + "/" + "all" + "/" + info
+                )
             } else if (nowPage == "activity" || nowSearch == "節慶活動") {
-                this.$router.push("/activity/" + city + "/" + date + "/" + info)
+                this.$router.push(
+                    "/activity/" + city + "/" + "all" + "/" + info
+                )
             } else if (nowPage == "restaurant" || nowSearch == "品嘗美食") {
-                this.$router.push("/restaurant/" + city + "/" + info)
+                this.$router.push(
+                    "/restaurant/" + city + "/" + "all" + "/" + info
+                )
             }
         },
         getInfo() {
             store.dispatch("READ_ATTRACTIONS_INFO")
         },
-        goPage() {
-            let city = this.searchCity == "all" ? "全部縣市" : this.searchCity
-            let info = this.searchInfo == "" ? "all" : this.searchInfo
-            this.$router.push("/attractions/" + city + "/" + info)
-        },
+        // goPage() {
+        //     let city = this.searchCity == "all" ? "全部縣市" : this.searchCity
+        //     let info = this.searchInfo == "" ? "all" : this.searchInfo
+        //     this.$router.push("/attractions/" + city + "/" + info)
+        // },
         searchChangeHandler(str) {
             this.nowSearch = str
         },
@@ -139,9 +154,6 @@ module.exports = {
             this.searchCity = str1
         },
         changeBreadcrumbs(add, city) {
-            console.log("func", store.state.breadcrumbs.length)
-            console.log("func", add)
-            console.log("func", city)
             if (store.state.breadcrumbs.length == 2) {
                 store.dispatch("CLEAR_BREADCRUMBS")
             }

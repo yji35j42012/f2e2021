@@ -26,6 +26,8 @@ module.exports = {
     },
     mounted() {
         console.log("ClassType")
+        store.dispatch("CLEAR_BREADCRUMBS")
+        store.dispatch("ADD_BREADCRUMBS", this.getPageName())
     },
     computed: {
         title() {
@@ -47,7 +49,18 @@ module.exports = {
     },
     methods: {
         typeSearch(str) {
-            this.$router.push(this.$route.fullPath + "/" + str)
+            this.$router.push(
+                this.$route.fullPath + "/全部縣市/" + str + "/all"
+            )
+        },
+        getPageName() {
+            if (store.state.nowPage == "attractions") {
+                return "探索景點"
+            } else if (store.state.nowPage == "activity") {
+                return "節慶活動"
+            } else if (store.state.nowPage == "restaurant") {
+                return "品嘗美食"
+            }
         },
     },
 }

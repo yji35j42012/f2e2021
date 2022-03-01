@@ -20,8 +20,9 @@ module.exports = {
         breadcrumbs: httpVueLoader("../components/Breadcrumbs.vue"),
     },
     mounted() {
-        console.log('adf');
         store.dispatch("READ_ATTRACTIONS_INFO")
+        // store.dispatch("DEL_BREADCRUMBS")
+        // store.dispatch("ADD_BREADCRUMBS", this.getPageName())
     },
     computed: {
         showFunc() {
@@ -33,16 +34,8 @@ module.exports = {
             }
         },
     },
-    methods: {        
-        getPageName() {
-            if (store.state.nowPage == "attractions") {
-                return "探索景點"
-            } else if (store.state.nowPage == "activity") {
-                return "節慶活動"
-            } else if (store.state.nowPage == "restaurant") {
-                return "品嘗美食"
-            }
-        },
+    methods: {
+      
     },
 }
 </script>

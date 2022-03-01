@@ -34,6 +34,8 @@ module.exports = {
     },
     mounted() {
         store.dispatch("READ_RESTAURANT_INFO")
+        // store.dispatch("DEL_BREADCRUMBS")
+        // store.dispatch("ADD_BREADCRUMBS", "品嚐美食")
     },
     computed: {
         restaurant_sort() {

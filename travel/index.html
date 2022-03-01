@@ -13,7 +13,7 @@
 	<div id="app" class="wrap">
 		<!-- <loading v-if="loadingShow"></loading> -->
 		<htitle></htitle>
-		<div :class="['content' , nowPath]">
+		<div :class="['content' , nowPage]">
 			<router-view></router-view>
 		</div>
 		<hfooter></hfooter>
@@ -50,19 +50,13 @@
 						),
 					},
 					{
-						path: ":class",
+						path: ":city/:class/:search",
 						component: httpVueLoader(
 							"./components/SearchGroup.vue"
 						),
 					},
 					{
-						path: ":city/:search",
-						component: httpVueLoader(
-							"./components/SearchGroup.vue"
-						),
-					},
-					{
-						path: ":city/:search/:id",
+						path: ":city/:class/:search/:id",
 						component: httpVueLoader(
 							"./components/ShowDetail.vue"
 						),
@@ -80,19 +74,13 @@
 						),
 					},
 					{
-						path: ":class",
+						path: ":city/:class/:search",
 						component: httpVueLoader(
 							"./components/SearchGroup.vue"
 						),
 					},
 					{
-						path: ":city/:date/:search",
-						component: httpVueLoader(
-							"./components/SearchGroup.vue"
-						),
-					},
-					{
-						path: ":city/:date/:search/:id",
+						path: ":city/:class/:search/:id",
 						component: httpVueLoader(
 							"./components/ShowDetail.vue"
 						),
@@ -110,19 +98,13 @@
 						),
 					},
 					{
-						path: ":class",
+						path: ":city/:class/:search",
 						component: httpVueLoader(
 							"./components/SearchGroup.vue"
 						),
 					},
 					{
-						path: ":city/:search",
-						component: httpVueLoader(
-							"./components/SearchGroup.vue"
-						),
-					},
-					{
-						path: ":city/:search/:id",
+						path: ":city/:class/:search/:id",
 						component: httpVueLoader(
 							"./components/ShowDetail.vue"
 						),
@@ -139,7 +121,8 @@
 			el: "#app",
 			data() {
 				return {
-					nowPath: "",
+					nowPage: "",
+					nowPage: '',
 					icon_all: icon_all,
 					alertShow: false,
 					city: [],
@@ -165,18 +148,25 @@
 			watch: {
 				$route(to, from) {
 					var now = this.$route.path;
-					// console.log('now', this.$route);
-
 					if (this.$route.path == "/") {
-						this.nowPath = "home";
+						this.nowPage = "home";
 						store.dispatch("PAGE", "home");
 					} else {
-						this.nowPath = now.split("/")[1];
+						this.nowPage = now.split("/")[1];
 						store.dispatch("PAGE", now.split("/")[1]);
 					}
 				},
 			},
 			methods: {
+				getPageName() {
+					if (this.nowPage == "attractions") {
+						return "探索景點"
+					} else if (this.nowPage == "activity") {
+						return "節慶活動"
+					} else if (this.nowPage == "restaurant") {
+						return "品嘗美食"
+					}
+				},
 				close() {
 					this.alertShow = false;
 				},
