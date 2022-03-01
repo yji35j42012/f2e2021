@@ -106,7 +106,7 @@ module.exports = {
                         : this.searchInfo.city
                 )
             }
-        }else{
+        } else {
             store.dispatch("ADD_BREADCRUMBS", this.getPageName())
         }
 
