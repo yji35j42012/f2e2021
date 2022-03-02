@@ -11,7 +11,7 @@
 
 <body>
 	<div id="app" class="wrap">
-		<!-- <loading v-if="loadingShow"></loading> -->
+		<loading v-if="loadingShow"></loading>
 		<htitle></htitle>
 		<div :class="['content' , nowPage]">
 			<router-view></router-view>
@@ -138,7 +138,7 @@
 			router,
 			mounted() {
 				store.dispatch("READ_CITY");
-				store.dispatch("SET_LOADING", false);
+				console.log('this.nowPage');
 			},
 			computed: {
 				loadingShow() {
@@ -152,6 +152,7 @@
 						this.nowPage = "home";
 						store.dispatch("PAGE", "home");
 					} else {
+						store.dispatch("SET_LOADING", true);
 						this.nowPage = now.split("/")[1];
 						store.dispatch("PAGE", now.split("/")[1]);
 					}

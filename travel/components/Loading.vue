@@ -9,7 +9,7 @@
     width: 100%;
     height: 100%;
     background-color: #fff;
-    z-index: 3;
+    z-index: 100;
 }
 .loading_container {
     position: relative;

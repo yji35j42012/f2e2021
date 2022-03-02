@@ -85,6 +85,7 @@ module.exports = {
     },
     mounted() {
         console.log("SearchGroup")
+        store.dispatch("SET_LOADING", true)
         this.nowPage = store.state.nowPage
         this.searchInfo.classType = this.$route.params.class
         this.searchInfo.city =
@@ -93,28 +94,17 @@ module.exports = {
             this.$route.params.search == "all" ? "" : this.$route.params.search
         this.searchInfo.date = this.$route.params.date
         this.getInfo()
-        if (store.state.breadcrumbs.length == 0) {
-            store.dispatch("CLEAR_BREADCRUMBS")
-            store.dispatch("ADD_BREADCRUMBS", this.getPageName())
-            if (this.searchInfo.classType !== "all") {
-                store.dispatch("ADD_BREADCRUMBS", this.searchInfo.classType)
-            } else {
-                store.dispatch(
-                    "ADD_BREADCRUMBS",
-                    this.searchInfo.city == ""
-                        ? "全部縣市"
-                        : this.searchInfo.city
-                )
-            }
+
+        store.dispatch("CLEAR_BREADCRUMBS")
+        store.dispatch("ADD_BREADCRUMBS", this.getPageName())
+        if (this.searchInfo.classType !== "all") {
+            store.dispatch("ADD_BREADCRUMBS", this.searchInfo.classType)
         } else {
-            store.dispatch("ADD_BREADCRUMBS", this.getPageName())
+            store.dispatch(
+                "ADD_BREADCRUMBS",
+                this.searchInfo.city == "" ? "全部縣市" : this.searchInfo.city
+            )
         }
-
-        console.log("breadcrumbs count", store.state.breadcrumbs.length)
-
-        // if (this.searchInfo.classType) {
-        //     store.dispatch("ADD_BREADCRUMBS", this.searchInfo.classType)
-        // }
     },
     computed: {
         itemCount() {
@@ -258,6 +248,10 @@ module.exports = {
                             type: item.Class1,
                         })
                     })
+
+                    setTimeout(() => {
+                        store.dispatch("SET_LOADING", false)
+                    }, 1000)
                 })
             } else if (this.nowPage == "activity") {
                 if (searchInfo.classType !== "all") {
@@ -289,6 +283,10 @@ module.exports = {
                             type: item.Class1,
                         })
                     })
+
+                    setTimeout(() => {
+                        store.dispatch("SET_LOADING", false)
+                    }, 1000)
                 })
             } else if (this.nowPage == "restaurant") {
                 if (searchInfo.classType !== "all") {
@@ -320,6 +318,10 @@ module.exports = {
                             type: item.Class1,
                         })
                     })
+
+                    setTimeout(() => {
+                        store.dispatch("SET_LOADING", false)
+                    }, 1000)
                 })
             }
         },

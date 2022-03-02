@@ -114,6 +114,10 @@ module.exports = {
             this.selectShow = !this.selectShow
         },
         searchHandler() {
+            console.log("func")
+            store.dispatch("SET_LOADING", true)
+            console.log("func1")
+
             let nowPage = store.state.nowPage
             let city = this.searchCity == "all" ? "全部縣市" : this.choseCity
             let info = this.searchInfo == "" ? "all" : this.searchInfo
@@ -121,9 +125,6 @@ module.exports = {
             let nowSearch = this.nowSearch
 
             this.changeBreadcrumbs(nowSearch, city)
-            console.log("nowPage", nowPage)
-            console.log("nowSearch", nowSearch)
-
             if (nowPage == "attractions" || nowSearch == "探索景點") {
                 this.$router.push(
                     "/attractions/" + city + "/" + "all" + "/" + info
@@ -141,11 +142,6 @@ module.exports = {
         getInfo() {
             store.dispatch("READ_ATTRACTIONS_INFO")
         },
-        // goPage() {
-        //     let city = this.searchCity == "all" ? "全部縣市" : this.searchCity
-        //     let info = this.searchInfo == "" ? "all" : this.searchInfo
-        //     this.$router.push("/attractions/" + city + "/" + info)
-        // },
         searchChangeHandler(str) {
             this.nowSearch = str
         },
@@ -154,8 +150,22 @@ module.exports = {
             this.searchCity = str1
         },
         changeBreadcrumbs(add, city) {
+            console.log("add", add)
+            console.log("city", city)
+
             if (store.state.breadcrumbs.length == 2) {
                 store.dispatch("CLEAR_BREADCRUMBS")
+                store.dispatch("ADD_BREADCRUMBS", this.getPageName())
+                store.dispatch("ADD_BREADCRUMBS", city)
+            }
+        },
+        getPageName() {
+            if (store.state.nowPage == "attractions") {
+                return "探索景點"
+            } else if (store.state.nowPage == "activity") {
+                return "節慶活動"
+            } else if (store.state.nowPage == "restaurant") {
+                return "品嘗美食"
             }
         },
     },

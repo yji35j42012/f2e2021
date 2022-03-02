@@ -209,7 +209,7 @@ const store = new Vuex.Store({
         ADD_BREADCRUMBS({ commit }, str) {
             commit("SET_BREADCRUMBS", str)
         },
-        DEL_BREADCRUMBS ({ commit }) {
+        DEL_BREADCRUMBS({ commit }) {
             commit("DEL_BREADCRUMBS")
         },
         CLEAR_BREADCRUMBS({ commit }) {
@@ -222,6 +222,8 @@ const store = new Vuex.Store({
             commit("SET_SHOWSEARCH", showObj)
         },
         SET_LOADING({ commit }, boo) {
+            console.log("!!!", boo)
+
             setTimeout(() => {
                 commit("SET_LOADING", boo)
             }, 1000)

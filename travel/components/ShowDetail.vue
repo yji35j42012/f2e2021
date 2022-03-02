@@ -158,9 +158,6 @@ module.exports = {
     },
     mounted() {
         console.log("ShowDetail")
-        // if (store.state.breadcrumbs.length !== 3) {
-        //     this.$router.push("/")
-        // }
         var axiosUrl = ""
         let searchId = this.$route.params.id
         if (store.state.nowPage == "restaurant") {
@@ -180,6 +177,22 @@ module.exports = {
                 "')&%24top=1&%24format=JSON"
         }
 
+        this.nowPage = store.state.nowPage
+        classType = this.$route.params.class
+        city =
+            this.$route.params.city == "全部縣市"
+                ? "全部縣市"
+                : this.$route.params.city
+
+        store.dispatch("CLEAR_BREADCRUMBS")
+        store.dispatch("ADD_BREADCRUMBS", this.getPageName())
+        if (classType !== "all") {
+            store.dispatch("ADD_BREADCRUMBS", classType)
+        } else {
+            store.dispatch("ADD_BREADCRUMBS", city)
+        }
+
+
         axios.get(axiosUrl).then((res) => {
             let item = res.data[0]
             let page = store.state.nowPage
@@ -198,6 +211,7 @@ module.exports = {
             } else if (page == "activity") {
                 this.detail.name = item.ActivityName
             }
+            store.dispatch("ADD_BREADCRUMBS", this.detail.name)
         })
     },
     computed: {
@@ -205,6 +219,16 @@ module.exports = {
             return this.detail
         },
     },
-    methods: {},
+    methods: {
+        getPageName() {
+            if (store.state.nowPage == "attractions") {
+                return "探索景點"
+            } else if (store.state.nowPage == "activity") {
+                return "節慶活動"
+            } else if (store.state.nowPage == "restaurant") {
+                return "品嘗美食"
+            }
+        },
+    },
 }
 </script>

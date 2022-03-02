@@ -21,6 +21,7 @@ module.exports = {
     },
     mounted() {
         store.dispatch("READ_ACTIVITY_INFO")
+            store.dispatch("SET_LOADING", true)
     },
     computed: {
         showFunc() {
