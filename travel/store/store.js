@@ -222,11 +222,13 @@ const store = new Vuex.Store({
             commit("SET_SHOWSEARCH", showObj)
         },
         SET_LOADING({ commit }, boo) {
-            console.log("!!!", boo)
-
-            setTimeout(() => {
+            if (boo) {
                 commit("SET_LOADING", boo)
-            }, 1000)
+            } else {
+                setTimeout(() => {
+                    commit("SET_LOADING", boo)
+                }, 1000)
+            }
         },
         SET_DETAIL({ commit }, str) {
             commit("SET_DETAIL", str)

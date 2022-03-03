@@ -165,16 +165,25 @@ module.exports = {
                 "https://ptx.transportdata.tw/MOTC/v2/Tourism/Restaurant?%24filter=contains(RestaurantID%2C'" +
                 searchId +
                 "')&%24top=1&%24format=JSON"
+            setTimeout(() => {
+                store.dispatch("SET_LOADING", false)
+            }, 1000)
         } else if (store.state.nowPage == "activity") {
             axiosUrl =
                 "https://ptx.transportdata.tw/MOTC/v2/Tourism/Activity?%24filter=contains(ActivityID%2C'" +
                 searchId +
                 "')&%24top=1&%24format=JSON"
+            setTimeout(() => {
+                store.dispatch("SET_LOADING", false)
+            }, 1000)
         } else if (store.state.nowPage == "attractions") {
             axiosUrl =
                 "https://ptx.transportdata.tw/MOTC/v2/Tourism/ScenicSpot?%24filter=contains(ScenicSpotID%2C'" +
                 searchId +
                 "')&%24top=1&%24format=JSON"
+            setTimeout(() => {
+                store.dispatch("SET_LOADING", false)
+            }, 1000)
         }
 
         this.nowPage = store.state.nowPage
@@ -191,7 +200,6 @@ module.exports = {
         } else {
             store.dispatch("ADD_BREADCRUMBS", city)
         }
-
 
         axios.get(axiosUrl).then((res) => {
             let item = res.data[0]
@@ -212,6 +220,9 @@ module.exports = {
                 this.detail.name = item.ActivityName
             }
             store.dispatch("ADD_BREADCRUMBS", this.detail.name)
+            setTimeout(() => {
+                store.dispatch("SET_LOADING", false)
+            }, 1000)
         })
     },
     computed: {

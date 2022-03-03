@@ -21,9 +21,6 @@ module.exports = {
     },
     mounted() {
         store.dispatch("READ_ATTRACTIONS_INFO")
-            store.dispatch("SET_LOADING", true)
-        // store.dispatch("DEL_BREADCRUMBS")
-        // store.dispatch("ADD_BREADCRUMBS", this.getPageName())
     },
     computed: {
         showFunc() {
@@ -36,7 +33,7 @@ module.exports = {
         },
     },
     methods: {
-      
+        
     },
 }
 </script>

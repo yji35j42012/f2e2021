@@ -28,6 +28,9 @@ module.exports = {
         console.log("ClassType")
         store.dispatch("CLEAR_BREADCRUMBS")
         store.dispatch("ADD_BREADCRUMBS", this.getPageName())
+        setTimeout(() => {
+            store.dispatch("SET_LOADING", false)
+        }, 1000)
     },
     computed: {
         title() {
