@@ -32,16 +32,5 @@ module.exports = {
             }
         },
     },
-    methods: {
-        getPageName() {
-            if (store.state.nowPage == "attractions") {
-                return "探索景點"
-            } else if (store.state.nowPage == "activity") {
-                return "節慶活動"
-            } else if (store.state.nowPage == "restaurant") {
-                return "品嘗美食"
-            }
-        },
-    },
 }
 </script>

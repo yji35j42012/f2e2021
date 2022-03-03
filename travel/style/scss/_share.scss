@@ -242,7 +242,6 @@ h3 {
 .container {
     width: 100%;
     max-width: 1200px;
-    height: 100%;
     padding: 0 45px 120px;
     margin: auto;
     @include mw(M) {
@@ -705,9 +704,16 @@ h3 {
         overflow: hidden;
         width: calc(100% / 4 - 22.5px);
         margin-bottom: 36px;
+        border-radius: 20px;
+        @extend %hand;
         @include mw(M) {
             flex: none;
             width: 220px;
+        }
+        @include hoverHandler {
+            .result_pic {
+                transform: scale(1.1);
+            }
         }
     }
     &_item + &_item:not(:nth-child(4n + 1)) {
@@ -721,6 +727,8 @@ h3 {
         background-repeat: no-repeat;
         background-size: cover;
         border-radius: 20px;
+        transform: scale(1);
+        @extend %transition;
     }
     // .result_txt
     &_txt {

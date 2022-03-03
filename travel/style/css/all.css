@@ -106,12 +106,12 @@ select {
   }
 }
 
-.normal_sel_group, .menu_btn span, .menu_btn span::before, .menu_btn span::after, .menu_group, .r2c4_item, .page_li:not(.page_more), .page_prev, .page_next {
+.normal_sel_group, .menu_btn span, .menu_btn span::before, .menu_btn span::after, .menu_group, .r2c4_item, .result_pic, .page_li:not(.page_more), .page_prev, .page_next {
   -webkit-transition-duration: 0.3s;
           transition-duration: 0.3s;
 }
 
-.hand, .normal_sel, .normal_btn, .menu_btn, .banner_next, .banner_prev, .banner_dot li, .breadcrumbs li:not(:last-child), .alert_func .normal_btn, .r2c4_item, .page_li:not(.page_more), .page_prev, .page_next {
+.hand, .normal_sel, .normal_btn, .menu_btn, .banner_next, .banner_prev, .banner_dot li, .breadcrumbs li:not(:last-child), .alert_func .normal_btn, .r2c4_item, .result_item, .page_li:not(.page_more), .page_prev, .page_next {
   cursor: pointer;
 }
 
@@ -471,7 +471,6 @@ h3 span .icon_arrow {
 .container {
   width: 100%;
   max-width: 1200px;
-  height: 100%;
   padding: 0 45px 120px;
   margin: auto;
 }
@@ -1135,6 +1134,7 @@ h3 span .icon_arrow {
   overflow: hidden;
   width: calc(100% / 4 - 22.5px);
   margin-bottom: 36px;
+  border-radius: 20px;
 }
 
 @media screen and (max-width: 995px) {
@@ -1144,6 +1144,18 @@ h3 span .icon_arrow {
             flex: none;
     width: 220px;
   }
+}
+
+@media (pointer: fine) and (-webkit-max-device-pixel-ratio: 2), (pointer: fine) and (max-resolution: 2dppx), screen and (pointer: fine) and (-webkit-max-device-pixel-ratio: 2), (-moz-touch-enabled: 0) {
+  .result_item:hover .result_pic {
+    -webkit-transform: scale(1.1);
+            transform: scale(1.1);
+  }
+}
+
+.result_item:active .result_pic {
+  -webkit-transform: scale(1.1);
+          transform: scale(1.1);
 }
 
 .result_item + .result_item:not(:nth-child(4n + 1)) {
@@ -1157,6 +1169,8 @@ h3 span .icon_arrow {
   background-repeat: no-repeat;
   background-size: cover;
   border-radius: 20px;
+  -webkit-transform: scale(1);
+          transform: scale(1);
 }
 
 .result_txt_title {
@@ -1705,15 +1719,15 @@ h3 span .icon_arrow {
 }
 
 .map_surrounding .icon_mount {
-  background-image: url("../images/icon/icon_mount.svg");
+  background-image: url("../../images/icon/icon_mount.svg");
 }
 
 .map_surrounding .icon_nearby {
-  background-image: url("../images/icon/icon_nearby.svg");
+  background-image: url("../../images/icon/icon_nearby.svg");
 }
 
 .map_surrounding .icon_eat {
-  background-image: url("../images/icon/icon_eat.svg");
+  background-image: url("../../images/icon/icon_eat.svg");
 }
 
 @media screen and (max-width: 995px) {

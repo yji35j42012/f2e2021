@@ -140,6 +140,7 @@ module.exports = {
                     showList.push(showSearch[i])
                 }
             }
+            store.dispatch("SET_LOADING", false)
             return showList
         },
     },
@@ -342,6 +343,7 @@ module.exports = {
             this.$router.push(this.$route.fullPath + "/" + id)
         },
         changePageHanlder(num) {
+            store.dispatch("SET_LOADING", true)
             if (
                 num == "++" &&
                 this.pageInfo.nowPageNum !== this.pageInfo.maxPage

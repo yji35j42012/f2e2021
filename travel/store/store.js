@@ -227,7 +227,7 @@ const store = new Vuex.Store({
             } else {
                 setTimeout(() => {
                     commit("SET_LOADING", boo)
-                }, 1000)
+                }, 500)
             }
         },
         SET_DETAIL({ commit }, str) {

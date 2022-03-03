@@ -36,31 +36,6 @@ module.exports = {
         store.dispatch("READ_RESTAURANT_INFO")
     },
     computed: {
-        restaurant_sort() {
-            return store.state.restaurant.class
-        },
-        restaurant_info() {
-            let showList = []
-            let info = this.result
-            let mathPage = Math.ceil(info.info.length / 20) //頁數
-            info.infoMaxPage = mathPage
-            startItem =
-                (parseInt(info.infoNowPage) - 1) * parseInt(info.infoMaxShow)
-            endItem = parseInt(info.infoNowPage) * parseInt(info.infoMaxShow)
-
-            if (mathPage == 1) {
-                showList = info.info
-            } else if (endItem > info.count) {
-                for (let i = startItem; i < info.count; i++) {
-                    showList.push(info.info[i])
-                }
-            } else {
-                for (let i = startItem; i < endItem; i++) {
-                    showList.push(info.info[i])
-                }
-            }
-            return showList
-        },
         showFunc() {
             let breadcrumbCount = store.state.breadcrumbs.length
             if (breadcrumbCount == 3) {
@@ -71,37 +46,6 @@ module.exports = {
         },
     },
     methods: {
-        changePageHanlder(num) {
-            if (
-                num == "++" &&
-                this.result.infoNowPage !== this.result.infoMaxPage
-            ) {
-                this.result.infoNowPage = this.result.infoNowPage + 1
-            } else if (num == "--" && this.result.infoNowPage !== 1) {
-                this.result.infoNowPage = this.result.infoNowPage - 1
-            } else if (num !== "++" && num !== "--") {
-                this.result.infoNowPage = num
-            }
-        },
-        clearSearchHandler() {
-            this.resultShow = false
-        },
-        returnIdHandler(id) {
-            this.resultShow = false
-            let nowPage = store.state.nowPage
-            if (nowPage == "restaurant") {
-                this.$router.push("/restaurant/" + id)
-            }
-        },
-        getPageName() {
-            if (store.state.nowPage == "attractions") {
-                return "探索景點"
-            } else if (store.state.nowPage == "activity") {
-                return "節慶活動"
-            } else if (store.state.nowPage == "restaurant") {
-                return "品嘗美食"
-            }
-        },
     },
 }
 </script>
