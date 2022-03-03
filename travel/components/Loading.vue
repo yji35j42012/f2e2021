@@ -86,13 +86,3 @@
         </div>
     </div>
 </template>
-
-<script>
-module.exports = {
-    data() {
-        return {}
-    },
-    computes: {},
-    methods: {},
-}
-</script>

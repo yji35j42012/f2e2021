@@ -28,27 +28,6 @@ module.exports = {
             return store.state.nowPage
         },
     },
-    watch: {
-        $route(to, from) {
-            // let nowPage = store.state.nowPage
-            // let city =
-            //     this.$route.params.city == "全部縣市"
-            //         ? ""
-            //         : this.$route.params.city
-
-            // let classType = this.$route.params.class
-
-            // let searchInfo =
-            //     this.$route.params.search == "all"
-            //         ? ""
-            //         : this.$route.params.search
-            // console.log('Bread nowPage',nowPage)
-            // console.log('Bread city',city)
-            // console.log('Bread classType',classType)
-            // console.log('Bread searchInfo',searchInfo)
-            // console.log("bread", this.getPageName())
-        },
-    },
     methods: {
         breadHandler(str, index) {
             let breadCount = store.state.breadcrumbs.length

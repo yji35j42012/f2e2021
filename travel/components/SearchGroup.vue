@@ -117,13 +117,10 @@ module.exports = {
     computed: {
         itemCount() {
             let showSearch = this.showContent
-            console.log("dfasdfasdfasdf", this.showContent.length)
-
             return showSearch.length
         },
         itemContent() {
-            console.log('itemContent');
-            
+            console.log('itemContent');            
             this.itemPage()
             let showSearch = this.showContent
             let showList = []
@@ -132,7 +129,6 @@ module.exports = {
             startItem = nowPageNum * 20 - 19
             endItem = nowPageNum * 20 + 1
             showList = []
-
             if (maxPage == 1) {
                 showList = showSearch
             } else if (endItem > showSearch.length) {

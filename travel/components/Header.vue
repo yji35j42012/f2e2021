@@ -5,7 +5,6 @@
         <h1 class="logo">
             <router-link to="/">
                 <img src="./images/logo.png" alt="" />
-                <!-- <img src="./images/logo-mobile.png" alt="" /> -->
             </router-link>
         </h1>
 

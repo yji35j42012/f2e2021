@@ -175,16 +175,12 @@ module.exports = {
             this.selectShow = !this.selectShow
         },
         searchHandler() {
-            console.log("func")
             store.dispatch("SET_LOADING", true)
-            console.log("func1")
-
             let nowPage = store.state.nowPage
             let city = this.searchCity == "all" ? "全部縣市" : this.choseCity
             let info = this.searchInfo == "" ? "all" : this.searchInfo
             let date = this.searchDate
             let nowSearch = this.nowSearch
-
             this.changeBreadcrumbs(nowSearch, city)
             if (nowPage == "attractions" || nowSearch == "探索景點") {
                 this.$router.push(
@@ -211,9 +207,6 @@ module.exports = {
             this.searchCity = str1
         },
         changeBreadcrumbs(add, city) {
-            console.log("add", add)
-            console.log("city", city)
-
             if (store.state.breadcrumbs.length == 2) {
                 store.dispatch("CLEAR_BREADCRUMBS")
                 store.dispatch("ADD_BREADCRUMBS", this.getPageName())
