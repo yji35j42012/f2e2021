@@ -471,6 +471,7 @@ h3 span .icon_arrow {
 .container {
   width: 100%;
   max-width: 1200px;
+  height: 100%;
   padding: 0 45px 120px;
   margin: auto;
 }
@@ -782,9 +783,57 @@ h3 span .icon_arrow {
   -webkit-box-pack: start;
       -ms-flex-pack: start;
           justify-content: flex-start;
+  -ms-flex-line-pack: start;
+      align-content: flex-start;
   -ms-flex-wrap: wrap;
       flex-wrap: wrap;
-  margin-top: 35px;
+  height: calc(100% - 50px - 112px);
+  padding-top: 35px;
+}
+
+.nodata {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  width: 100%;
+  height: 100%;
+}
+
+.nodata_pic {
+  width: 70px;
+  height: 70px;
+  margin-bottom: 11px;
+  background: url("../images/icon/nodata.svg") no-repeat center/contain;
+}
+
+.nodata_pic::before {
+  display: block;
+  content: "";
+  width: 100%;
+  height: 100%;
+  background: rgba(127, 151, 123, 0.2);
+  border-radius: 100%;
+}
+
+.nodata_txt {
+  text-align: center;
+  line-height: 34px;
+  color: #7f977b;
+}
+
+.nodata_txt p {
+  font-size: 20px;
+  font-weight: bold;
 }
 
 .breadcrumbs {
@@ -797,7 +846,7 @@ h3 span .icon_arrow {
   -webkit-box-pack: start;
       -ms-flex-pack: start;
           justify-content: flex-start;
-  margin: 60px 0 30px;
+  padding: 60px 0 30px;
   color: #6e7d60;
 }
 

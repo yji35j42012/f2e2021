@@ -6,7 +6,7 @@
             搜尋結果
             <span class="result_count"> 共有 {{ itemCount }} 筆 </span>
         </h3>
-        <ul class="result_group">
+        <ul class="result_group" v-if="itemCount !== 0">
             <li
                 class="result_item"
                 v-for="(item, index) in itemContent"
@@ -34,6 +34,14 @@
                 </div>
             </li>
         </ul>
+        <div class="nodata" v-else>
+            <div class="nodata_pic"></div>
+            <!-- <img src="../images/icon/nodata.svg" alt=""> -->
+            <div class="nodata_txt">
+                <p>目前查無資料</p>
+                <p>請重新查詢</p>
+            </div>
+        </div>
         <page
             v-if="pageInfo.maxPage > 1"
             :maxpage="pageInfo.maxPage"
@@ -109,9 +117,13 @@ module.exports = {
     computed: {
         itemCount() {
             let showSearch = this.showContent
+            console.log("dfasdfasdfasdf", this.showContent.length)
+
             return showSearch.length
         },
         itemContent() {
+            console.log('itemContent');
+            
             this.itemPage()
             let showSearch = this.showContent
             let showList = []
@@ -139,6 +151,8 @@ module.exports = {
         itemPage() {
             let show = []
             let pageCount = Math.ceil(this.showContent.length / 20) //頁數
+            console.log('pageCount',pageCount);
+            
             this.pageInfo.maxPage = pageCount //最大頁數
             let halfPage = pageCount / 2
 
@@ -215,6 +229,7 @@ module.exports = {
         },
         getInfo() {
             searchInfo = this.searchInfo
+            this.pageInfo.maxPage = 0
             this.info = []
             this.showContent = []
             let url
