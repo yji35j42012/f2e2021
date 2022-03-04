@@ -76,16 +76,31 @@ h3 {
         @at-root .home & {
             margin-left: 0;
         }
+        @include mw(S) {
+            margin-left: 0;
+        }
     }
 
     .normal_sel,
     .normal_date {
         max-width: 240px;
+        @include mw(S) {
+            max-width: unset;
+            margin-bottom: 10px;
+        }
     }
     .normal_btn {
         max-width: 210px;
+        @include mw(S) {
+            max-width: unset;
+        }
     }
-
+    .normal_inp {
+        @include mw(S) {
+            max-width: unset;
+            margin-bottom: 10px;
+        }
+    }
     @at-root .about & {
         @include d_f(flex, center, flex-end);
         flex-wrap: wrap;
@@ -103,6 +118,9 @@ h3 {
             flex-direction: column;
             width: 100%;
         }
+    }
+    @include mw(S) {
+        flex-direction: column;
     }
 }
 
@@ -693,11 +711,15 @@ h3 {
         color: #646464;
         font-size: 18px;
     }
+    // .result_group
     &_group {
         @include d_f(flex);
         flex-wrap: wrap;
         width: 100%;
         font-size: 0;
+        @include mw(M) {
+            justify-content: center;
+        }
     }
     // .result_item
     &_item {
@@ -708,7 +730,15 @@ h3 {
         @extend %hand;
         @include mw(M) {
             flex: none;
-            width: 220px;
+            width: 100%;
+            max-width: calc(100% / 3);
+            padding: 0 15px;
+        }
+        @include mw(S) {
+            max-width: calc(100% / 2);
+        }
+        @include mw(XS) {
+            max-width: unset;
         }
         @include hoverHandler {
             .result_pic {
@@ -718,6 +748,9 @@ h3 {
     }
     &_item + &_item:not(:nth-child(4n + 1)) {
         margin-left: 30px;
+        @include mw(M) {
+            margin-left: 0;
+        }
     }
     // .result_pic
     &_pic {
@@ -729,6 +762,14 @@ h3 {
         border-radius: 20px;
         transform: scale(1);
         @extend %transition;
+        @include mw(M) {
+            width: 100%;
+            max-width: 220px;
+            margin: auto;
+        }
+        @include mw(S) {
+            max-width: unset;
+        }
     }
     // .result_txt
     &_txt {
@@ -762,6 +803,15 @@ h3 {
                     width: 13px;
                 }
             }
+        }
+        @include mw(M) {
+            flex: none;
+            width: 100%;
+            max-width: 220px;
+            margin: auto;
+        }
+        @include mw(S) {
+            max-width: unset;
         }
     }
 }
