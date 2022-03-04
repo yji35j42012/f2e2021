@@ -1,144 +1,151 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8" />
-        <meta
-            name="viewport"
-            content="width=device-width, initial-scale=1, shrink-to-fit=no"
-        />
-        <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-        <title>旅遊網</title>
-        <style>
-            * {
-                margin: 0;
-                padding: 0;
-                list-style: none;
-            }
-            .wrap {
-                padding: 10px;
-            }
-            p > a + a {
-                margin-left: 10px;
-            }
-            .router-link-exact-active {
-                color: #fff;
-                background-color: #000;
-            }
-        </style>
-    </head>
 
-    <body>
-        <div id="app" class="wrap">
-            <p>
-                <router-link to="/">Index</router-link>
-                <router-link to="/page1">Page1</router-link>
-                <router-link to="/user">User</router-link>
-                <router-link to="/user/profile">User profile</router-link>
-                <router-link to="/user/posts">User post</router-link>
-                <router-link to="/user/123">User 123</router-link>
-                <!-- <router-link to="/user/profile/456">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title></title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+
+        .wrap {
+            padding: 10px;
+        }
+
+        .testShow {
+            width: 100%;
+            background-color: #ccc;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app" class="wrap">
+        <p>
+            <router-link to="/">Index</router-link>
+            <router-link to="/page1">Page1</router-link>
+            <router-link to="/user">User</router-link>
+            <router-link to="/user/profile">User profile</router-link>
+            <router-link to="/user/posts">User post</router-link>
+            <router-link to="/user/123">User 123</router-link>
+            <!-- <router-link to="/user/profile/456">
                     User profile 456
                 </router-link>
                 <router-link :to="{name:`user`,params:{id:123}}">
                     User profile 456
                 </router-link> -->
-                <button @click="clickHandler">User</button>
-                <button @click="$router.go(-1)">Back</button>
-                <button @click="$router.go(1)">For</button>
-            </p>
-            <router-view></router-view>
+            <button @click="clickHandler">User</button>
+            <button @click="$router.go(-1)">Back</button>
+            <button @click="$router.go(1)">For</button>
+        </p>
+        <router-view></router-view>
+        <div class="testShow">
+            <userform class="float-right" enctype="multipart/form-data" data-any="lorem_string" :name="user.name"
+                :account="user.account" @submit="onSubmit"></userform>
         </div>
+    </div>
 
-        <script src="./js/libs/axios.js"></script>
-        <script src="./js/libs/vue_2_6_9.js"></script>
-        <script src="./js/libs/vue-router.js"></script>
-        <script src="./js/libs/http-vue-loader.js"></script>
-        <script src="./js/libs/vuex_3_0_1.js"></script>
-        <script src="./js/icon_all.js"></script>
-        <script src="./store/store.js"></script>
+    <script src="./js/libs/axios.js"></script>
+    <script src="./js/libs/vue_2_6_9.js"></script>
+    <script src="./js/libs/vue-router.js"></script>
+    <script src="./js/libs/http-vue-loader.js"></script>
+    <script src="./js/libs/vuex_3_0_1.js"></script>
+    <script src="./js/icon_all.js"></script>
+    <script src="./store/store.js"></script>
 
-        <script src="./aaa.json"></script>
-        <script>
-            const Index = {
-                template: `<div class="page">Index</div>`,
-            };
-            const Page1 = {
-                template: `<div class="page">Page1</div>`,
-            };
-            const Error = {
-                template: `<div class="">404</div>`,
-            };
-            const routes = [
-                {
-                    path: "",
-                    component: Index,
-                    name: "index",
-                },
-                {
-                    path: "/page1",
-                    component: Page1,
-                    name: "page1",
-                },
-                {
-                    path: "/user",
-                    component: httpVueLoader("./test/user.vue"),
-                    children: [
-                        {
-                            path: "",
-                            component: httpVueLoader("./test/UserContent.vue"),
-                        },
-                        {
-                            path: "profile",
-                            component: httpVueLoader("./test/profile.vue"),
-                        },
-                        {
-                            path: "posts",
-                            component: httpVueLoader("./test/post.vue"),
-                        },
-                        {
-                            path: "/user/:id",
-                            component: httpVueLoader("./test/post.vue"),
-                        },
-                    ],
-                },
-                {
-                    path: "/404",
-                    component: Error,
-                },
-                {
-                    path: "*",
-                    redirect: "/404",
-                },
-                {
-                    path: "*",
-                    component: Error,
-                },
-            ];
-            const router = new VueRouter({
-                // mode: 'history',
-                routes: routes, // (缩写) 相当于 routes: routes
-            });
-
-            var vue = new Vue({
-                el: "#app",
-                data() {
-                    return {};
-                },
-                components: {
-                    // htitle: httpVueLoader("./components/Header.vue"),
-                    // banner: httpVueLoader("./components/Banner.vue"),
-                    // func: httpVueLoader("./components/Func.vue"),
-                },
-                router,
-
-                methods: {
-                    clickHandler() {
-                        this.$router.push("/user", this.completeHandler);
+    <script>
+        const Index = {
+            template: `<div class="page">Index</div>`,
+        };
+        const Page1 = {
+            template: `<div class="page">Page1</div>`,
+        };
+        const Error = {
+            template: `<div class="">404</div>`,
+        };
+        const routes = [
+            {
+                path: "",
+                component: Index,
+                name: "index",
+            },
+            {
+                path: "/page1",
+                component: Page1,
+                name: "page1",
+            },
+            {
+                path: "/user",
+                component: httpVueLoader("./test/user.vue"),
+                children: [
+                    {
+                        path: "",
+                        component: httpVueLoader("./test/UserContent.vue"),
                     },
-                    completeHandler() {
+                    {
+                        path: "profile",
+                        component: httpVueLoader("./test/profile.vue"),
                     },
+                    {
+                        path: "posts",
+                        component: httpVueLoader("./test/post.vue"),
+                    },
+                    {
+                        path: "/user/:id",
+                        component: httpVueLoader("./test/post.vue"),
+                    },
+                ],
+            },
+            {
+                path: "/404",
+                component: Error,
+            },
+            {
+                path: "*",
+                redirect: "/404",
+            },
+            {
+                path: "*",
+                component: Error,
+            },
+        ];
+        const router = new VueRouter({
+            // mode: 'history',
+            routes: routes, // (缩写) 相当于 routes: routes
+        });
+
+        var vue = new Vue({
+            el: "#app",
+            data() {
+                return {
+                    user: {
+                        name: "alex",
+                        account: 'alexalex'
+                    }
+                };
+            },
+            components: {
+                userform: httpVueLoader("./test/userform.vue"),
+                // htitle: httpVueLoader("./components/Header.vue"),
+                // banner: httpVueLoader("./components/Banner.vue"),
+                // func: httpVueLoader("./components/Func.vue"),
+            },
+            router,
+            methods: {
+                onSubmit() { },
+                clickHandler() {
+                    this.$router.push("/user", this.completeHandler);
                 },
-            });
-        </script>
-    </body>
+                completeHandler() {
+                },
+            },
+        });
+    </script>
+</body>
+
 </html>
