@@ -151,59 +151,59 @@ module.exports = {
         return {
             icon_all: icon_all,
             detail: [],
-        }
+        };
     },
     components: {
         banner: httpVueLoader("../components/Banner.vue"),
     },
     mounted() {
-        console.log("ShowDetail")
-        var axiosUrl = ""
-        let searchId = this.$route.params.id
+        console.log("ShowDetail");
+        var axiosUrl = "";
+        let searchId = this.$route.params.id;
         if (store.state.nowPage == "restaurant") {
             axiosUrl =
                 "https://ptx.transportdata.tw/MOTC/v2/Tourism/Restaurant?%24filter=contains(RestaurantID%2C'" +
                 searchId +
-                "')&%24top=1&%24format=JSON"
+                "')&%24top=1&%24format=JSON";
             setTimeout(() => {
-                store.dispatch("SET_LOADING", false)
-            }, 1000)
+                store.dispatch("SET_LOADING", false);
+            }, 1000);
         } else if (store.state.nowPage == "activity") {
             axiosUrl =
                 "https://ptx.transportdata.tw/MOTC/v2/Tourism/Activity?%24filter=contains(ActivityID%2C'" +
                 searchId +
-                "')&%24top=1&%24format=JSON"
+                "')&%24top=1&%24format=JSON";
             setTimeout(() => {
-                store.dispatch("SET_LOADING", false)
-            }, 1000)
+                store.dispatch("SET_LOADING", false);
+            }, 1000);
         } else if (store.state.nowPage == "attractions") {
             axiosUrl =
                 "https://ptx.transportdata.tw/MOTC/v2/Tourism/ScenicSpot?%24filter=contains(ScenicSpotID%2C'" +
                 searchId +
-                "')&%24top=1&%24format=JSON"
+                "')&%24top=1&%24format=JSON";
             setTimeout(() => {
-                store.dispatch("SET_LOADING", false)
-            }, 1000)
+                store.dispatch("SET_LOADING", false);
+            }, 1000);
         }
 
-        this.nowPage = store.state.nowPage
-        classType = this.$route.params.class
+        this.nowPage = store.state.nowPage;
+        classType = this.$route.params.class;
         city =
             this.$route.params.city == "全部縣市"
                 ? "全部縣市"
-                : this.$route.params.city
+                : this.$route.params.city;
 
-        store.dispatch("CLEAR_BREADCRUMBS")
-        store.dispatch("ADD_BREADCRUMBS", this.getPageName())
+        store.dispatch("CLEAR_BREADCRUMBS");
+        store.dispatch("ADD_BREADCRUMBS", this.getPageName());
         if (classType !== "all") {
-            store.dispatch("ADD_BREADCRUMBS", classType)
+            store.dispatch("ADD_BREADCRUMBS", classType);
         } else {
-            store.dispatch("ADD_BREADCRUMBS", city)
+            store.dispatch("ADD_BREADCRUMBS", city);
         }
-
+        //
         axios.get(axiosUrl).then((res) => {
-            let item = res.data[0]
-            let page = store.state.nowPage
+            let item = res.data[0];
+            let page = store.state.nowPage;
             this.detail = {
                 address: item.Address,
                 description: item.Description,
@@ -211,35 +211,35 @@ module.exports = {
                 opentime: item.OpenTime,
                 phone: item.Phone,
                 webAddress: item.WebsiteUrl,
-            }
+            };
             if (page == "restaurant") {
-                this.detail.name = item.RestaurantName
+                this.detail.name = item.RestaurantName;
             } else if (page == "attractions") {
-                this.detail.name = item.ScenicSpotName
+                this.detail.name = item.ScenicSpotName;
             } else if (page == "activity") {
-                this.detail.name = item.ActivityName
+                this.detail.name = item.ActivityName;
             }
-            store.dispatch("ADD_BREADCRUMBS", this.detail.name)
+            store.dispatch("ADD_BREADCRUMBS", this.detail.name);
             setTimeout(() => {
-                store.dispatch("SET_LOADING", false)
-            }, 1000)
-        })
+                store.dispatch("SET_LOADING", false);
+            }, 1000);
+        });
     },
     computed: {
         detailContent() {
-            return this.detail
+            return this.detail;
         },
     },
     methods: {
         getPageName() {
             if (store.state.nowPage == "attractions") {
-                return "探索景點"
+                return "探索景點";
             } else if (store.state.nowPage == "activity") {
-                return "節慶活動"
+                return "節慶活動";
             } else if (store.state.nowPage == "restaurant") {
-                return "品嘗美食"
+                return "品嘗美食";
             }
         },
     },
-}
+};
 </script>
