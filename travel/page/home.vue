@@ -302,25 +302,25 @@ module.exports = {
     data() {
         return {
             icon_all: icon_all,
-        }
+        };
     },
     components: {
         banner: httpVueLoader("../components/Banner.vue"),
         func: httpVueLoader("../components/Func.vue"),
     },
     mounted() {
-        store.dispatch("CLEAR_BREADCRUMBS")
+        store.dispatch("CLEAR_BREADCRUMBS");
         if (this.$route.path == "/") {
             setTimeout(() => {
-                store.dispatch("SET_LOADING", false)
-            }, 1000)
+                store.dispatch("SET_LOADING", false);
+            }, 1000);
         }
     },
     computed: {},
     methods: {
         pageHandler(str) {
-            this.$router.push(str)
+            this.$router.push(str);
         },
     },
-}
+};
 </script>
