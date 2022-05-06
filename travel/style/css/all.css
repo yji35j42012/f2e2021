@@ -848,7 +848,7 @@ h3 span .icon_arrow {
   width: 70px;
   height: 70px;
   margin-bottom: 11px;
-  background: url("../images/icon/nodata.svg") no-repeat center/contain;
+  background: url("../../images/icon/nodata.svg") no-repeat center/contain;
 }
 
 .nodata_pic::before {
@@ -1491,7 +1491,7 @@ h3 span .icon_arrow {
   width: 15px;
   height: 15px;
   margin-right: 6px;
-  background: url("../images/icon/icon_adderss.svg") no-repeat center/contain;
+  background: url("../../images/icon/icon_adderss.svg") no-repeat center/contain;
 }
 
 .about_address .tw {

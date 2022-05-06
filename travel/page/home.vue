@@ -312,7 +312,6 @@ module.exports = {
         store.dispatch("CLEAR_BREADCRUMBS")
         if (this.$route.path == "/") {
             setTimeout(() => {
-                console.log("???")
                 store.dispatch("SET_LOADING", false)
             }, 1000)
         }

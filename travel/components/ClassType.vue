@@ -22,31 +22,30 @@
 <script>
 module.exports = {
     data() {
-        return {}
+        return {};
     },
     mounted() {
-        console.log("ClassType")
-        store.dispatch("CLEAR_BREADCRUMBS")
-        store.dispatch("ADD_BREADCRUMBS", this.getPageName())
+        store.dispatch("CLEAR_BREADCRUMBS");
+        store.dispatch("ADD_BREADCRUMBS", this.getPageName());
         setTimeout(() => {
-            store.dispatch("SET_LOADING", false)
-        }, 1000)
+            store.dispatch("SET_LOADING", false);
+        }, 1000);
     },
     computed: {
         title() {
-            let title = "熱門主題"
+            let title = "熱門主題";
             if (store.state.nowPage == "restaurant") {
-                title = "熱門分類"
+                title = "熱門分類";
             }
-            return title
+            return title;
         },
         typeItem() {
             if (store.state.nowPage == "restaurant") {
-                return store.state.restaurant.class
+                return store.state.restaurant.class;
             } else if (store.state.nowPage == "attractions") {
-                return store.state.attractions.class
+                return store.state.attractions.class;
             } else if (store.state.nowPage == "activity") {
-                return store.state.activity.class
+                return store.state.activity.class;
             }
         },
     },
@@ -54,17 +53,17 @@ module.exports = {
         typeSearch(str) {
             this.$router.push(
                 this.$route.fullPath + "/全部縣市/" + str + "/all"
-            )
+            );
         },
         getPageName() {
             if (store.state.nowPage == "attractions") {
-                return "探索景點"
+                return "探索景點";
             } else if (store.state.nowPage == "activity") {
-                return "節慶活動"
+                return "節慶活動";
             } else if (store.state.nowPage == "restaurant") {
-                return "品嘗美食"
+                return "品嘗美食";
             }
         },
     },
-}
+};
 </script>

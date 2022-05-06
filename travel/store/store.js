@@ -28,56 +28,56 @@ const store = new Vuex.Store({
     getters: {},
     mutations: {
         SET_PAGE(state, str) {
-            state.nowPage = str
+            state.nowPage = str;
         },
         SET_CITY(state, str) {
-            state.city = str
+            state.city = str;
         },
         SET_RESTAURANT(state, str) {
-            state.restaurant.class = str.class_obj
-            state.restaurant.info = str.info_obj
+            state.restaurant.class = str.class_obj;
+            state.restaurant.info = str.info_obj;
         },
         SET_ACTIVITY(state, str) {
-            state.activity.class = str.class_obj
-            state.activity.info = str.info_obj
+            state.activity.class = str.class_obj;
+            state.activity.info = str.info_obj;
         },
         SET_ATTRACTIONS(state, str) {
-            state.attractions.class = str.class_obj
-            state.attractions.info = str.info_obj
+            state.attractions.class = str.class_obj;
+            state.attractions.info = str.info_obj;
         },
         SET_BREADCRUMBS(state, str) {
-            state.breadcrumbs.push(str)
+            state.breadcrumbs.push(str);
         },
         DEL_BREADCRUMBS(state) {
-            state.breadcrumbs.splice(-1, 1)
+            state.breadcrumbs.splice(-1, 1);
         },
         CLEAR_BREADCRUMBS(state) {
-            state.breadcrumbs = []
+            state.breadcrumbs = [];
         },
         SET_SEARCHITEM(state, searchObj) {
-            state.searchItem = []
-            state.searchItem = searchObj
+            state.searchItem = [];
+            state.searchItem = searchObj;
         },
         SET_SHOWSEARCH(state, obj) {
-            state.showSearch = obj
+            state.showSearch = obj;
         },
         SET_LOADING(state, boo) {
-            state.loadingShow = boo
+            state.loadingShow = boo;
         },
         SET_DETAIL(state, str) {
-            state.showDetail = str
+            state.showDetail = str;
         },
     },
     actions: {
         PAGE({ commit }, str) {
-            commit("SET_PAGE", str)
+            commit("SET_PAGE", str);
         },
         READ_CITY({ commit }) {
             axios
                 .get("https://gist.motc.gov.tw/gist_api/V3/Map/Basic/City")
                 .then((res) => {
-                    commit("SET_CITY", res.data)
-                })
+                    commit("SET_CITY", res.data);
+                });
         },
         READ_ATTRACTIONS_INFO({ commit }) {
             axios
@@ -89,21 +89,21 @@ const store = new Vuex.Store({
                     let class_obj = {
                         class_sort: [],
                         class_map: {},
-                    }
-                    let info_obj = []
+                    };
+                    let info_obj = [];
                     res.data.forEach((item) => {
                         if (!class_obj.class_map[item.Class1] && item.Class1) {
-                            class_obj.class_sort.push(item.Class1)
+                            class_obj.class_sort.push(item.Class1);
                             class_obj.class_map[item.Class1] = {
                                 picUrl: [],
-                            }
+                            };
                         }
                         if (item.Class1) {
                             class_obj.class_map[item.Class1].picUrl.push(
                                 item.Picture.PictureUrl1
                                     ? item.Picture.PictureUrl1
                                     : "../images/error.png"
-                            )
+                            );
                         }
                         info_obj.push({
                             infoId: item.ScenicSpotID,
@@ -117,10 +117,10 @@ const store = new Vuex.Store({
                                 : "../images/error.png",
                             infoName: item.ScenicSpotName,
                             type: item.Class1,
-                        })
-                    })
-                    commit("SET_ATTRACTIONS", { class_obj, info_obj })
-                })
+                        });
+                    });
+                    commit("SET_ATTRACTIONS", { class_obj, info_obj });
+                });
         },
         READ_RESTAURANT_INFO({ commit }) {
             axios
@@ -132,19 +132,19 @@ const store = new Vuex.Store({
                     let class_obj = {
                         class_sort: [],
                         class_map: {},
-                    }
-                    let info_obj = []
+                    };
+                    let info_obj = [];
                     res.data.forEach((item) => {
                         if (!class_obj.class_map[item.Class] && item.Class) {
-                            class_obj.class_sort.push(item.Class)
+                            class_obj.class_sort.push(item.Class);
                             class_obj.class_map[item.Class] = {
                                 picUrl: [],
-                            }
+                            };
                         }
                         if (item.Class) {
                             class_obj.class_map[item.Class].picUrl.push(
                                 item.Picture.PictureUrl1
-                            )
+                            );
                         }
                         info_obj.push({
                             infoId: item.RestaurantID,
@@ -158,10 +158,10 @@ const store = new Vuex.Store({
                                 : "../images/error.png",
                             infoName: item.RestaurantName,
                             type: item.Class,
-                        })
-                    })
-                    commit("SET_RESTAURANT", { class_obj, info_obj })
-                })
+                        });
+                    });
+                    commit("SET_RESTAURANT", { class_obj, info_obj });
+                });
         },
         READ_ACTIVITY_INFO({ commit }) {
             axios
@@ -173,21 +173,21 @@ const store = new Vuex.Store({
                     let class_obj = {
                         class_sort: [],
                         class_map: {},
-                    }
-                    let info_obj = []
+                    };
+                    let info_obj = [];
                     res.data.forEach((item) => {
                         if (!class_obj.class_map[item.Class1] && item.Class1) {
-                            class_obj.class_sort.push(item.Class1)
+                            class_obj.class_sort.push(item.Class1);
                             class_obj.class_map[item.Class1] = {
                                 picUrl: [],
-                            }
+                            };
                         }
                         if (item.Class1) {
                             class_obj.class_map[item.Class1].picUrl.push(
                                 item.Picture.PictureUrl1
                                     ? item.Picture.PictureUrl1
                                     : "../images/error.png"
-                            )
+                            );
                         }
                         info_obj.push({
                             infoId: item.ActivityID,
@@ -201,37 +201,37 @@ const store = new Vuex.Store({
                                 : "../images/error.png",
                             infoName: item.ActivityName,
                             type: item.Class1,
-                        })
-                    })
-                    commit("SET_ACTIVITY", { class_obj, info_obj })
-                })
+                        });
+                    });
+                    commit("SET_ACTIVITY", { class_obj, info_obj });
+                });
         },
         ADD_BREADCRUMBS({ commit }, str) {
-            commit("SET_BREADCRUMBS", str)
+            commit("SET_BREADCRUMBS", str);
         },
         DEL_BREADCRUMBS({ commit }) {
-            commit("DEL_BREADCRUMBS")
+            commit("DEL_BREADCRUMBS");
         },
         CLEAR_BREADCRUMBS({ commit }) {
-            commit("CLEAR_BREADCRUMBS")
+            commit("CLEAR_BREADCRUMBS");
         },
         SET_SEARCHITEM({ commit }, searchObj) {
-            commit("SET_SEARCHITEM", searchObj)
+            commit("SET_SEARCHITEM", searchObj);
         },
         SET_SHOWSEARCH({ commit }, showObj) {
-            commit("SET_SHOWSEARCH", showObj)
+            commit("SET_SHOWSEARCH", showObj);
         },
         SET_LOADING({ commit }, boo) {
             if (boo) {
-                commit("SET_LOADING", boo)
+                commit("SET_LOADING", boo);
             } else {
                 setTimeout(() => {
-                    commit("SET_LOADING", boo)
-                }, 500)
+                    commit("SET_LOADING", boo);
+                }, 500);
             }
         },
         SET_DETAIL({ commit }, str) {
-            commit("SET_DETAIL", str)
+            commit("SET_DETAIL", str);
         },
     },
-})
+});

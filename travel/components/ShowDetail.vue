@@ -157,7 +157,6 @@ module.exports = {
         banner: httpVueLoader("../components/Banner.vue"),
     },
     mounted() {
-        console.log("ShowDetail");
         var axiosUrl = "";
         let searchId = this.$route.params.id;
         if (store.state.nowPage == "restaurant") {

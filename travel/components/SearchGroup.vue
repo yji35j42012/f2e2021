@@ -92,7 +92,6 @@ module.exports = {
         },
     },
     mounted() {
-        console.log("SearchGroup")
         store.dispatch("SET_LOADING", true)
         this.nowPage = store.state.nowPage
         this.searchInfo.classType = this.$route.params.class
@@ -119,8 +118,7 @@ module.exports = {
             let showSearch = this.showContent
             return showSearch.length
         },
-        itemContent() {
-            console.log('itemContent');            
+        itemContent() {       
             this.itemPage()
             let showSearch = this.showContent
             let showList = []
@@ -147,9 +145,7 @@ module.exports = {
     methods: {
         itemPage() {
             let show = []
-            let pageCount = Math.ceil(this.showContent.length / 20) //頁數
-            console.log('pageCount',pageCount);
-            
+            let pageCount = Math.ceil(this.showContent.length / 20) //頁數            
             this.pageInfo.maxPage = pageCount //最大頁數
             let halfPage = pageCount / 2
 
