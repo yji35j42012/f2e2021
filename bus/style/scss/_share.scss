@@ -1,20 +1,27 @@
 .wrap {
+    display: flex;
+    flex-direction: column;
     width: 100%;
     height: 100%;
 }
 
 .nav {
-    @include d_f(flex, space-between, center);
+    flex: none;
     width: 100%;
     height: 75px;
-    padding: 0 60px;
+    // padding: 0 60px;
     background-color: #3caad9;
 }
 .container {
     @include d_f(flex, 0, 0);
     width: 100%;
-    height: calc(100% - 75px - 65px);
-    background-color: #ffffff;
+    max-width: 1280px;
+    height: 100%;
+    margin: auto;
+    // height: calc(100% - 75px - 65px);
+    @at-root .nav & {
+        @include d_f(flex, space-between, center);
+    }
 }
 .logo {
     width: 56px;
@@ -24,7 +31,7 @@
         height: 100%;
     }
 }
-.main {
+.menu {
     @include d_f(flex, 0, center);
     li {
         a {
@@ -41,7 +48,12 @@
         margin-left: 48px;
     }
 }
+.main {
+    width: 100%;
+    height: 100%;
+}
 footer {
+    flex: none;
     @include d_f(flex, center, center);
     flex-direction: column;
     width: 100%;
@@ -69,10 +81,10 @@ footer {
     &_inp {
         width: 100%;
         height: 45px;
-		margin-bottom: 24px;
-		padding: 10px;
-		border: 1px solid #3caad9;
-		border-radius: 10px;
+        margin-bottom: 24px;
+        padding: 10px;
+        border: 1px solid #3caad9;
+        border-radius: 10px;
     }
     &_btn {
         flex: none;

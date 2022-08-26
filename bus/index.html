@@ -10,29 +10,31 @@
 </head>
 
 <body>
-
 	<div id="app" class="wrap">
 		<div class="nav">
-			<h1 class="logo">
-				<router-link to="/"><img src="./images/logo.svg" alt=""></router-link>
-			</h1>
-
-			<ul class="main">
-				<li>
-					<router-link to="/routeSearch">路線搜尋</router-link>
-				</li>
-				<li>
-					<router-link to="/">路線規劃</router-link>
-				</li>
-				<li>
-					<router-link to="/">附近站牌</router-link>
-				</li>
-				<li>
-					<router-link to="/">我的最愛</router-link>
-				</li>
-			</ul>
+			<div class="container">
+				<h1 class="logo">
+					<router-link to="/"><img src="./images/logo.svg" alt=""></router-link>
+				</h1>
+				<ul class="menu">
+					<li>
+						<router-link to="/routeSearch">路線搜尋</router-link>
+					</li>
+					<li>
+						<router-link to="/">路線規劃</router-link>
+					</li>
+					<li>
+						<router-link to="/">附近站牌</router-link>
+					</li>
+					<li>
+						<router-link to="/">我的最愛</router-link>
+					</li>
+				</ul>
+			</div>
 		</div>
-		<router-view></router-view>
+		<div :class="['main' , nowPage]">
+			<router-view></router-view>
+		</div>
 		<footer>
 			<span class="copy">Copyright © 2021 公車總站</span>
 			<p>Bus vector created by stories - www.freepik.com</p>
@@ -125,7 +127,9 @@
 		var vue = new Vue({
 			el: "#app",
 			data() {
-				return {};
+				return {
+					nowPage: null,
+				};
 			},
 			components: {
 
@@ -134,6 +138,19 @@
 
 			},
 			router,
+			watch: {
+				$route(to, from) {
+					var now = this.$route.path;
+					if (this.$route.path == "/") {
+						this.nowPage = "home";
+						store.dispatch("PAGE", "home");
+					} else {
+						store.dispatch("SET_LOADING", true);
+						this.nowPage = now.split("/")[1];
+						store.dispatch("PAGE", now.split("/")[1]);
+					}
+				},
+			},
 			computed: {
 
 			},

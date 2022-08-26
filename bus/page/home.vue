@@ -2,7 +2,8 @@
 
 <template>
     <div class="container">
-		home
+		<div class="home_txt"></div>
+        <div class="home_pic"></div>
 	</div>
 </template>
 

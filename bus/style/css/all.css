@@ -1,9 +1,9 @@
-.main li a {
+.menu li a {
   -webkit-transition-duration: 0.3s;
           transition-duration: 0.3s;
 }
 
-.main li a {
+.menu li a {
   cursor: pointer;
 }
 
@@ -28,11 +28,37 @@ button {
 }
 
 .wrap {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
   width: 100%;
   height: 100%;
 }
 
 .nav {
+  -webkit-box-flex: 0;
+      -ms-flex: none;
+          flex: none;
+  width: 100%;
+  height: 75px;
+  background-color: #3caad9;
+}
+
+.container {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  width: 100%;
+  max-width: 1280px;
+  height: 100%;
+  margin: auto;
+}
+
+.nav .container {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -42,19 +68,6 @@ button {
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
-  width: 100%;
-  height: 75px;
-  padding: 0 60px;
-  background-color: #3caad9;
-}
-
-.container {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  width: 100%;
-  height: calc(100% - 75px - 65px);
-  background-color: #ffffff;
 }
 
 .logo {
@@ -67,7 +80,7 @@ button {
   height: 100%;
 }
 
-.main {
+.menu {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -76,26 +89,34 @@ button {
           align-items: center;
 }
 
-.main li a {
+.menu li a {
   color: #ffffff99;
   text-decoration: none;
 }
 
 @media (pointer: fine) and (-webkit-max-device-pixel-ratio: 2), (pointer: fine) and (max-resolution: 2dppx), screen and (pointer: fine) and (-webkit-max-device-pixel-ratio: 2), (-moz-touch-enabled: 0) {
-  .main li a:hover {
+  .menu li a:hover {
     color: #ffffff;
   }
 }
 
-.main li a:active {
+.menu li a:active {
   color: #ffffff;
 }
 
-.main li + li {
+.menu li + li {
   margin-left: 48px;
 }
 
+.main {
+  width: 100%;
+  height: 100%;
+}
+
 footer {
+  -webkit-box-flex: 0;
+      -ms-flex: none;
+          flex: none;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
