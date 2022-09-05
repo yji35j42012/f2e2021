@@ -15,9 +15,10 @@
 .container {
     @include d_f(flex, 0, 0);
     width: 100%;
-    max-width: 1280px;
+    max-width: 1400px;
     height: 100%;
     margin: auto;
+    padding: 0 60px;
     // height: calc(100% - 75px - 65px);
     @at-root .nav & {
         @include d_f(flex, space-between, center);
@@ -106,8 +107,48 @@ footer {
     padding: 40px 15px 60px;
 }
 
+h1 {
+    font-family: "PingFang TC";
+    font-style: normal;
+    font-weight: 600;
+    font-size: 36px;
+    line-height: 160%;
+    color: #06182d;
+    @include mw(M) {
+        font-size: 24px;
+    }
+}
 h2 {
     color: #333333;
     font-weight: 600;
     font-size: 24px;
+}
+
+.normal_btn {
+    @include d_f(flex, center, center);
+    width: 100%;
+    height: 65px;
+    background: #3caad9;
+    color: #fff;
+    fill: #fff;
+    border-radius: 10px;
+    font-weight: 600;
+    font-size: 20px;
+    cursor: pointer;
+    @include mw(M) {
+        font-size: 16px;
+    }
+    &._search {
+        max-width: 280px;
+        margin-top: 77px;
+        @include mw(M) {
+            margin-top: 45px;
+        }
+        svg {
+            width: 24px;
+            height: 24px;
+            margin-left: 18px;
+            padding: 2px;
+        }
+    }
 }

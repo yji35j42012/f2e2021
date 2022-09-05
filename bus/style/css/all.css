@@ -53,9 +53,10 @@ button {
   display: -ms-flexbox;
   display: flex;
   width: 100%;
-  max-width: 1280px;
+  max-width: 1400px;
   height: 100%;
   margin: auto;
+  padding: 0 60px;
 }
 
 .nav .container {
@@ -193,9 +194,129 @@ footer p {
   padding: 40px 15px 60px;
 }
 
+h1 {
+  font-family: "PingFang TC";
+  font-style: normal;
+  font-weight: 600;
+  font-size: 36px;
+  line-height: 160%;
+  color: #06182d;
+}
+
+@media screen and (max-width: 995px) {
+  h1 {
+    font-size: 24px;
+  }
+}
+
 h2 {
   color: #333333;
   font-weight: 600;
   font-size: 24px;
+}
+
+.normal_btn {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  width: 100%;
+  height: 65px;
+  background: #3caad9;
+  color: #fff;
+  fill: #fff;
+  border-radius: 10px;
+  font-weight: 600;
+  font-size: 20px;
+  cursor: pointer;
+}
+
+@media screen and (max-width: 995px) {
+  .normal_btn {
+    font-size: 16px;
+  }
+}
+
+.normal_btn._search {
+  max-width: 280px;
+  margin-top: 77px;
+}
+
+@media screen and (max-width: 995px) {
+  .normal_btn._search {
+    margin-top: 45px;
+  }
+}
+
+.normal_btn._search svg {
+  width: 24px;
+  height: 24px;
+  margin-left: 18px;
+  padding: 2px;
+}
+
+.home {
+  padding: 42px 0;
+}
+
+.home .container {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+@media screen and (max-width: 995px) {
+  .home .container {
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+  }
+}
+
+.home h1 {
+  -webkit-box-flex: 0;
+      -ms-flex: none;
+          flex: none;
+  white-space: nowrap;
+}
+
+.home_serach .line {
+  position: relative;
+}
+
+.home_serach .line::after {
+  content: attr(data-txt);
+  position: relative;
+}
+
+.home_serach .line::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: block;
+  width: calc(100% - 16px);
+  height: 17px;
+  margin: auto;
+  background: #3caad9;
+  border-radius: 100px;
+}
+
+.home_pic img {
+  width: 100%;
+  vertical-align: middle;
 }
 /*# sourceMappingURL=all.css.map */

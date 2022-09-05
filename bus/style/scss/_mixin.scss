@@ -18,7 +18,7 @@
 }
 
 // juc 預設值 flex-start 、 align-items 預設值 stretch
-@mixin d_f($flex, $jc: flex-start, $ai: stretch) {
+@mixin d_f($flex, $jc, $ai) {
     display: $flex;
     @if ($jc != 0) {
         justify-content: $jc;
