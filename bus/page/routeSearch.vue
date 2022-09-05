@@ -15,14 +15,14 @@
             <div class="keyboard_box">
                 <button class="keyboard_btn">紅</button>
                 <button class="keyboard_btn">黃</button>
-                <button class="keyboard_btn _num">７</button>
-                <button class="keyboard_btn _num">８</button>
-                <button class="keyboard_btn _num">９</button>
+                <button class="keyboard_btn _num">7</button>
+                <button class="keyboard_btn _num">8</button>
+                <button class="keyboard_btn _num">9</button>
                 <button class="keyboard_btn">藍</button>
                 <button class="keyboard_btn">棕</button>
-                <button class="keyboard_btn _num">４</button>
-                <button class="keyboard_btn _num">５</button>
-                <button class="keyboard_btn _num">６</button>
+                <button class="keyboard_btn _num">4</button>
+                <button class="keyboard_btn _num">5</button>
+                <button class="keyboard_btn _num">6</button>
                 <button class="keyboard_btn">綠</button>
                 <button class="keyboard_btn">橘</button>
                 <button class="keyboard_btn _num">1</button>
@@ -34,15 +34,33 @@
                 <button class="keyboard_btn">back</button>
             </div>
         </div>
-        <ul class="list"></ul>
-        <div class="map"></div>
+        <ul class="list">
+            <li class="list_item">
+                <div class="list_item_txt">
+                    <p class="list_item_num">30</p>
+                    <p class="list_item_name">
+                        中台新村-第一廣場-中台新村
+                    </p>
+                </div>
+                <div class="list_item_star">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 23">
+                        <path :d="icon_all.star" />
+                    </svg>
+                </div>
+            </li>
+        </ul>
+        <div class="map">
+            <img src="../images/map.jpg" alt="" />
+        </div>
     </div>
 </template>
 
 <script>
 module.exports = {
     data() {
-        return {};
+        return {
+            icon_all: icon_all,
+        };
     },
     mounted() {},
     computed: {},
