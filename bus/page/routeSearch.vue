@@ -35,7 +35,7 @@
             </div>
         </div>
         <ul class="list">
-            <li class="list_item">
+            <li class="list_item" v-for="item in 30" :key="item">
                 <div class="list_item_txt">
                     <p class="list_item_num">30</p>
                     <p class="list_item_name">
