@@ -5,11 +5,11 @@
         <div class="inpBox">
             <h2>請選擇地點並輸入編號</h2>
             <div class="keyboard_box">
-                <button class="keyboard_btn">雙北</button>
-                <button class="keyboard_btn">桃園</button>
-                <button class="keyboard_btn">台中</button>
-                <button class="keyboard_btn">高雄</button>
-                <button class="keyboard_btn">更多</button>
+                <button class="keyboard_btn _area">雙北</button>
+                <button class="keyboard_btn _area">桃園</button>
+                <button class="keyboard_btn _area _on">台中</button>
+                <button class="keyboard_btn _area">高雄</button>
+                <button class="keyboard_btn _area">更多</button>
             </div>
             <input type="text" class="keyboard_inp" />
             <div class="keyboard_box">
