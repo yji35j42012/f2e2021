@@ -13,27 +13,25 @@ module.exports = {
     data() {
         return {
             icon_all: icon_all,
-        }
+        };
     },
     components: {
         func: httpVueLoader("../components/Func.vue"),
         breadcrumbs: httpVueLoader("../components/Breadcrumbs.vue"),
     },
     mounted() {
-        store.dispatch("READ_ATTRACTIONS_INFO")
+        store.dispatch("READ_ATTRACTIONS_INFO");
     },
     computed: {
         showFunc() {
-            let breadcrumbCount = store.state.breadcrumbs.length
+            let breadcrumbCount = store.state.breadcrumbs.length;
             if (breadcrumbCount == 3) {
-                return false
+                return false;
             } else {
-                return true
+                return true;
             }
         },
     },
-    methods: {
-        
-    },
-}
+    methods: {},
+};
 </script>
