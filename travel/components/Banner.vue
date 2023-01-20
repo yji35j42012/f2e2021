@@ -5,13 +5,13 @@
         <div class="banner_group">
             <div
                 class="banner_item"
-                style="background-image: url('../../images/banner1.jpg')"
+                style="background-image: url('./images/banner1.jpg')"
             >
                 <span>新北市 | 不厭亭</span>
             </div>
             <div
                 class="banner_item"
-                style="background-image: url('../images/banner2.jpg')"
+                style="background-image: url('./images/banner2.jpg')"
             ></div>
         </div>
         <button class="banner_prev">

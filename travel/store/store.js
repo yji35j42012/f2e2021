@@ -73,11 +73,36 @@ const store = new Vuex.Store({
             commit("SET_PAGE", str);
         },
         READ_CITY({ commit }) {
-            axios
-                .get("https://gist.motc.gov.tw/gist_api/V3/Map/Basic/City")
-                .then((res) => {
-                    commit("SET_CITY", res.data);
-                });
+            var city = [
+                {CityName: "台北市",},
+                {CityName: "基隆市",},
+                {CityName: "新北市",},
+                {CityName: "連江縣",},
+                {CityName: "宜蘭縣",},
+                {CityName: "新竹市",},
+                {CityName: "新竹縣",},
+                {CityName: "桃園市",},
+                {CityName: "苗栗縣",},
+                {CityName: "台中市",},
+                {CityName: "彰化縣",},
+                {CityName: "南投縣",},
+                {CityName: "嘉義市",},
+                {CityName: "嘉義縣",},
+                {CityName: "雲林縣",},
+                {CityName: "台南市",},
+                {CityName: "高雄市",},
+                {CityName: "澎湖縣",},
+                {CityName: "金門縣",},
+                {CityName: "屏東縣",},
+                {CityName: "台東縣",},
+                {CityName: "花蓮縣",},
+            ];
+            commit("SET_CITY", city);
+            // axios
+            //     .get("https://gist.motc.gov.tw/gist_api/V3/Map/Basic/City")
+            //     .then((res) => {
+            //         commit("SET_CITY", res.data);
+            //     });
         },
         READ_ATTRACTIONS_INFO({ commit }) {
             axios
